@@ -1,5 +1,5 @@
 # gunstore_database
-This repo was created for the Database Managent (GDI) discipline in the Center of Informatics of 
+This repo was created to simulate a hypothetical Gunstore Database for the Database and Information Managent (GDI) discipline of the Center of Informatics of 
 the Federal University of Pernambuco.
 
 @jgfn1
