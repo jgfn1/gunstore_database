@@ -51,8 +51,10 @@ CREATE TABLE employees
   CONSTRAINT employees_pkey
     PRIMARY KEY (employee_cpf),
   CONSTRAINT employees_fkey
+    FOREIGN KEY (employee_cpf) REFERENCES  persons(cpf),
+  CONSTRAINT employees_fkey1
     FOREIGN KEY (supervisor_cpf) REFERENCES employees(employee_cpf),
-  CONSTRAINT persons_fkey1
+  CONSTRAINT persons_fkey2
     FOREIGN KEY (department_code) REFERENCES departments(department_code)
 );
 
