@@ -24,11 +24,8 @@ CREATE TABLE persons
   name VARCHAR2(20),
   birthdate DATE,
   sex VARCHAR2(1),
-  department_code INTEGER,
   CONSTRAINT persons_pkey
     PRIMARY KEY (cpf),
-  CONSTRAINT persons_fkey
-    FOREIGN KEY (department_code) REFERENCES departments(department_code)
 );
 
 CREATE TABLE phones
@@ -50,10 +47,13 @@ CREATE TABLE employees
   worked_years INTEGER,
   job_title VARCHAR2(20),
   supervisor_cpf INTEGER,
+  department_code INTEGER,
   CONSTRAINT employees_pkey
     PRIMARY KEY (employee_cpf),
   CONSTRAINT employees_fkey
-    FOREIGN KEY (supervisor_cpf) REFERENCES employees(employee_cpf)
+    FOREIGN KEY (supervisor_cpf) REFERENCES employees(employee_cpf),
+  CONSTRAINT persons_fkey1
+    FOREIGN KEY (department_code) REFERENCES departments(department_code)
 );
 
 CREATE TABLE clients
