@@ -25,7 +25,7 @@ CREATE TABLE persons
   birthdate DATE,
   sex VARCHAR2(1),
   CONSTRAINT persons_pkey
-    PRIMARY KEY (cpf),
+    PRIMARY KEY (cpf)
 );
 
 CREATE TABLE phones
@@ -86,8 +86,13 @@ CREATE TABLE overtimes --Brazilian "hora extra"
   overtime_date DATE,
   start_time TIMESTAMP,
   end_time TIMESTAMP,
-  employee_cpf INTEGER
-
+  employee_cpf INTEGER,
+  CONSTRAINT overtimes_pkey
+    PRIMARY KEY (overtime_date),
+  CONSTRAINT overtimes_const
+    UNIQUE (employee_cpf),
+  CONSTRAINT overtimes_fkey
+    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
 );
 
 CREATE TABLE employee_vacancies
