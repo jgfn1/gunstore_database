@@ -100,7 +100,13 @@ CREATE TABLE employee_vacancies
   employee_cpf INTEGER,
   vacancy_number INTEGER,
   load_unload BINARY_DOUBLE, -- 1 - Load | 0 - Unload
-  floor INTEGER
+  floor INTEGER,
+  CONSTRAINT employee_vacancies_pkey
+    PRIMARY KEY (employee_cpf),
+  CONSTRAINT employee_vacancies_pkey1
+    PRIMARY KEY (vacancy_number),
+  CONSTRAINT employee_vacancies_fkey
+    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
 );
 
 CREATE TABLE sales
