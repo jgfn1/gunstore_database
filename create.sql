@@ -109,13 +109,27 @@ CREATE TABLE employee_vacancies
     FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
 );
 
-CREATE TABLE sales
+CREATE TABLE sale
 (
   employee_cpf INTEGER,
   client_cpf INTEGER,
   artifact_code INTEGER,
   sale_number INTEGER,
-  date_hour TIMESTAMP
+  date_hour TIMESTAMP,
+  CONSTRAINT sale_pkey
+    PRIMARY KEY (employee_cpf),
+  CONSTRAINT sale_pkey1
+    PRIMARY KEY (client_cpf),
+  CONSTRAINT sale_pkey2
+    PRIMARY KEY (artifact_code),
+  CONSTRAINT sale_pkey3
+    PRIMARY KEY (sale_number),
+  CONSTRAINT sale_fkey
+    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf),
+  CONSTRAINT sale_fkey1
+    FOREIGN KEY (client_cpf) REFERENCES clients(client_cpf),
+  CONSTRAINT sale_fkey2
+    FOREIGN KEY (artifact_code) REFERENCES artifacts(artifact_code)
 );
 
 CREATE TABLE instruct
