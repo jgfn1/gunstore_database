@@ -135,5 +135,13 @@ CREATE TABLE sale
 CREATE TABLE instruct
 (
   client_cpf INTEGER,
-  employee_cpf INTEGER
-)
+  employee_cpf INTEGER,
+  CONSTRAINT instruct_pkey
+    PRIMARY KEY (client_cpf),
+  CONSTRAINT instruct_pkey1
+    PRIMARY KEY (employee_cpf),
+  CONSTRAINT instruct_fkey
+    FOREIGN KEY (client_cpf) REFERENCES clients(client_cpf),
+  CONSTRAINT instruct_fkey1
+    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
+);
