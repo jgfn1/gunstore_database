@@ -1,4 +1,4 @@
-INSERT INTO addresses VALUES (000, 'Avenida Presidente Jair Messias Bolsonaro)';
+INSERT INTO addresses VALUES (000, 'Avenida Presidente Jair Messias Bolsonaro');
 INSERT INTO addresses VALUES (001, 'Avenida Presidente Dr. Enéas Carneiro');
 INSERT INTO addresses VALUES (002, 'Avenida Imperador Dom Pedro II');
 INSERT INTO addresses VALUES (003, 'Avenida Presidente Donald J. Trump');
@@ -17,7 +17,7 @@ INSERT INTO departments VALUES (011, 'Metralhadoras', 011, 003);
 INSERT INTO departments VALUES (100, 'Espingardas', 100, 004);
 INSERT INTO departments VALUES (101, 'Bombas', 101, 005);
 
-INSERT INTO persons VALUES (000, 'Barão de Mauá', 28/12/1813, 'M', 000;
+INSERT INTO persons VALUES (000, 'Barão de Mauá', 28/12/1813, 'M', 000);
 INSERT INTO persons VALUES (001, 'Duque de Caxias', 25/08/1803, 'M', 001);
 INSERT INTO persons VALUES (002, 'Winston Churchill', 30/11/1874, 'M', 002);
 INSERT INTO persons VALUES (003, 'Ronald Reagan', 6/02/1911, 'M', 003);
