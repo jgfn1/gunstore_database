@@ -1,7 +1,7 @@
 CREATE TABLE addresses
 (
   cep INTEGER, --CEP is the Brazilian equivalent to the American ZIP Code.
-  street VARCHAR2(20),
+  street VARCHAR2(100),
   CONSTRAINT addresses_pkey
     PRIMARY KEY (cep)
 );
@@ -9,7 +9,7 @@ CREATE TABLE addresses
 CREATE TABLE departments
 (
   department_code INTEGER,
-  name VARCHAR2(20),
+  name VARCHAR2(100),
   phone_extension INTEGER, --In Portuguese it is called "Ramal".
   manager_cpf INTEGER,
   CONSTRAINT departments_pkey
@@ -21,11 +21,14 @@ CREATE TABLE departments
 CREATE TABLE persons
 (
   cpf INTEGER, --CPF is the Brazilian equivalent to the American Social Security Number.
-  name VARCHAR2(20),
+  name VARCHAR2(100),
   birthdate DATE,
   sex VARCHAR2(1),
+  cep INTEGER,
   CONSTRAINT persons_pkey
-    PRIMARY KEY (cpf)
+    PRIMARY KEY (cpf),
+  CONSTRAINT persons_fkey
+    FOREIGN KEY (cep) REFERENCES addresses(cep)
 );
 
 CREATE TABLE phones
@@ -45,7 +48,7 @@ CREATE TABLE employees
   employee_cpf INTEGER,
   wage INTEGER,
   worked_years INTEGER,
-  job_title VARCHAR2(20),
+  job_title VARCHAR2(100),
   supervisor_cpf INTEGER,
   department_code INTEGER,
   CONSTRAINT employees_pkey
@@ -73,8 +76,8 @@ CREATE TABLE clients
 CREATE TABLE artifacts
 (
   artifact_code INTEGER,
-  name VARCHAR2(20),
-  manufacturer_name VARCHAR2(20),
+  name VARCHAR2(100),
+  manufacturer_name VARCHAR2(100),
   manufacture_date DATE,
   sale_date DATE,
   CONSTRAINT artifacts_pkey
