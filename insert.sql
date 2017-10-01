@@ -46,3 +46,22 @@ INSERT INTO employees VALUES (003, 1200, 7, 'Gestor de Metralhadoras | Vendedor 
 INSERT INTO employees VALUES (009, 1100, 20, 'Gestor de Bombas | Vendedor | Instrutor de Tiro', 010, 000);
 INSERT INTO employees VALUES (010, 300, 5, 'Gestor de Rifles/Fuzis | Gestor de Espingardas', 010, 000);
 
+INSERT INTO clients VALUES (000, 3, 0, 0);
+INSERT INTO clients VALUES (001, 300, 1, 1);
+INSERT INTO clients VALUES (004, 5, 0, 0);
+INSERT INTO clients VALUES (005, 1, 1, 1);
+INSERT INTO clients VALUES (006, 20, 0, 1);
+INSERT INTO clients VALUES (007, 7, 1, 1);
+INSERT INTO clients VALUES (008, 5000, 1, 1);
+
+INSERT INTO artifacts VALUES (000, 'Desert Eagle .50C', 'Israel Military Industries', 12/07/1997, 01/01/2000);
+INSERT INTO artifacts VALUES (001, 'Katana', 'Hattori Hanzo', 04/11/1580, 10/08/2004);
+INSERT INTO artifacts VALUES (010, 'Kalashnikova 1947 (AK-47)', 'Mikhail Kalashnikov', 01/01/1947, 29/09/2017);
+INSERT INTO artifacts VALUES (011, 'Uzi Micro SMG ', 'Israel Military Industries', 13/05/1948, 21/09/1951);
+INSERT INTO artifacts VALUES (100, 'Winchester Model 1912 (Shotgun 12)', 'Winchester Repeating Arms Company', 12/12/1912, 30/10/2006);
+INSERT INTO artifacts VALUES (101, 'C-4', 'Phillips Petroleum Company', 31/03/1958, 01/07/1987);
+
+INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
+INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
+INSERT INTO overtimes VALUES (to_date('21/07/2016', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 009);
+INSERT INTO overtimes VALUES (to_date('01/07/1998', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 010);
