@@ -1,3 +1,15 @@
+DROP TABLE addresses
+DROP TABLE departments
+DROP TABLE persons
+DROP TABLE phones
+DROP TABLE employees
+DROP TABLE clients
+DROP TABLE artifacts
+DROP TABLE overtimes
+DROP TABLE sale
+DROP TABLE employee_vacancies
+DROP TABLE instruct
+
 CREATE TABLE addresses
 (
   cep INTEGER, --CEP is the Brazilian equivalent to the American ZIP Code.
@@ -14,8 +26,6 @@ CREATE TABLE departments
   manager_cpf INTEGER,
   CONSTRAINT departments_pkey
     PRIMARY KEY (department_code),
-  CONSTRAINT departments_fkey
-    FOREIGN KEY (manager_cpf) REFERENCES employees(employee_cpf)
 );
 
 CREATE TABLE persons
@@ -24,21 +34,21 @@ CREATE TABLE persons
   name VARCHAR2(100),
   birthdate DATE,
   sex VARCHAR2(1),
-  cep INTEGER,
+  P_cep INTEGER,
   CONSTRAINT persons_pkey
     PRIMARY KEY (cpf),
   CONSTRAINT persons_fkey
-    FOREIGN KEY (cep) REFERENCES addresses(cep)
+    FOREIGN KEY (P_cep) REFERENCES addresses(cep)
+  --CONSTRAINT persons_checksex check (sex= 'M' or sex = 'F')
 );
 
 CREATE TABLE phones
 (
   cpf INTEGER,
   phone_number INTEGER,
-  CONSTRAINT phones_pkey1
-    PRIMARY KEY (cpf),
-  CONSTRAINT phones_pkey2
-    PRIMARY KEY (phone_number),
+  CONSTRAINT phones_pkey
+    PRIMARY KEY (cpf, phone_number),
+  
   CONSTRAINT phones_fkey
     FOREIGN KEY (cpf) REFERENCES persons(cpf)
 );
@@ -89,13 +99,14 @@ CREATE TABLE overtimes --Brazilian "hora extra"
   overtime_date DATE,
   start_time TIMESTAMP,
   end_time TIMESTAMP,
-  employee_cpf INTEGER,
+  employee_cpf INTEGER NOT NULL,
   CONSTRAINT overtimes_pkey
     PRIMARY KEY (overtime_date),
   CONSTRAINT overtimes_const
     UNIQUE (employee_cpf),
   CONSTRAINT overtimes_fkey
     FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
+  
 );
 
 CREATE TABLE employee_vacancies
@@ -105,9 +116,8 @@ CREATE TABLE employee_vacancies
   load_unload BINARY_DOUBLE, -- 1 - Load | 0 - Unload
   floor INTEGER,
   CONSTRAINT employee_vacancies_pkey
-    PRIMARY KEY (employee_cpf),
-  CONSTRAINT employee_vacancies_pkey1
-    PRIMARY KEY (vacancy_number),
+    PRIMARY KEY (employee_cpf, vacancy_number),
+  
   CONSTRAINT employee_vacancies_fkey
     FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
 );
@@ -120,13 +130,8 @@ CREATE TABLE sale
   sale_number INTEGER,
   date_hour TIMESTAMP,
   CONSTRAINT sale_pkey
-    PRIMARY KEY (employee_cpf),
-  CONSTRAINT sale_pkey1
-    PRIMARY KEY (client_cpf),
-  CONSTRAINT sale_pkey2
-    PRIMARY KEY (artifact_code),
-  CONSTRAINT sale_pkey3
-    PRIMARY KEY (sale_number),
+    PRIMARY KEY (employee_cpf, client_cpf, artifact_code, sale_number),
+  
   CONSTRAINT sale_fkey
     FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf),
   CONSTRAINT sale_fkey1
@@ -140,11 +145,13 @@ CREATE TABLE instruct
   client_cpf INTEGER,
   employee_cpf INTEGER,
   CONSTRAINT instruct_pkey
-    PRIMARY KEY (client_cpf),
-  CONSTRAINT instruct_pkey1
-    PRIMARY KEY (employee_cpf),
+    PRIMARY KEY (client_cpf, employee_cpf),
+  
   CONSTRAINT instruct_fkey
     FOREIGN KEY (client_cpf) REFERENCES clients(client_cpf),
   CONSTRAINT instruct_fkey1
     FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
 );
+
+ALTER TABLE departments ADD CONSTRAINT departments_fkey
+    FOREIGN KEY (manager_cpf) REFERENCES employees(employee_cpf)
