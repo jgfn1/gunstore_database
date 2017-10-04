@@ -1,14 +1,14 @@
---DROP TABLE overtimes;
---DROP TABLE employee_vacancies;
---DROP TABLE phones;
---DROP TABLE sale;
---DROP TABLE instruct;
---DROP TABLE clients;
---DROP TABLE employees;
---DROP TABLE persons FORCE CASCADE;
---DROP TABLE addresses;
---DROP TABLE departments;
---DROP TABLE artifacts;
+DROP TABLE overtimes;
+DROP TABLE employee_vacancies;
+DROP TABLE phones;
+DROP TABLE sale;
+DROP TABLE instruct;
+DROP TABLE clients;
+DROP TABLE employees;
+DROP TABLE persons FORCE CASCADE;
+DROP TABLE addresses;
+DROP TABLE departments;
+DROP TABLE artifacts;
 
 
 CREATE TABLE addresses(
@@ -17,24 +17,23 @@ CREATE TABLE addresses(
   CONSTRAINT addresses_pkey PRIMARY KEY (zipcode)
 );
 
-CREATE TABLE departments
-(
+CREATE TABLE departments(
   department_code INTEGER,
   name VARCHAR2 (100),
   phone_extension INTEGER, --In Portuguese it is called "Ramal".
   manager_cpf INTEGER NOT NULL,
-  CONSTRAINT departments_pkey PRIMARY KEY (department_code),
+  CONSTRAINT departments_pkey PRIMARY KEY (department_code)
 );
 
 CREATE TABLE persons
 (
   cpf INTEGER, --CPF is the Brazilian equivalent to the American Social Security Number.
-  name VARCHAR2(100),
+  name VARCHAR2 (100),
   birthdate DATE,
   sex VARCHAR2(1)  check (sex= 'M' or sex = 'F'),
   P_cep INTEGER,
   CONSTRAINT persons_pkey PRIMARY KEY (cpf),
-  CONSTRAINT persons_fkey FOREIGN KEY (P_cep) REFERENCES addresses(zipcode);
+  CONSTRAINT persons_fkey FOREIGN KEY (P_cep) REFERENCES addresses(zipcode)
 );
 
 CREATE TABLE phones
@@ -109,7 +108,6 @@ CREATE TABLE sale
   sale_number INTEGER,
   date_hour TIMESTAMP,
   CONSTRAINT sale_pkey PRIMARY KEY (employee_cpf, client_cpf, artifact_code, sale_number),
-  
   CONSTRAINT sale_fkey FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf),
   CONSTRAINT sale_fkey1 FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
   CONSTRAINT sale_fkey2 FOREIGN KEY (artifact_code) REFERENCES artifacts (artifact_code)
@@ -125,4 +123,4 @@ CREATE TABLE instruct
 );
 
 ALTER TABLE departments ADD CONSTRAINT departments_fkey
-    FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf)
+    FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf);
