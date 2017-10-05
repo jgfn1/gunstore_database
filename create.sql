@@ -4,15 +4,15 @@ DROP TABLE phones;
 DROP TABLE sale;
 DROP TABLE instruct;
 DROP TABLE clients;
-DROP TABLE employees;
-DROP TABLE persons FORCE CASCADE;
+DROP TABLE employees CASCADE CONSTRAINTS;
+DROP TABLE persons CASCADE CONSTRAINTS; --foi dito para ser usado FORCE CONSTRAINTS, mas essa sintaxe não existe
 DROP TABLE addresses;
 DROP TABLE departments;
 DROP TABLE artifacts;
 
 
 CREATE TABLE addresses(
-  zipcode INTEGER,      --cep
+  zipcode INTEGER,      -- antes era cep, mas acusava 'nome ja em uso'
   street VARCHAR2 (100),
   CONSTRAINT addresses_pkey PRIMARY KEY (zipcode)
 );
