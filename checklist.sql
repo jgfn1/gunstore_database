@@ -24,7 +24,7 @@ SQL - básicas
 1. Uso de BETWEEN com valores numéricos
     --2. Uso de BETWEEN com datas
 3. Uso de LIKE/NOT LIKE com tokens (% ou _)
-4. Uso de IN com subconsulta
+    --4. Uso de IN com subconsulta
 5. Uso de IS NULL/IS NOT NULL
 6. Uso de ORDER BY
 7. Criação de VIEW
