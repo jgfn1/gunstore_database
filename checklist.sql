@@ -2,10 +2,10 @@
 Checklist 1 - SQL e PL - GDI EC 2017.2
 
 Obs.: As questoes feitas devem ser identificadas com identacao de
-duas "tabs" e colocadas entre parenteses.
+duas "tabs" e dois hífens "--".
   Ex. (A 2. foi feita porem a 1. nao.):
       1. Faca isto.
-          (2. Faca aquilo.)
+          --2. Faca aquilo.
 
 Obs. 1: Devemos prestar atenção em qual dos três códigos devemos copiar
 os itens que fazemos do checklist.
@@ -22,7 +22,7 @@ executem, para demonstração.
 
 SQL - básicas
 1. Uso de BETWEEN com valores numéricos
-2. Uso de BETWEEN com datas
+    --2. Uso de BETWEEN com datas
 3. Uso de LIKE/NOT LIKE com tokens (% ou _)
 4. Uso de IN com subconsulta
 5. Uso de IS NULL/IS NOT NULL

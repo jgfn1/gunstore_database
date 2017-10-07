@@ -232,3 +232,8 @@ CREATE TABLE instruct
 INSERT INTO instruct VALUES (001, 009);
 INSERT INTO instruct VALUES (005, 009);
 INSERT INTO instruct VALUES (008, 003);
+
+--2. Uso de BETWEEN com datas
+SELECT cep FROM addresses
+WHERE cep BETWEEN 000 AND 006;
+
