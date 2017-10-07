@@ -257,5 +257,6 @@ SELECT * FROM ocuppied_vacancies;
 
 --10. Criar CHECKs
 ALTER TABLE employees
-ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))
-ADD (CONSTRAINT employees_name_check CHECK (name <> 'Adolf Hitler'));
+ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
+ALTER TABLE persons
+ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
