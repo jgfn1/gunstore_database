@@ -12,3 +12,11 @@ WHERE client_cpf IN (
 SELECT sale_number FROM sale
 WHERE sale_number > 3
 ORDER BY date_hour;
+
+--7. Criação de VIEW
+CREATE VIEW ocuppied_vacancies AS
+SELECT employee_cpf, vacancy_number FROM employee_vacancies;
+
+--8. Consulta sobre VIEW
+SELECT * FROM ocuppied_vacancies;
+

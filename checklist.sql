@@ -27,8 +27,8 @@ SQL - básicas
     --4. Uso de IN com subconsulta
 5. Uso de IS NULL/IS NOT NULL
     --6. Uso de ORDER BY
-7. Criação de VIEW
-8. Consulta sobre VIEW
+    --7. Criação de VIEW
+    --8. Consulta sobre VIEW
 9. Deleção de VIEW
 10. Criar CHECKs
 11. Criar PK Composta
