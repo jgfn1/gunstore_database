@@ -26,7 +26,7 @@ SQL - básicas
 3. Uso de LIKE/NOT LIKE com tokens (% ou _)
     --4. Uso de IN com subconsulta
 5. Uso de IS NULL/IS NOT NULL
-6. Uso de ORDER BY
+    --6. Uso de ORDER BY
 7. Criação de VIEW
 8. Consulta sobre VIEW
 9. Deleção de VIEW

@@ -7,3 +7,8 @@ SELECT client_cpf FROM clients
 WHERE client_cpf IN (
   SELECT client_cpf FROM instruct
 );
+
+--6. Uso de ORDER BY
+SELECT sale_number FROM sale
+WHERE sale_number > 3
+ORDER BY date_hour;
