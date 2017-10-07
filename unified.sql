@@ -260,3 +260,8 @@ ALTER TABLE employees
 ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
+
+--42. Subconsulta dentro da cláusula FROM (VIEW implícita)
+SELECT name FROM (
+  SELECT name, department_code FROM departments
+);

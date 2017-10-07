@@ -65,7 +65,7 @@ referenciado na subconsulta)
 41. Uso de REVOKE
 
 SQL - avançadas
-42. Subconsulta dentro da cláusula FROM (VIEW implícita)
+    --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 43. Operação aritmética com função de agregação como operador
 44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
 45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
