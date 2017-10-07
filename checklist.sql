@@ -30,7 +30,7 @@ SQL - básicas
     --7. Criação de VIEW
     --8. Consulta sobre VIEW
 9. Deleção de VIEW
-10. Criar CHECKs
+    --10. Criar CHECKs
 11. Criar PK Composta
 12. Criar FK Composta
 13. Usar Valor DEFAULT (Ex: Data do Sistema)

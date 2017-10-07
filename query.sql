@@ -20,3 +20,7 @@ SELECT employee_cpf, vacancy_number FROM employee_vacancies;
 --8. Consulta sobre VIEW
 SELECT * FROM ocuppied_vacancies;
 
+--10. Criar CHECKs
+ALTER TABLE employees
+ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))
+ADD (CONSTRAINT employees_name_check CHECK (name <> 'Adolf Hitler'));
