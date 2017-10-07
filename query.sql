@@ -30,3 +30,9 @@ ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 SELECT name FROM (
   SELECT name, department_code FROM departments
 );
+
+----44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
+SELECT wage FROM employees
+WHERE employees.wage > (
+  SELECT avg(wage) FROM employees
+);
