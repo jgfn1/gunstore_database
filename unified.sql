@@ -271,3 +271,7 @@ SELECT wage FROM employees
 WHERE employees.wage > (
   SELECT avg(wage) FROM employees
 );
+
+--48. Bloco anônimo com declaração de variável e instrução
+DECLARE
+  weapon_number
