@@ -150,6 +150,7 @@ CREATE TABLE overtimes --Brazilian "hora extra"
   overtime_date DATE,
   start_time TIMESTAMP,
   end_time TIMESTAMP,
+  --5. Uso de IS NULL/IS NOT NULL
   employee_cpf INTEGER NOT NULL,
   CONSTRAINT overtimes_pkey PRIMARY KEY (overtime_date),
   CONSTRAINT overtimes_const UNIQUE (employee_cpf),
@@ -159,6 +160,8 @@ CREATE TABLE overtimes --Brazilian "hora extra"
 
 --INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
 --INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
+
+--13. Usar Valor DEFAULT (Ex: Data do Sistema)
 INSERT INTO overtimes VALUES (to_date('21/07/2016', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 009);
 INSERT INTO overtimes VALUES (to_date('01/07/1998', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 010);
 
@@ -201,6 +204,7 @@ CREATE TABLE instruct
 (
   client_cpf INTEGER,
   employee_cpf INTEGER,
+  --11. Criar PK Composta
   CONSTRAINT instruct_pkey PRIMARY KEY (client_cpf, employee_cpf),
   CONSTRAINT instruct_fkey FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
   CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
@@ -210,10 +214,19 @@ CREATE TABLE instruct
 INSERT INTO instruct VALUES (001, 009);
 INSERT INTO instruct VALUES (005, 009);
 INSERT INTO instruct VALUES (008, 003);
+
+--1. Uso de BETWEEN com valores numéricos
+SELECT client_cpf, training_end_register from clients
+WHERE purchases_number BETWEEN 1 and 10;
     
---2. Uso de BETWEEN com datas
+--2. Uso de BETWEEN com datas << certeza que é isso mesmo<<<<<<<<<<<<<<ATENÇÃO<<<<<
 SELECT cep FROM addresses
 WHERE cep BETWEEN 000 AND 006;
+
+--3. Uso de LIKE/NOT LIKE com tokens (% ou _)
+--seleciona todas as armas nao fabricadas pela israel military
+SELECT name from artifact
+WHERE manufacturer_name NOT LIKE 'Israel Military %'; 
 
 --4. Uso de IN com subconsulta
 SELECT client_cpf FROM clients
