@@ -12,9 +12,9 @@ DROP TABLE artifacts;
 
 
 CREATE TABLE addresses(
-  zipcode INTEGER,      -- antes era cep, mas acusava 'nome ja em uso'
+  cep INTEGER,      --cep is the brazilian to 'zipcode'
   street VARCHAR2 (100),
-  CONSTRAINT addresses_pkey PRIMARY KEY (zipcode)
+  CONSTRAINT addresses_pkey PRIMARY KEY (cep)
 );
 
 CREATE TABLE departments(
@@ -33,7 +33,7 @@ CREATE TABLE persons
   sex VARCHAR2(1)  check (sex= 'M' or sex = 'F'),
   P_cep INTEGER,
   CONSTRAINT persons_pkey PRIMARY KEY (cpf),
-  CONSTRAINT persons_fkey FOREIGN KEY (P_cep) REFERENCES addresses(zipcode)
+  CONSTRAINT persons_fkey FOREIGN KEY (P_cep) REFERENCES addresses(cep)
 );
 
 CREATE TABLE phones
@@ -122,5 +122,5 @@ CREATE TABLE instruct
   CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
 );
 
-ALTER TABLE departments ADD CONSTRAINT departments_fkey
-    FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf);
+--ALTER TABLE departments ADD CONSTRAINT departments_fkey
+    --FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf);

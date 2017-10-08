@@ -17,17 +17,17 @@ INSERT INTO departments VALUES (011, 'Metralhadoras', 011, 003);
 INSERT INTO departments VALUES (100, 'Espingardas', 100, 010);
 INSERT INTO departments VALUES (101, 'Bombas', 101, 009);
 
-INSERT INTO persons VALUES (000, 'Barão de Mauá', 28/12/1813, 'M', 000);
-INSERT INTO persons VALUES (001, 'Duque de Caxias', 25/08/1803, 'M', 001);
-INSERT INTO persons VALUES (002, 'Winston Churchill', 30/11/1874, 'M', 002);
-INSERT INTO persons VALUES (003, 'Ronald Reagan', 6/02/1911, 'M', 003);
-INSERT INTO persons VALUES (004, 'Machado de Assis', 21/06/1839, 'M', 004);
-INSERT INTO persons VALUES (005, 'Dom Pedro I', 12/10/1798, 'M', 005);
-INSERT INTO persons VALUES (006, 'Ariano Suassuna', 16/06/1927, 'M', 006);
-INSERT INTO persons VALUES (007, 'Plínio Salgado', 22/01/1895, 'M', 007);
-INSERT INTO persons VALUES (008, 'Coronel Brilhante Ustra', 28/07/1932, 'M', 008);
-INSERT INTO persons VALUES (009, 'Harry S. Truman', 26/12/1972, 'M', 009);
-INSERT INTO persons VALUES (010, 'Tomás de Aquino', 07/03/1274, 'M', 010);
+INSERT INTO persons VALUES (000, 'Barão de Mauá', to_date('28/12/1813', 'dd/mm/yyyy'), 'M', 000);
+INSERT INTO persons VALUES (001, 'Duque de Caxias', to_date('25/08/1803', 'dd/mm/yyyy'), 'M', 001);
+INSERT INTO persons VALUES (002, 'Winston Churchill', to_date('30/11/1874', 'dd/mm/yyyy'), 'M', 002);
+INSERT INTO persons VALUES (003, 'Ronald Reagan', to_date('06/02/1911', 'dd/mm/yyyy'), 'M', 003);
+INSERT INTO persons VALUES (004, 'Machado de Assis', to_date('21/06/1839', 'dd/mm/yyyy'), 'M', 004);
+INSERT INTO persons VALUES (005, 'Dom Pedro I', to_date('12/10/1798', 'dd/mm/yyyy'), 'M', 005);
+INSERT INTO persons VALUES (006, 'Ariano Suassuna', to_date('16/06/1927', 'dd/mm/yyyy'), 'M', 006);
+INSERT INTO persons VALUES (007, 'Plínio Salgado', to_date('22/01/1895', 'dd/mm/yyyy'), 'M', 007);
+INSERT INTO persons VALUES (008, 'Coronel Brilhante Ustra', to_date('28/07/1932', 'dd/mm/yyyy'), 'M', 008);
+INSERT INTO persons VALUES (009, 'Harry S. Truman', to_date('26/12/1972', 'dd/mm/yyyy'), 'M', 009);
+INSERT INTO persons VALUES (010, 'Tomás de Aquino', to_date('07/03/1274', 'dd/mm/yyyy'), 'M', 010);
 
 INSERT INTO phones VALUES (009, 0000);
 INSERT INTO phones VALUES (000, 0001);
@@ -54,15 +54,15 @@ INSERT INTO clients VALUES (006, 20, 0, 1);
 INSERT INTO clients VALUES (007, 7, 1, 1);
 INSERT INTO clients VALUES (008, 5000, 1, 1);
 
-INSERT INTO artifacts VALUES (000, 'Desert Eagle .50C', 'Israel Military Industries', 12/07/1997, 01/01/2000);
-INSERT INTO artifacts VALUES (001, 'Katana', 'Hattori Hanzo', 04/11/1580, 10/08/2004);
-INSERT INTO artifacts VALUES (010, 'Kalashnikova 1947 (AK-47)', 'Mikhail Kalashnikov', 01/01/1947, 29/09/2017);
-INSERT INTO artifacts VALUES (011, 'Uzi Micro SMG ', 'Israel Military Industries', 13/05/1948, 21/09/1951);
-INSERT INTO artifacts VALUES (100, 'Winchester Model 1912 (Shotgun 12)', 'Winchester Repeating Arms Company', 12/12/1912, 30/10/2006);
-INSERT INTO artifacts VALUES (101, 'C-4', 'Phillips Petroleum Company', 31/03/1958, 01/07/1987);
+INSERT INTO artifacts VALUES (000, 'Desert Eagle .50C', 'Israel Military Industries', to_date('12/07/1997', 'dd/mm/yyyy'), to_date('01/01/2000', 'dd/mm/yyyy'));
+INSERT INTO artifacts VALUES (001, 'Katana', 'Hattori Hanzo', to_date('04/11/1580', 'dd/mm/yyyy'), to_date('10/08/2004', 'dd/mm/yyyy'));
+INSERT INTO artifacts VALUES (010, 'Kalashnikova 1947 (AK-47)', 'Mikhail Kalashnikov', to_date('01/01/1947', 'dd/mm/yyyy'), to_date('29/09/2017', 'dd/mm/yyyy'));
+INSERT INTO artifacts VALUES (011, 'Uzi Micro SMG ', 'Israel Military Industries', to_date('13/05/1948', 'dd/mm/yyyy'), to_date('21/09/1951', 'dd/mm/yyyy'));
+INSERT INTO artifacts VALUES (100, 'Winchester Model 1912 (Shotgun 12)', 'Winchester Repeating Arms Company', to_date('12/12/1912', 'dd/mm/yyyy'), to_date('30/10/2006', 'dd/mm/yyyy'));
+INSERT INTO artifacts VALUES (101, 'C-4', 'Phillips Petroleum Company', to_date('31/03/1958', 'dd/mm/yyyy'), to_date('01/07/1987', 'dd/mm/yyyy'));
 
-INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
-INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
+--INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
+--INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
 INSERT INTO overtimes VALUES (to_date('21/07/2016', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 009);
 INSERT INTO overtimes VALUES (to_date('01/07/1998', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 010);
 

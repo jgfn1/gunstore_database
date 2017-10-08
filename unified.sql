@@ -1,9 +1,20 @@
+DROP TABLE overtimes;
+DROP TABLE employee_vacancies;
+DROP TABLE phones;
+DROP TABLE sale;
+DROP TABLE instruct;
+DROP TABLE clients;
+DROP TABLE employees CASCADE CONSTRAINTS;
+DROP TABLE persons CASCADE CONSTRAINTS; --foi dito para ser usado FORCE CONSTRAINTS, mas essa sintaxe não existe
+DROP TABLE addresses;
+DROP TABLE departments;
+DROP TABLE artifacts;
+
 CREATE TABLE addresses
 (
-  cep INTEGER, --CEP is the Brazilian equivalent to the American ZIP Code.
-  street VARCHAR2(100),
-  CONSTRAINT addresses_pkey
-    PRIMARY KEY (cep)
+  cep INTEGER,      --cep is the brazilian to 'zipcode'
+  street VARCHAR2 (100),
+  CONSTRAINT addresses_pkey PRIMARY KEY (cep)
 );
 
 INSERT INTO addresses VALUES (000, 'Avenida Presidente Jair Messias Bolsonaro');
@@ -21,13 +32,10 @@ INSERT INTO addresses VALUES (010, 'Rua da Vida');
 CREATE TABLE departments
 (
   department_code INTEGER,
-  name VARCHAR2(100),
+  name VARCHAR2 (100),
   phone_extension INTEGER, --In Portuguese it is called "Ramal".
-  manager_cpf INTEGER,
-  CONSTRAINT departments_pkey
-    PRIMARY KEY (department_code),
-  CONSTRAINT departments_fkey
-    FOREIGN KEY (manager_cpf) REFERENCES employees(employee_cpf)
+  manager_cpf INTEGER NOT NULL,
+  CONSTRAINT departments_pkey PRIMARY KEY (department_code)
 );
 
 INSERT INTO departments VALUES (000, 'Pistolas/Revólveres', 000, 002);
@@ -40,14 +48,12 @@ INSERT INTO departments VALUES (101, 'Bombas', 101, 009);
 CREATE TABLE persons
 (
   cpf INTEGER, --CPF is the Brazilian equivalent to the American Social Security Number.
-  name VARCHAR2(100),
+  name VARCHAR2 (100),
   birthdate DATE,
-  sex VARCHAR2(1),
-  cep INTEGER,
-  CONSTRAINT persons_pkey
-    PRIMARY KEY (cpf),
-  CONSTRAINT persons_fkey
-    FOREIGN KEY (cep) REFERENCES addresses(cep)
+  sex VARCHAR2(1)  check (sex= 'M' or sex = 'F'),
+  P_cep INTEGER,
+  CONSTRAINT persons_pkey PRIMARY KEY (cpf),
+  CONSTRAINT persons_fkey FOREIGN KEY (P_cep) REFERENCES addresses(cep)
 );
 
 INSERT INTO persons VALUES (000, 'Barão de Mauá', to_date('28/12/1813', 'dd/mm/yyyy'), 'M', 000);
@@ -66,13 +72,10 @@ CREATE TABLE phones
 (
   cpf INTEGER,
   phone_number INTEGER,
-  CONSTRAINT phones_pkey1
-    PRIMARY KEY (cpf),
-  CONSTRAINT phones_pkey2
-    PRIMARY KEY (phone_number),
-  CONSTRAINT phones_fkey
-    FOREIGN KEY (cpf) REFERENCES persons(cpf)
+  CONSTRAINT phones_pkey PRIMARY KEY (cpf, phone_number),
+  CONSTRAINT phones_fkey FOREIGN KEY (cpf) REFERENCES persons (cpf)
 );
+
 
 INSERT INTO phones VALUES (009, 0000);
 INSERT INTO phones VALUES (000, 0001);
@@ -94,20 +97,18 @@ CREATE TABLE employees
   job_title VARCHAR2(100),
   supervisor_cpf INTEGER,
   department_code INTEGER,
-  CONSTRAINT employees_pkey
-    PRIMARY KEY (employee_cpf),
-  CONSTRAINT employees_fkey
-    FOREIGN KEY (employee_cpf) REFERENCES  persons(cpf),
-  CONSTRAINT employees_fkey1
-    FOREIGN KEY (supervisor_cpf) REFERENCES employees(employee_cpf),
-  CONSTRAINT persons_fkey2
-    FOREIGN KEY (department_code) REFERENCES departments(department_code)
+  CONSTRAINT employees_pkey PRIMARY KEY (employee_cpf),
+  CONSTRAINT employees_fkey FOREIGN KEY (employee_cpf) REFERENCES persons (cpf),
+  CONSTRAINT employees_fkey1 FOREIGN KEY (supervisor_cpf) REFERENCES employees (employee_cpf),
+  CONSTRAINT persons_fkey2 FOREIGN KEY (department_code) REFERENCES departments (department_code)
 );
 
+INSERT INTO employees VALUES (010, 300, 5, 'Gestor de Rifles/Fuzis | Gestor de Espingardas', 010, 000);    
 INSERT INTO employees VALUES (002, 1000, 10, 'Gestor de Pistolas/Revólveres | Gestor de Armas Brancas', 010, 000);
 INSERT INTO employees VALUES (003, 1200, 7, 'Gestor de Metralhadoras | Vendedor | Instrutor de Tiro', 010, 000);
 INSERT INTO employees VALUES (009, 1100, 20, 'Gestor de Bombas | Vendedor | Instrutor de Tiro', 010, 000);
-INSERT INTO employees VALUES (010, 300, 5, 'Gestor de Rifles/Fuzis | Gestor de Espingardas', 010, 000);
+
+ALTER TABLE departments ADD CONSTRAINT departments_fkey FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf); --adding a foreing key at departments
 
 CREATE TABLE clients
 (
@@ -115,10 +116,8 @@ CREATE TABLE clients
   purchases_number INTEGER,
   heavy_guns_license BINARY_DOUBLE, -- 1 - Have the License | 0 - Don't.
   training_end_register BINARY_DOUBLE, -- 1 - Finished the training | 0 - Don't.
-  CONSTRAINT clients_pkey
-    PRIMARY KEY (client_cpf),
-  CONSTRAINT clients_fkey
-    FOREIGN KEY (client_cpf) REFERENCES persons(cpf)
+  CONSTRAINT clients_pkey PRIMARY KEY (client_cpf),
+  CONSTRAINT clients_fkey FOREIGN KEY (client_cpf) REFERENCES persons (cpf)
 );
 
 INSERT INTO clients VALUES (000, 3, 0, 0);
@@ -132,12 +131,11 @@ INSERT INTO clients VALUES (008, 5000, 1, 1);
 CREATE TABLE artifacts
 (
   artifact_code INTEGER,
-  name VARCHAR2(100),
+  name VARCHAR2 (100),
   manufacturer_name VARCHAR2(100),
   manufacture_date DATE,
   sale_date DATE,
-  CONSTRAINT artifacts_pkey
-    PRIMARY KEY (artifact_code)
+  CONSTRAINT artifacts_pkey PRIMARY KEY (artifact_code)
 );
 
 INSERT INTO artifacts VALUES (000, 'Desert Eagle .50C', 'Israel Military Industries', to_date('12/07/1997', 'dd/mm/yyyy'), to_date('01/01/2000', 'dd/mm/yyyy'));
@@ -152,17 +150,15 @@ CREATE TABLE overtimes --Brazilian "hora extra"
   overtime_date DATE,
   start_time TIMESTAMP,
   end_time TIMESTAMP,
-  employee_cpf INTEGER,
-  CONSTRAINT overtimes_pkey
-    PRIMARY KEY (overtime_date),
-  CONSTRAINT overtimes_const
-    UNIQUE (employee_cpf),
-  CONSTRAINT overtimes_fkey
-    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
+  employee_cpf INTEGER NOT NULL,
+  CONSTRAINT overtimes_pkey PRIMARY KEY (overtime_date),
+  CONSTRAINT overtimes_const UNIQUE (employee_cpf),
+  CONSTRAINT overtimes_fkey FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
+  
 );
 
-INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
-INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
+--INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
+--INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
 INSERT INTO overtimes VALUES (to_date('21/07/2016', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 009);
 INSERT INTO overtimes VALUES (to_date('01/07/1998', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 010);
 
@@ -172,12 +168,8 @@ CREATE TABLE employee_vacancies
   vacancy_number INTEGER,
   load_unload BINARY_DOUBLE, -- 1 - Load | 0 - Unload
   floor INTEGER,
-  CONSTRAINT employee_vacancies_pkey
-    PRIMARY KEY (employee_cpf),
-  CONSTRAINT employee_vacancies_pkey1
-    PRIMARY KEY (vacancy_number),
-  CONSTRAINT employee_vacancies_fkey
-    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
+  CONSTRAINT employee_vacancies_pkey PRIMARY KEY (employee_cpf, vacancy_number),
+  CONSTRAINT employee_vacancies_fkey FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
 );
 
 INSERT INTO employee_vacancies VALUES (002, 00, 0, 00);
@@ -192,20 +184,10 @@ CREATE TABLE sale
   artifact_code INTEGER,
   sale_number INTEGER,
   date_hour TIMESTAMP,
-  CONSTRAINT sale_pkey
-    PRIMARY KEY (employee_cpf),
-  CONSTRAINT sale_pkey1
-    PRIMARY KEY (client_cpf),
-  CONSTRAINT sale_pkey2
-    PRIMARY KEY (artifact_code),
-  CONSTRAINT sale_pkey3
-    PRIMARY KEY (sale_number),
-  CONSTRAINT sale_fkey
-    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf),
-  CONSTRAINT sale_fkey1
-    FOREIGN KEY (client_cpf) REFERENCES clients(client_cpf),
-  CONSTRAINT sale_fkey2
-    FOREIGN KEY (artifact_code) REFERENCES artifacts(artifact_code)
+  CONSTRAINT sale_pkey PRIMARY KEY (employee_cpf, client_cpf, artifact_code, sale_number),
+  CONSTRAINT sale_fkey FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf),
+  CONSTRAINT sale_fkey1 FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
+  CONSTRAINT sale_fkey2 FOREIGN KEY (artifact_code) REFERENCES artifacts (artifact_code)
 );
 
 INSERT INTO sale VALUES (009, 001, 101, 1, (CURRENT_TIMESTAMP));
@@ -219,20 +201,16 @@ CREATE TABLE instruct
 (
   client_cpf INTEGER,
   employee_cpf INTEGER,
-  CONSTRAINT instruct_pkey
-    PRIMARY KEY (client_cpf),
-  CONSTRAINT instruct_pkey1
-    PRIMARY KEY (employee_cpf),
-  CONSTRAINT instruct_fkey
-    FOREIGN KEY (client_cpf) REFERENCES clients(client_cpf),
-  CONSTRAINT instruct_fkey1
-    FOREIGN KEY (employee_cpf) REFERENCES employees(employee_cpf)
+  CONSTRAINT instruct_pkey PRIMARY KEY (client_cpf, employee_cpf),
+  CONSTRAINT instruct_fkey FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
+  CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
 );
+
 
 INSERT INTO instruct VALUES (001, 009);
 INSERT INTO instruct VALUES (005, 009);
 INSERT INTO instruct VALUES (008, 003);
-
+    
 --2. Uso de BETWEEN com datas
 SELECT cep FROM addresses
 WHERE cep BETWEEN 000 AND 006;
