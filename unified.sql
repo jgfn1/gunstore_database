@@ -259,6 +259,18 @@ ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 SELECT department_code, sum(wage) FROM employees
 GROUP BY department_code;
 
+--21. Uso de HAVING
+SELECT department_code, sum(wage) FROM employees
+GROUP BY department_code
+HAVING sum(wage) > 200;
+
+--22. Uso de HAVING com subconsulta
+SELECT department_code, sum(wage) FROM employees
+GROUP BY department_code
+HAVING sum(wage) > (
+  SELECT sum(worked_years) FROM employees
+);
+
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments

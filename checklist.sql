@@ -41,8 +41,8 @@ SQL - básicas
 18. Função de agregação sem GROUP BY
     --19. Função de agregação com GROUP BY
 20. Uso de DISTINCT
-21. Uso de HAVING
-22. Uso de HAVING com subconsulta
+    --21. Uso de HAVING
+    --22. Uso de HAVING com subconsulta
 23. Uso de WHERE + HAVING
 24. Junção entre duas tabelas
 25. Junção entre três tabelas + condição de seleção (M:N)
