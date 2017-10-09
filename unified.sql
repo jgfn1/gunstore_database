@@ -50,10 +50,10 @@ CREATE TABLE persons
   cpf INTEGER, --CPF is the Brazilian equivalent to the American Social Security Number.
   name VARCHAR2 (100),
   birthdate DATE,
-  sex VARCHAR2(1)  check (sex= 'M' or sex = 'F'),
-  P_cep INTEGER,
+  sex VARCHAR2(1) CHECK (sex = 'M' or sex = 'F'),
+  person_cep INTEGER,
   CONSTRAINT persons_pkey PRIMARY KEY (cpf),
-  CONSTRAINT persons_fkey FOREIGN KEY (P_cep) REFERENCES addresses(cep)
+  CONSTRAINT persons_fkey FOREIGN KEY (person_cep) REFERENCES addresses(cep)
 );
 
 INSERT INTO persons VALUES (000, 'Barão de Mauá', to_date('28/12/1813', 'dd/mm/yyyy'), 'M', 000);
@@ -155,7 +155,6 @@ CREATE TABLE overtimes --Brazilian "hora extra"
   CONSTRAINT overtimes_pkey PRIMARY KEY (overtime_date),
   CONSTRAINT overtimes_const UNIQUE (employee_cpf),
   CONSTRAINT overtimes_fkey FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
-  
 );
 
 --INSERT INTO overtimes VALUES (NULL , NULL, NULL, 002);
@@ -274,6 +273,20 @@ HAVING sum(wage) > (
 --29. Junção usando FULL OUTER JOIN
 SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D
   ON P.cpf = D.manager_cpf;
+
+--31. Uma subconsulta com uso de ALL
+SELECT name FROM persons
+WHERE birthdate < ALL (
+  SELECT birthdate FROM persons
+  WHERE birthdate > to_date('01/01/1850', 'dd/mm/yyyy')
+);
+
+--32. Uma subconsulta com uso de EXISTS/NOT EXISTS
+SELECT A.name FROM artifacts A
+WHERE exists(
+  SELECT S.artifact_code FROM sale S
+  WHERE A.artifact_code = S.artifact_code
+);
 
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (

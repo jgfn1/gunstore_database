@@ -51,8 +51,8 @@ SQL - básicas
 28. Junção usando RIGHT OUTER JOIN
     --29. Junção usando FULL OUTER JOIN
 30. Uma subconsulta com uso de ANY ou SOME
-31. Uma subconsulta com uso de ALL
-32. Uma subconsulta com uso de EXISTS/NOT EXISTS
+    --31. Uma subconsulta com uso de ALL
+    --32. Uma subconsulta com uso de EXISTS/NOT EXISTS
 33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo
 referenciado na subconsulta)
 34. Uso de UNION
@@ -73,7 +73,7 @@ SQL - avançadas
 47. EXISTS com mais de uma tabela, sem fazer junção
 
 PL - básicas
-48. Bloco anônimo com declaração de variável e instrução
+    --48. Bloco anônimo com declaração de variável e instrução
 49. Bloco anônimo com exceção
 50. Uso de IF-THEN-ELSE
 51. Uso de ELSIF

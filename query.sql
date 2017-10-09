@@ -54,6 +54,20 @@ HAVING sum(wage) > (
 SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D
   ON P.cpf = D.manager_cpf;
 
+--31. Uma subconsulta com uso de ALL
+SELECT name FROM persons
+WHERE birthdate < ALL (
+  SELECT birthdate FROM persons
+  WHERE birthdate > to_date('01/01/1850', 'dd/mm/yyyy')
+);
+
+--32. Uma subconsulta com uso de EXISTS/NOT EXISTS
+SELECT A.name FROM artifacts A
+WHERE exists(
+  SELECT S.artifact_code FROM sale S
+  WHERE A.artifact_code = S.artifact_code
+);
+
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments
