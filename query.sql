@@ -34,6 +34,10 @@ ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 
+--19. Função de agregação com GROUP BY
+SELECT department_code, sum(wage) FROM employees
+GROUP BY department_code;
+
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments

@@ -39,7 +39,7 @@ SQL - básicas
 16. Usar ALTER TABLE para Remover de Coluna
 17. Operadores aritméticos no SELECT
 18. Função de agregação sem GROUP BY
-19. Função de agregação com GROUP BY
+    --19. Função de agregação com GROUP BY
 20. Uso de DISTINCT
 21. Uso de HAVING
 22. Uso de HAVING com subconsulta
