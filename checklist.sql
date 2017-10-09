@@ -49,11 +49,11 @@ SQL - básicas
 26. Junção usando INNER JOIN
 27. Junção usando LEFT OUTER JOIN
 28. Junção usando RIGHT OUTER JOIN
-29. Junção usando FULL OUTER JOIN
-30. Uma subconsultacom uso de ANY ou SOME
-31. Uma subconsultacom uso de ALL
-32. Uma subconsultacom uso de EXISTS/NOT EXISTS
-33. Uma subconsultacom uso de ALIAS com consultas aninhadas (ALIAS externo sendo
+    --29. Junção usando FULL OUTER JOIN
+30. Uma subconsulta com uso de ANY ou SOME
+31. Uma subconsulta com uso de ALL
+32. Uma subconsulta com uso de EXISTS/NOT EXISTS
+33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo
 referenciado na subconsulta)
 34. Uso de UNION
 35. Uso de INTERSECT

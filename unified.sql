@@ -271,6 +271,10 @@ HAVING sum(wage) > (
   SELECT sum(worked_years) FROM employees
 );
 
+--29. Junção usando FULL OUTER JOIN
+SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D
+  ON P.cpf = D.manager_cpf;
+
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments
