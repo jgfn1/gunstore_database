@@ -219,13 +219,13 @@ INSERT INTO instruct VALUES (008, 003);
 SELECT client_cpf, training_end_register from clients
 WHERE purchases_number BETWEEN 1 and 10;
     
---2. Uso de BETWEEN com datas << certeza que é isso mesmo<<<<<<<<<<<<<<ATENÇÃO<<<<<
-SELECT cep FROM addresses
-WHERE cep BETWEEN 000 AND 006;
+--2. Uso de BETWEEN com datas
+SELECT name FROM persons
+WHERE birthdate BETWEEN to_date('01/01/1900', 'dd/mm/yyyy') AND to_date('01/01/2017', 'dd/mm/yyyy');
 
 --3. Uso de LIKE/NOT LIKE com tokens (% ou _)
 --seleciona todas as armas nao fabricadas pela israel military
-SELECT name from artifact
+SELECT name from artifacts
 WHERE manufacturer_name NOT LIKE 'Israel Military %'; 
 
 --4. Uso de IN com subconsulta
@@ -265,4 +265,8 @@ WHERE employees.wage > (
 
 --48. Bloco anônimo com declaração de variável e instrução
 DECLARE
-  weapon_number
+  bomb_number INTEGER := 0;
+BEGIN
+    SELECT artifact_code INTO bomb_number FROM artifacts
+    WHERE name = 'C-4';
+END;

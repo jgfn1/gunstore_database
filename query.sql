@@ -1,6 +1,11 @@
 --2. Uso de BETWEEN com datas
-SELECT cep FROM addresses
-WHERE cep BETWEEN 000 AND 006;
+SELECT name FROM persons
+WHERE birthdate BETWEEN to_date('01/01/1900', 'dd/mm/yyyy') AND to_date('01/01/2017', 'dd/mm/yyyy');
+
+--3. Uso de LIKE/NOT LIKE com tokens (% ou _)
+--seleciona todas as armas nao fabricadas pela israel military
+SELECT name from artifacts
+WHERE manufacturer_name NOT LIKE 'Israel Military %';
 
 --4. Uso de IN com subconsulta
 SELECT client_cpf FROM clients
