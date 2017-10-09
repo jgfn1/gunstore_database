@@ -240,11 +240,14 @@ WHERE sale_number > 3
 ORDER BY date_hour;
 
 --7. Criação de VIEW
-CREATE VIEW ocuppied_vacancies AS
+CREATE VIEW occupied_vacancies AS
 SELECT employee_cpf, vacancy_number FROM employee_vacancies;
 
 --8. Consulta sobre VIEW
-SELECT * FROM ocuppied_vacancies;
+SELECT * FROM occupied_vacancies;
+
+--9. Deleção de VIEW
+DROP VIEW occupied_vacancies;
 
 --10. Criar CHECKs
 ALTER TABLE employees

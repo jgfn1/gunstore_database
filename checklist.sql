@@ -21,19 +21,19 @@ executem, para demonstração.
 5. Gatilhos devem estar acompanhados de instruções que os ativem, para demonstração.
 
 SQL - básicas
-	--1. Uso de BETWEEN com valores numéricos
+  	--1. Uso de BETWEEN com valores numéricos
     --2. Uso de BETWEEN com datas
 3. Uso de LIKE/NOT LIKE com tokens (% ou _)
     --4. Uso de IN com subconsulta
-	--5. Uso de IS NULL/IS NOT NULL
+	  --5. Uso de IS NULL/IS NOT NULL
     --6. Uso de ORDER BY
     --7. Criação de VIEW
     --8. Consulta sobre VIEW
-9. Deleção de VIEW
+    --9. Deleção de VIEW
     --10. Criar CHECKs
-	--11. Criar PK Composta
+    --11. Criar PK Composta
 12. Criar FK Composta
-	--13. Usar Valor DEFAULT (Ex: Data do Sistema)
+	  --13. Usar Valor DEFAULT (Ex: Data do Sistema)
 14. Usar ALTER TABLE para Modificação de Coluna
 15. Usar ALTER TABLE para Adicionar Coluna
 16. Usar ALTER TABLE para Remover de Coluna
