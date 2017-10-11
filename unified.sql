@@ -17,6 +17,11 @@ CREATE TABLE addresses
   CONSTRAINT addresses_pkey PRIMARY KEY (cep)
 );
 
+--15. Usar ALTER TABLE para Adicionar Coluna
+--16. Usar ALTER TABLE para Remover de Coluna
+alter table addresses add (reference_point varchar2 (30))
+alter table addresses drop (reference_point)
+
 INSERT INTO addresses VALUES (000, 'Avenida Presidente Jair Messias Bolsonaro');
 INSERT INTO addresses VALUES (001, 'Avenida Presidente Dr. Enéas Carneiro');
 INSERT INTO addresses VALUES (002, 'Avenida Imperador Dom Pedro II');
@@ -108,6 +113,7 @@ INSERT INTO employees VALUES (002, 1000, 10, 'Gestor de Pistolas/Revólveres | G
 INSERT INTO employees VALUES (003, 1200, 7, 'Gestor de Metralhadoras | Vendedor | Instrutor de Tiro', 010, 000);
 INSERT INTO employees VALUES (009, 1100, 20, 'Gestor de Bombas | Vendedor | Instrutor de Tiro', 010, 000);
 
+--14. Usar ALTER TABLE para Modificação de Coluna
 ALTER TABLE departments ADD CONSTRAINT departments_fkey FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf); --adding a foreing key at departments
 
 CREATE TABLE clients
@@ -150,7 +156,6 @@ CREATE TABLE overtimes --Brazilian "hora extra"
   overtime_date DATE,
   start_time TIMESTAMP,
   end_time TIMESTAMP,
-  --5. Uso de IS NULL/IS NOT NULL
   employee_cpf INTEGER NOT NULL,
   CONSTRAINT overtimes_pkey PRIMARY KEY (overtime_date),
   CONSTRAINT overtimes_const UNIQUE (employee_cpf),
@@ -232,6 +237,9 @@ SELECT client_cpf FROM clients
 WHERE client_cpf IN (
   SELECT client_cpf FROM instruct
 );
+ --5. Uso de IS NULL/IS NOT NULL
+select employee_cpf from overtimes 
+where end_time is NULL;
 
 --6. Uso de ORDER BY
 SELECT sale_number FROM sale
@@ -269,6 +277,11 @@ GROUP BY department_code
 HAVING sum(wage) > (
   SELECT sum(worked_years) FROM employees
 );
+
+--24. Junção entre duas tabelas
+select P.name, S.artifact_code
+from persons P, sale S
+where P.cpf = S.client_cpf ;
 
 --29. Junção usando FULL OUTER JOIN
 SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D

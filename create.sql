@@ -17,6 +17,11 @@ CREATE TABLE addresses(
   CONSTRAINT addresses_pkey PRIMARY KEY (cep)
 );
 
+--15. Usar ALTER TABLE para Adicionar Colunas
+--16. Usar ALTER TABLE para Remover de Coluna
+alter table addresses add (reference_point varchar2(30))
+alter table addresses drop (reference_point)	
+
 CREATE TABLE departments(
   department_code INTEGER,
   name VARCHAR2 (100),
@@ -122,5 +127,4 @@ CREATE TABLE instruct
   CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
 );
 
---ALTER TABLE departments ADD CONSTRAINT departments_fkey
-    --FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf);
+ALTER TABLE departments ADD CONSTRAINT departments_fkey FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf);

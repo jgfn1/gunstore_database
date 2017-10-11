@@ -33,10 +33,10 @@ SQL - básicas
     --10. Criar CHECKs
     --11. Criar PK Composta
 12. Criar FK Composta
-	  --13. Usar Valor DEFAULT (Ex: Data do Sistema)
-14. Usar ALTER TABLE para Modificação de Coluna
-15. Usar ALTER TABLE para Adicionar Coluna
-16. Usar ALTER TABLE para Remover de Coluna
+	--13. Usar Valor DEFAULT (Ex: Data do Sistema)
+	--14. Usar ALTER TABLE para Modificação de Coluna
+	--15. Usar ALTER TABLE para Adicionar Coluna
+	--16. Usar ALTER TABLE para Remover de Coluna
 17. Operadores aritméticos no SELECT
 18. Função de agregação sem GROUP BY
     --19. Função de agregação com GROUP BY
@@ -44,7 +44,7 @@ SQL - básicas
     --21. Uso de HAVING
     --22. Uso de HAVING com subconsulta
 23. Uso de WHERE + HAVING
-24. Junção entre duas tabelas
+	--24. Junção entre duas tabelas
 25. Junção entre três tabelas + condição de seleção (M:N)
 26. Junção usando INNER JOIN
 27. Junção usando LEFT OUTER JOIN
