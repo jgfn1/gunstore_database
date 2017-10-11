@@ -266,6 +266,9 @@ ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 SELECT department_code, sum(wage) FROM employees
 GROUP BY department_code;
 
+--20. Uso de DISTINCT
+SELECT DISTINCT department_code FROM employeey;
+
 --21. Uso de HAVING
 SELECT department_code, sum(wage) FROM employees
 GROUP BY department_code
@@ -279,9 +282,24 @@ HAVING sum(wage) > (
 );
 
 --24. Junção entre duas tabelas
+--34. Uso de UNION
 select P.name, S.artifact_code
 from persons P, sale S
-where P.cpf = S.client_cpf ;
+where P.cpf = S.client_cpf 
+union (select artifact_code from artifacts)
+;
+
+--35. Uso de INTERSECT
+--funcionarios que tiraram ferias
+(select cpf from persons)
+intersect
+	(select employee_cpf from employee_vacancies);
+
+--36. Uso de MINUS
+--funcionarios que nao tiraram ferias
+(select cpf from persons)
+minus
+	(select employee_cpf from employee_vacancies);
 
 --29. Junção usando FULL OUTER JOIN
 SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D

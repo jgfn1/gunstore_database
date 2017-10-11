@@ -55,9 +55,9 @@ SQL - básicas
     --32. Uma subconsulta com uso de EXISTS/NOT EXISTS
 33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo
 referenciado na subconsulta)
-34. Uso de UNION
-35. Uso de INTERSECT
-36. Uso de MINUS
+	--34. Uso de UNION
+	--35. Uso de INTERSECT
+	--36. Uso de MINUS
 37. INSERT com subconsulta
 38. UPDATE com subconsulta
 39. DELETE com subconsulta
