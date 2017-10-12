@@ -88,8 +88,8 @@ SQL - avançadas
 62. Cursor dentro de FOR (sem DECLARE)
 63. Procedimento sem parâmetro
 64. Procedimento com parâmetro IN
-65. Procedimento com parâmetro OUT
-66. Procedimento com parâmetro INOUT
+    --65. Procedimento com parâmetro OUT
+    --66. Procedimento com parâmetro INOUT
 67. Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
 criados anteriormente)
 68. Função sem parâmetro

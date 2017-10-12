@@ -449,6 +449,25 @@ begin
 end;
 /
 
+--65. Procedimento com parâmetro OUT
+CREATE OR REPLACE PROCEDURE returnc4c(c4_number OUT INTEGER) 
+is 
+BEGIN
+  SELECT artifact_code INTO c4_number FROM artifacts
+  WHERE name = 'C-4';
+END returnc4c ;
+
+--66. Procedimento com parâmetro INOUT
+CREATE OR REPLACE PROCEDURE return_super( super INOUT INTEGER) 
+is 
+BEGIN
+  SELECT supervisor_cpf INTO super FROM employees
+  WHERE super = employee_cpf;
+EXCEPTION 
+  WHEN NO_DATA_FOUND THEN
+  super = 0;
+END returnc4c ;
+
 --67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
 criados anteriormente)
 
