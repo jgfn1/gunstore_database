@@ -345,9 +345,15 @@ INNER JOIN instruct as i ON p.cpf = i.cpf;
 
 
 --48. Bloco anônimo com declaração de variável e instrução
+--56. Recuperação de dados para variável
+--55. FOR LOOP
 DECLARE
   bomb_number INTEGER := 0;
 BEGIN
     SELECT artifact_code INTO bomb_number FROM artifacts
     WHERE name = 'C-4';
+    --LOOP
+
+    --EXIT [WHEN ];
+    --END LOOP;
 END;

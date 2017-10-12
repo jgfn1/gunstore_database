@@ -80,8 +80,8 @@ PL - básicas
 52. Uso de CASE
 53. LOOP com instrução de saída
 54. WHILE LOOP
-55. FOR LOOP
-56. Recuperação de dados para variável
+	--55. FOR LOOP
+	--56. Recuperação de dados para variável
 57. Recuperação de dados para registro
 58. Output de string com variável
 59. Uso de cursor explícito com variável
