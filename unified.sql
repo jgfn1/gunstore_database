@@ -17,11 +17,6 @@ CREATE TABLE addresses
   CONSTRAINT addresses_pkey PRIMARY KEY (cep)
 );
 
---15. Usar ALTER TABLE para Adicionar Coluna
---16. Usar ALTER TABLE para Remover de Coluna
-alter table addresses add (reference_point varchar2 (30))
-alter table addresses drop (reference_point)
-
 INSERT INTO addresses VALUES (000, 'Avenida Presidente Jair Messias Bolsonaro');
 INSERT INTO addresses VALUES (001, 'Avenida Presidente Dr. Enéas Carneiro');
 INSERT INTO addresses VALUES (002, 'Avenida Imperador Dom Pedro II');
@@ -220,7 +215,7 @@ INSERT INTO instruct VALUES (005, 009);
 INSERT INTO instruct VALUES (008, 003);
 
 --1. Uso de BETWEEN com valores numéricos
-SELECT client_cpf, training_end_register from clients
+SELECT client_cpf, training_end_register FROM clients
 WHERE purchases_number BETWEEN 1 and 10;
     
 --2. Uso de BETWEEN com datas
@@ -229,7 +224,7 @@ WHERE birthdate BETWEEN to_date('01/01/1900', 'dd/mm/yyyy') AND to_date('01/01/2
 
 --3. Uso de LIKE/NOT LIKE com tokens (% ou _)
 --seleciona todas as armas nao fabricadas pela israel military
-SELECT name from artifacts
+SELECT name FROM artifacts
 WHERE manufacturer_name NOT LIKE 'Israel Military %'; 
 
 --4. Uso de IN com subconsulta
@@ -239,8 +234,8 @@ WHERE client_cpf IN (
 );
 
  --5. Uso de IS NULL/IS NOT NULL
-select employee_cpf from overtimes 
-where end_time is NULL;
+SELECT employee_cpf FROM overtimes
+WHERE end_time IS NULL;
 
 --6. Uso de ORDER BY
 --46. ORDER BY com mais de dois campos
@@ -264,6 +259,12 @@ ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 
+--15. Usar ALTER TABLE para Adicionar Coluna
+ALTER TABLE addresses ADD (reference_point VARCHAR2(30));
+
+--16. Usar ALTER TABLE para Remover de Coluna
+ALTER TABLE addresses DROP (reference_point);
+
 --17 Operadores aritméticos no SELECT
 SELECT sale_number + employee_cpf
 FROM sale;
@@ -276,7 +277,7 @@ SELECT department_code, sum(wage) FROM employees
 GROUP BY department_code;
 
 --20. Uso de DISTINCT
-SELECT DISTINCT department_code FROM employeey;
+SELECT DISTINCT department_code FROM employees;
 
 --21. Uso de HAVING
 SELECT department_code, sum(wage) FROM employees
@@ -291,12 +292,12 @@ HAVING sum(wage) > (
 );
 
 --24. Junção entre duas tabelas
+
 --34. Uso de UNION
-select P.name, S.artifact_code
-from persons P, sale S
-where P.cpf = S.client_cpf 
-union (select artifact_code from artifacts)
-;
+SELECT P.name, S.artifact_code
+FROM persons P, sale S
+WHERE P.cpf = S.client_cpf
+UNION (SELECT artifact_code FROM artifacts);
 
 --26. Junção usando INNER JOIN
 select name
@@ -304,7 +305,6 @@ from persons
 INNER JOIN sale ON cpf = client_cpf ;
 
 --27 Junção usando LEFT OUTER JOIN
-
 SELECT employees.employee_cpf, sale.sale_number
 FROM employees
 LEFT OUTER JOIN sale
@@ -319,15 +319,13 @@ ON employees.employee_cpf = sale.employee_cpf;
 
 --35. Uso de INTERSECT
 --funcionarios que tiraram ferias
-(select cpf from persons)
-intersect
-	(select employee_cpf from employee_vacancies);
+(SELECT cpf FROM persons) INTERSECT
+	(SELECT employee_cpf FROM employee_vacancies);
 
 --36. Uso de MINUS
 --funcionarios que nao tiraram ferias
-(select cpf from persons)
-minus
-	(select employee_cpf from employee_vacancies);
+(SELECT cpf FROM persons) MINUS
+	(SELECT employee_cpf FROM employee_vacancies);
 
 --29. Junção usando FULL OUTER JOIN
 SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D
@@ -348,7 +346,6 @@ WHERE exists(
 );
 
 --37 INSERT com subconsulta
-
 INSERT INTO sale
 (employee_cpf, client_cpf, artifact_code, sale_number)
 SELECT 009, client_cpf, 100, 412
@@ -372,10 +369,10 @@ WHERE employees.wage > (
 );
 
 --45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
-select p.name
-from persons as p
-INNER JOIN sale as s ON p.cpf = s.client_cpf 
-INNER JOIN instruct as i ON p.cpf = i.cpf;
+SELECT p.name
+FROM persons p
+INNER JOIN sale s ON p.cpf = s.client_cpf
+INNER JOIN instruct i ON p.cpf = i.cpf; /*Qual CPF, client_cpf ou employee cpf?*/
 
 --47 EXISTS com mais de uma tabela, sem fazer junção
 SELECT *
@@ -393,7 +390,6 @@ BEGIN
 END;
 /
 
-
 --56. Recuperação de dados para variável
 --55. FOR LOOP
 DECLARE
@@ -408,26 +404,25 @@ BEGIN
 END;
 
 --57 Recuperação de dados para registro
-select * from sale as of timestamp systimestamp - interval '5' minute;
+SELECT * FROM sale AS OF TIMESTAMP systimestamp - INTERVAL '5' MINUTE;
 
 --58 Output de string com variável
-set serveroutput on format wrapped;
-declare
+SET serveroutput ON FORMAT WRAPPED;
+DECLARE
 numero NUMBER := 10;
-begin
-    DBMS_OUTPUT.put_line('Vendemos ' || numero || ' armas');
-end;
+BEGIN
+    dbms_output.put_line('Vendemos ' || numero || ' armas.');
+END;
 /
 
---67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
-criados anteriormente)
-
+--67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos
+-- procedimentos criados anteriormente)
 CREATE OR REPLACE PROCEDURE change_emp (sale_number NUMBER) AS
    tot_emps NUMBER;
    BEGIN
       UPDATE sale
       SET employee_cpf = 003
-      WHERE sale_number = change_emp.sale_number;
+      WHERE sale_number = change_emp.sale_number; /*change_emp?*/
    tot_emps := tot_emps - 1;
    END;
 /
@@ -438,27 +433,21 @@ END;
 /
 
 --68 Função sem parâmetro
-
 CREATE OR REPLACE FUNCTION get_cpf 
    RETURN NUMBER 
    IS acc_bal NUMBER;
    BEGIN 
-      SELECT employee_cpf 
-      INTO acc_bal 
-      FROM sale 
+      SELECT employee_cpf INTO acc_bal FROM sale
       WHERE sale_number = 20; 
       RETURN(acc_bal); 
     END;
 /
 
-
 --77 TRIGGER de comando
 --78 Uso de NEW em TRIGGER de inserção
 
 CREATE OR REPLACE TRIGGER addedSale
-BEFORE INSERT
-ON sale
-FOR EACH ROW
+BEFORE INSERT ON sale FOR EACH ROW
 BEGIN
 	DBMS_OUTPUT.put_line('New sale number= ' || :NEW.sale_number );
 END addedSale;
@@ -466,15 +455,13 @@ END addedSale;
 
 --87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 --anteriormente)
-SELECT *
-FROM sale
-WHERE sale_number = get_cpf;
-
+SELECT * FROM sale
+WHERE sale_number = get_cpf; /*get_cpf?*/
+;
 
 --88 Registro como parâmetro de função ou procedimento
 
-CREATE OR REPLACE PROCEDURE show_sale_number (sale_in IN sale%ROWTYPE)
-IS
+CREATE OR REPLACE PROCEDURE show_sale_number (sale_in IN sale%ROWTYPE) IS
 BEGIN
    DBMS_OUTPUT.put_line (sale_in.sale_number);
 END;
@@ -483,9 +470,7 @@ END;
 DECLARE
   l_sale sale%ROWTYPE;
 BEGIN
-  SELECT *
-    INTO l_sale
-    FROM sale
+  SELECT * INTO l_sale FROM sale
    WHERE sale_number = 1;
    show_sale_number(l_sale);
 END;
