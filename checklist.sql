@@ -76,8 +76,8 @@ PL - básicas
     --48. Bloco anônimo com declaração de variável e instrução
     --49. Bloco anônimo com exceção
 50. Uso de IF-THEN-ELSE
-51. Uso de ELSIF
-52. Uso de CASE
+    --51. Uso de ELSIF
+    --52. Uso de CASE
 53. LOOP com instrução de saída
 54. WHILE LOOP
 	--55. FOR LOOP

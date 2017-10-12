@@ -415,6 +415,30 @@ EXCEPTION WHEN LOGIN_DENIED THEN
 END;
 /
 
+--51. Uso de ELSIF
+DECLARE
+  a INTEGER := 1;
+BEGIN
+  IF a <> 1 THEN
+    DBMS_OUTPUT.put_line('That''s different, man!');
+  ELSIF a = 1 THEN
+    DBMS_OUTPUT.put_line('That''s equal, man!');
+  END IF;
+END;
+/
+
+--52. Uso de CASE
+DECLARE
+  a INTEGER := 1;
+BEGIN CASE a
+  WHEN NOT 1 THEN
+    DBMS_OUTPUT.put_line('That''s different, man!');
+  WHEN 1 THEN
+    DBMS_OUTPUT.put_line('That''s equal, man!');
+  END CASE;
+END;
+/
+
 --56. Recuperação de dados para variável
 --55. FOR LOOP
 DECLARE
@@ -427,6 +451,7 @@ BEGIN
     --EXIT [WHEN ];
     --END LOOP;
 END;
+/
 
 --57 Recuperação de dados para registro
 SELECT * FROM sale AS OF TIMESTAMP systimestamp - INTERVAL '5' MINUTE;
