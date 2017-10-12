@@ -264,6 +264,13 @@ ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 
+--17 Operadores aritméticos no SELECT
+SELECT sale_number + employee_cpf
+FROM sale;
+
+--18 Função de agregação sem GROUP BY
+SELECT COUNT(*) FROM sale;
+
 --19. Função de agregação com GROUP BY
 SELECT department_code, sum(wage) FROM employees
 GROUP BY department_code;
@@ -296,6 +303,20 @@ select name
 from persons
 INNER JOIN sale ON cpf = client_cpf ;
 
+--27 Junção usando LEFT OUTER JOIN
+
+SELECT employees.employee_cpf, sale.sale_number
+FROM employees
+LEFT OUTER JOIN sale
+ON employees.employee_cpf = sale.employee_cpf;
+
+--28 Junção usando RIGHT OUTER JOIN
+
+SELECT sale.sale_number, employees.employee_cpf
+FROM sale
+RIGHT OUTER JOIN employees
+ON employees.employee_cpf = sale.employee_cpf;
+
 --35. Uso de INTERSECT
 --funcionarios que tiraram ferias
 (select cpf from persons)
@@ -326,6 +347,19 @@ WHERE exists(
   WHERE A.artifact_code = S.artifact_code
 );
 
+--37 INSERT com subconsulta
+
+INSERT INTO sale
+(employee_cpf, client_cpf, artifact_code, sale_number)
+SELECT 009, client_cpf, 100, 412
+FROM clients
+WHERE client_cpf = 001;
+
+--38 UPDATE com subconsulta
+UPDATE sale
+SET employee_cpf = 003
+WHERE sale_number = 412;
+
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments
@@ -343,8 +377,23 @@ from persons as p
 INNER JOIN sale as s ON p.cpf = s.client_cpf 
 INNER JOIN instruct as i ON p.cpf = i.cpf;
 
+--47 EXISTS com mais de uma tabela, sem fazer junção
+SELECT *
+FROM sale
+WHERE EXISTS (SELECT *
+FROM employees
+WHERE sale.employee_cpf = employees.employee_cpf);
 
---48. Bloco anônimo com declaração de variável e instrução
+--48 Bloco anônimo com declaração de variável e instrução
+DECLARE
+   sale_num sale.sale_number%TYPE;
+BEGIN
+   sale_num := 2;
+   UPDATE sale SET sale_number = 20 WHERE sale_number = sale_num;
+END;
+/
+
+
 --56. Recuperação de dados para variável
 --55. FOR LOOP
 DECLARE
@@ -357,3 +406,15 @@ BEGIN
     --EXIT [WHEN ];
     --END LOOP;
 END;
+
+--57 Recuperação de dados para registro
+select * from sale as of timestamp systimestamp - interval '5' minute;
+
+--58 Output de string com variável
+set serveroutput on format wrapped;
+declare
+numero NUMBER := 10;
+begin
+    DBMS_OUTPUT.put_line('Vendemos ' || numero || ' armas');
+end;
+/
