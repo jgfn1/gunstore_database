@@ -656,6 +656,15 @@ BEGIN
 END addedSale;
 /
 
+--79. Uso de OLD em TRIGGER de deleção
+CREATE OR REPLACE TRIGGER delete_check BEFORE DELETE ON employees
+  REFERENCING OLD AS name
+BEGIN
+  IF (OLD = 'Dom Pedro I') THEN
+    DBMS_OUTPUT.put_line('You can''t fire the King who declared our independence, you idiot!');
+  END IF;
+END delete_check;
+
 --87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 --anteriormente)
 SELECT * FROM sale

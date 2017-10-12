@@ -154,3 +154,12 @@ CREATE OR REPLACE PACKAGE BODY two_functions AS
   END cpf_of_phone_value_incremented;
 
 END two_functions;
+
+--79. Uso de OLD em TRIGGER de deleção
+CREATE OR REPLACE TRIGGER delete_check BEFORE DELETE ON employees
+  REFERENCING OLD AS name
+BEGIN
+  IF (OLD = 'Dom Pedro I') THEN
+    DBMS_OUTPUT.put_line('You can''t fire the King who declared our independence, you idiot!');
+  END IF;
+END delete_check;

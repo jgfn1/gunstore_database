@@ -105,7 +105,7 @@ criados anteriormente)
 76. TRIGGER de linha com condição
 77. TRIGGER de comando
 78. Uso de NEW em TRIGGER de inserção
-79. Uso de OLD em TRIGGER de deleção
+    --79. Uso de OLD em TRIGGER de deleção
 80. Uso de NEW e OLD em TRIGGER de atualização
 81. Uso de TRIGGER para impedir inserção em tabela
 82. Uso de TRIGGER para impedir atualização em tabela
