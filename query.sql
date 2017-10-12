@@ -68,6 +68,18 @@ WHERE exists(
   WHERE A.artifact_code = S.artifact_code
 );
 
+--39. DELETE com subconsulta
+DELETE FROM employees
+WHERE wage > (
+    SELECT avg(wage) FROM employees
+);
+
+-- 40. Uso de GRANT
+GRANT SELECT ON employees TO human_resources_maganer;
+
+-- 41. Uso de REVOKE
+REVOKE SELECT ON employees FROM human_resources_maganer;
+
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments

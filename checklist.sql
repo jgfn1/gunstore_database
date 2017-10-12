@@ -2,7 +2,7 @@
 Checklist 1 - SQL e PL - GDI EC 2017.2
 
 Obs.: As questoes feitas devem ser identificadas com identacao de
-duas "tabs" e dois hífens "--".
+>>>>DUAS<<<< "tabs" e dois hífens "--".
   Ex. (A 2. foi feita porem a 1. nao.):
       1. Faca isto.
           --2. Faca aquilo.
@@ -33,10 +33,10 @@ SQL - básicas
     --10. Criar CHECKs
     --11. Criar PK Composta
 12. Criar FK Composta
-	--13. Usar Valor DEFAULT (Ex: Data do Sistema)
-	--14. Usar ALTER TABLE para Modificação de Coluna
-	--15. Usar ALTER TABLE para Adicionar Coluna
-	--16. Usar ALTER TABLE para Remover de Coluna
+	  --13. Usar Valor DEFAULT (Ex: Data do Sistema)
+	  --14. Usar ALTER TABLE para Modificação de Coluna
+	  --15. Usar ALTER TABLE para Adicionar Coluna
+	  --16. Usar ALTER TABLE para Remover de Coluna
 17. Operadores aritméticos no SELECT
 18. Função de agregação sem GROUP BY
     --19. Função de agregação com GROUP BY
@@ -44,9 +44,9 @@ SQL - básicas
     --21. Uso de HAVING
     --22. Uso de HAVING com subconsulta
 23. Uso de WHERE + HAVING
-	--24. Junção entre duas tabelas
+	  --24. Junção entre duas tabelas
 25. Junção entre três tabelas + condição de seleção (M:N)
-	--26. Junção usando INNER JOIN
+	  --26. Junção usando INNER JOIN
 27. Junção usando LEFT OUTER JOIN
 28. Junção usando RIGHT OUTER JOIN
     --29. Junção usando FULL OUTER JOIN
@@ -55,21 +55,21 @@ SQL - básicas
     --32. Uma subconsulta com uso de EXISTS/NOT EXISTS
 33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo
 referenciado na subconsulta)
-	--34. Uso de UNION
-	--35. Uso de INTERSECT
-	--36. Uso de MINUS
+	  --34. Uso de UNION
+    --35. Uso de INTERSECT
+	  --36. Uso de MINUS
 37. INSERT com subconsulta
 38. UPDATE com subconsulta
-39. DELETE com subconsulta
-40. Uso de GRANT
-41. Uso de REVOKE
+    --39. DELETE com subconsulta
+    --40. Uso de GRANT
+    --41. Uso de REVOKE
 
 SQL - avançadas
     --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 43. Operação aritmética com função de agregação como operador
     --44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
-	--45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
-	--46. ORDER BY com mais de dois campos
+	  --45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
+  	--46. ORDER BY com mais de dois campos
 47. EXISTS com mais de uma tabela, sem fazer junção
 
 PL - básicas
