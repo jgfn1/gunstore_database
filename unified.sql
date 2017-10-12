@@ -402,6 +402,19 @@ BEGIN
 END;
 /
 
+--49. Bloco anônimo com exceção
+DECLARE
+  a TIMESTAMP;
+BEGIN
+  WHILE TRUE LOOP
+    a := SYSTIMESTAMP;
+  END LOOP;
+
+EXCEPTION WHEN LOGIN_DENIED THEN
+  DBMS_OUTPUT.put_line('ERROR! The aliens are attacking, try logging in later!');
+END;
+/
+
 --56. Recuperação de dados para variável
 --55. FOR LOOP
 DECLARE

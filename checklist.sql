@@ -74,7 +74,7 @@ SQL - avançadas
 
 PL - básicas
     --48. Bloco anônimo com declaração de variável e instrução
-49. Bloco anônimo com exceção
+    --49. Bloco anônimo com exceção
 50. Uso de IF-THEN-ELSE
 51. Uso de ELSIF
 52. Uso de CASE
