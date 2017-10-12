@@ -237,14 +237,16 @@ SELECT client_cpf FROM clients
 WHERE client_cpf IN (
   SELECT client_cpf FROM instruct
 );
+
  --5. Uso de IS NULL/IS NOT NULL
 select employee_cpf from overtimes 
 where end_time is NULL;
 
 --6. Uso de ORDER BY
+--46. ORDER BY com mais de dois campos
 SELECT sale_number FROM sale
 WHERE sale_number > 3
-ORDER BY date_hour;
+ORDER BY date_hour, client_cpf DESC;
 
 --7. Criação de VIEW
 CREATE VIEW occupied_vacancies AS
@@ -289,6 +291,11 @@ where P.cpf = S.client_cpf
 union (select artifact_code from artifacts)
 ;
 
+--26. Junção usando INNER JOIN
+select name
+from persons
+INNER JOIN sale ON cpf = client_cpf ;
+
 --35. Uso de INTERSECT
 --funcionarios que tiraram ferias
 (select cpf from persons)
@@ -329,6 +336,13 @@ SELECT wage FROM employees
 WHERE employees.wage > (
   SELECT avg(wage) FROM employees
 );
+
+--45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
+select p.name
+from persons as p
+INNER JOIN sale as s ON p.cpf = s.client_cpf 
+INNER JOIN instruct as i ON p.cpf = i.cpf;
+
 
 --48. Bloco anônimo com declaração de variável e instrução
 DECLARE

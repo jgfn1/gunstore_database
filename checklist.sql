@@ -46,7 +46,7 @@ SQL - básicas
 23. Uso de WHERE + HAVING
 	--24. Junção entre duas tabelas
 25. Junção entre três tabelas + condição de seleção (M:N)
-26. Junção usando INNER JOIN
+	--26. Junção usando INNER JOIN
 27. Junção usando LEFT OUTER JOIN
 28. Junção usando RIGHT OUTER JOIN
     --29. Junção usando FULL OUTER JOIN
@@ -68,8 +68,8 @@ SQL - avançadas
     --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 43. Operação aritmética com função de agregação como operador
     --44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
-45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
-46. ORDER BY com mais de dois campos
+	--45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
+	--46. ORDER BY com mais de dois campos
 47. EXISTS com mais de uma tabela, sem fazer junção
 
 PL - básicas
