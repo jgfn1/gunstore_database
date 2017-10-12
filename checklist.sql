@@ -98,7 +98,7 @@ criados anteriormente)
     --69. Função com parâmetro IN
 70. Função com parâmetro OUT
     --71. Função com parâmetro INOUT
-72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
+    --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
 73. BEFORE TRIGGER
 74. AFTER TRIGGER
 75. TRIGGER de linha sem condição

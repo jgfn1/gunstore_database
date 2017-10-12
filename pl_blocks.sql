@@ -125,3 +125,32 @@ CREATE OR REPLACE FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TY
     value := value + 1;
     RETURN desired_cpf;
   END cpf_of_phone_value_incremented;
+
+  --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
+CREATE OR REPLACE PACKAGE two_functions AS
+  FUNCTION cpf_of_phone(phone IN phones.cpf%TYPE) RETURN INTEGER;
+  FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TYPE, value IN OUT INTEGER)
+  RETURN INTEGER;
+END two_functions;
+
+CREATE OR REPLACE PACKAGE BODY two_functions AS
+  FUNCTION cpf_of_phone(phone IN phones.cpf%TYPE)
+  RETURN INTEGER IS
+  desired_cpf phones.cpf%TYPE;
+  BEGIN
+    SELECT cpf INTO desired_cpf FROM phones
+    WHERE phone_number = phone;
+    RETURN desired_cpf;
+  END cpf_of_phone;
+
+  FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TYPE, value IN OUT INTEGER)
+  RETURN INTEGER IS
+  desired_cpf phones.cpf%TYPE;
+  BEGIN
+    SELECT cpf INTO desired_cpf FROM phones
+    WHERE phone_number = phone;
+    value := value + 1;
+    RETURN desired_cpf;
+  END cpf_of_phone_value_incremented;
+
+END two_functions;
