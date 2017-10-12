@@ -407,11 +407,11 @@ END;
 SELECT * FROM sale AS OF TIMESTAMP systimestamp - INTERVAL '5' MINUTE;
 
 --58 Output de string com variável
-SET serveroutput ON FORMAT WRAPPED;
+SET SERVEROUTPUT ON FORMAT WRAPPED;
 DECLARE
-numero NUMBER := 10;
+  numero NUMBER := 10;
 BEGIN
-    dbms_output.put_line('Vendemos ' || numero || ' armas.');
+  DBMS_OUTPUT.put_line('Vendemos ' || numero || ' armas.');
 END;
 /
 
@@ -460,7 +460,6 @@ WHERE sale_number = get_cpf; /*get_cpf?*/
 ;
 
 --88 Registro como parâmetro de função ou procedimento
-
 CREATE OR REPLACE PROCEDURE show_sale_number (sale_in IN sale%ROWTYPE) IS
 BEGIN
    DBMS_OUTPUT.put_line (sale_in.sale_number);

@@ -5,7 +5,7 @@ DROP TABLE sale;
 DROP TABLE instruct;
 DROP TABLE clients;
 DROP TABLE employees CASCADE CONSTRAINTS;
-DROP TABLE persons CASCADE CONSTRAINTS; --foi dito para ser usado FORCE CONSTRAINTS, mas essa sintaxe não existe
+DROP TABLE persons CASCADE CONSTRAINTS; --foi dito para ser usado FORCE CONSTRAINTS, mas essa sintaxe nï¿½o existe
 DROP TABLE addresses;
 DROP TABLE departments;
 DROP TABLE artifacts;
@@ -16,11 +16,6 @@ CREATE TABLE addresses(
   street VARCHAR2 (100),
   CONSTRAINT addresses_pkey PRIMARY KEY (cep)
 );
-
---15. Usar ALTER TABLE para Adicionar Colunas
---16. Usar ALTER TABLE para Remover de Coluna
-alter table addresses add (reference_point varchar2(30))
-alter table addresses drop (reference_point)	
 
 CREATE TABLE departments(
   department_code INTEGER,
@@ -128,3 +123,9 @@ CREATE TABLE instruct
 );
 
 ALTER TABLE departments ADD CONSTRAINT departments_fkey FOREIGN KEY (manager_cpf) REFERENCES employees (employee_cpf);
+
+--15. Usar ALTER TABLE para Adicionar Coluna
+ALTER TABLE addresses ADD (reference_point VARCHAR2(30));
+
+--16. Usar ALTER TABLE para Remover de Coluna
+ALTER TABLE addresses DROP (reference_point);
