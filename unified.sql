@@ -418,3 +418,54 @@ begin
     DBMS_OUTPUT.put_line('Vendemos ' || numero || ' armas');
 end;
 /
+
+--67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
+criados anteriormente)
+
+CREATE OR REPLACE PROCEDURE change_emp (sale_number NUMBER) AS
+   tot_emps NUMBER;
+   BEGIN
+      UPDATE sale
+      SET employee_cpf = 003
+      WHERE sale_number = change_emp.sale_number;
+   tot_emps := tot_emps - 1;
+   END;
+/
+
+BEGIN
+   change_emp(20);
+END;
+/
+
+--68 Função sem parâmetro
+
+CREATE OR REPLACE FUNCTION get_cpf 
+   RETURN NUMBER 
+   IS acc_bal NUMBER;
+   BEGIN 
+      SELECT employee_cpf 
+      INTO acc_bal 
+      FROM sale 
+      WHERE sale_number = 20; 
+      RETURN(acc_bal); 
+    END;
+/
+
+
+--77 TRIGGER de comando
+--78 Uso de NEW em TRIGGER de inserção
+
+CREATE OR REPLACE TRIGGER addedSale
+BEFORE INSERT
+ON sale
+FOR EACH ROW
+BEGIN
+	DBMS_OUTPUT.put_line('New sale number= ' || :NEW.sale_number );
+END addedSale;
+/
+
+--87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
+--anteriormente)
+SELECT *
+FROM sale
+WHERE sale_number = get_cpf;
