@@ -469,3 +469,24 @@ END addedSale;
 SELECT *
 FROM sale
 WHERE sale_number = get_cpf;
+
+
+--88 Registro como parâmetro de função ou procedimento
+
+CREATE OR REPLACE PROCEDURE show_sale_number (sale_in IN sale%ROWTYPE)
+IS
+BEGIN
+   DBMS_OUTPUT.put_line (sale_in.sale_number);
+END;
+/
+
+DECLARE
+  l_sale sale%ROWTYPE;
+BEGIN
+  SELECT *
+    INTO l_sale
+    FROM sale
+   WHERE sale_number = 1;
+   show_sale_number(l_sale);
+END;
+/
