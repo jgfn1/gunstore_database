@@ -104,3 +104,24 @@ BEGIN
   END LOOP;
 END;
 /
+
+--69. Função com parâmetro IN
+CREATE OR REPLACE FUNCTION cpf_of_phone(phone IN)
+  RETURN INTEGER IS
+  desired_cpf phones.cpf%TYPE;
+  BEGIN
+    SELECT cpf INTO desired_cpf FROM phones
+    WHERE phone_number = phone;
+    RETURN desired_cpf;
+  END cpf_of_phone;
+
+  --71. Função com parâmetro INOUT
+CREATE OR REPLACE FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TYPE, value IN OUT INTEGER)
+  RETURN INTEGER IS
+  desired_cpf phones.cpf%TYPE;
+  BEGIN
+    SELECT cpf INTO desired_cpf FROM phones
+    WHERE phone_number = phone;
+    value := value + 1;
+    RETURN desired_cpf;
+  END cpf_of_phone_value_incremented;

@@ -95,9 +95,9 @@ PL - básicas
 67. Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
 criados anteriormente)
 68. Função sem parâmetro
-69. Função com parâmetro IN
+    --69. Função com parâmetro IN
 70. Função com parâmetro OUT
-71. Função com parâmetro INOUT
+    --71. Função com parâmetro INOUT
 72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
 73. BEFORE TRIGGER
 74. AFTER TRIGGER
