@@ -84,7 +84,7 @@ PL - básicas
 	--56. Recuperação de dados para variável
 57. Recuperação de dados para registro
 58. Output de string com variável
-59. Uso de cursor explícito com variável
+    --59. Uso de cursor explícito com variável
 60. Uso de cursor explícito com registro
 61. Uso de cursor explícito com parâmetro
 62. Cursor dentro de FOR (sem DECLARE)

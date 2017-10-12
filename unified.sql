@@ -465,6 +465,27 @@ BEGIN
 END;
 /
 
+--59. Uso de cursor explícito com variável
+DECLARE
+  CURSOR all_weapons IS
+    SELECT * FROM artifacts;
+
+  weapons all_weapons%TYPE;
+
+  code artifacts.artifact_code%TYPE;
+  name artifacts.name%TYPE;
+  manufacturer artifacts.manufacturer_name%TYPE;
+  "date" artifacts.manufacture_date%TYPE;
+  sale artifacts.sale_date%TYPE;
+BEGIN
+  OPEN weapons;
+  LOOP
+    FETCH weapons INTO all_weapons;
+  EXIT WHEN weapons%NOTFOUND;
+  END LOOP;
+  CLOSE weapons;
+END;
+
 --67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos
 -- procedimentos criados anteriormente)
 CREATE OR REPLACE PROCEDURE change_emp (sale_number NUMBER) AS
