@@ -61,18 +61,16 @@ referenciado na subconsulta)
 37. INSERT com subconsulta
 38. UPDATE com subconsulta
 39. DELETE com subconsulta
-40. Uso de GRANT
+    --40. Uso de GRANT
 41. Uso de REVOKE
 
 SQL - avançadas
     --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
-43. Operação aritmética com função de agregação como operador
+    --43. Operação aritmética com função de agregação como operador
     --44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
 	--45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
 	--46. ORDER BY com mais de dois campos
-47. EXISTS com mais de uma tabela, sem fazer junção
-
-PL - básicas
+47. EXISTS com mais de uma tabela, sem fazer junção PL - básicas
     --48. Bloco anônimo com declaração de variável e instrução
 49. Bloco anônimo com exceção
 50. Uso de IF-THEN-ELSE

@@ -326,31 +326,16 @@ FROM sale
 RIGHT OUTER JOIN employees
 ON employees.employee_cpf = sale.employee_cpf;
 
+--29. Junção usando FULL OUTER JOIN
+SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D
+  ON P.cpf = D.manager_cpf;
+
 --30. Uma subconsulta com uso de ANY ou SOME
 SELECT employee_cpf, wage, job_title, worked_years
 FROM employees
 WHERE worked_years >
 SOME ( SELECT worked_years FROM employees 
 		WHERE worked_years < 7 );
-
---33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo referenciado na subconsulta)
-
-
---35. Uso de INTERSECT
---funcionarios que tiraram ferias
-(select cpf from persons)
-intersect
-	(select employee_cpf from employee_vacancies);
-
---36. Uso de MINUS
---funcionarios que nao tiraram ferias
-(select cpf from persons)
-minus
-	(select employee_cpf from employee_vacancies);
-
---29. Junção usando FULL OUTER JOIN
-SELECT P.name, D.name FROM persons P FULL OUTER JOIN departments D
-  ON P.cpf = D.manager_cpf;
 
 --31. Uma subconsulta com uso de ALL
 SELECT name FROM persons
@@ -366,7 +351,26 @@ WHERE exists(
   WHERE A.artifact_code = S.artifact_code
 );
 
---37 INSERT com subconsulta
+--33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo referenciado na subconsulta)
+
+--34. Uso de UNION
+( SELECT employee_cpf FROM employees)
+UNION
+	(SELECT cpf FROM persons)
+
+--35. Uso de INTERSECT
+--funcionarios que tiraram ferias
+(select cpf from persons)
+intersect
+	(select employee_cpf from employee_vacancies);
+
+--36. Uso de MINUS
+--funcionarios que nao tiraram ferias
+(select cpf from persons)
+minus
+	(select employee_cpf from employee_vacancies);
+
+--37. INSERT com subconsulta
 
 INSERT INTO sale
 (employee_cpf, client_cpf, artifact_code, sale_number)
@@ -374,15 +378,22 @@ SELECT 009, client_cpf, 100, 412
 FROM clients
 WHERE client_cpf = 001;
 
---38 UPDATE com subconsulta
+--38. UPDATE com subconsulta
 UPDATE sale
 SET employee_cpf = 003
 WHERE sale_number = 412;
+
+--40. Uso de GRANT
+GRANT SELECT ON employees TO acs;
 
 --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
 SELECT name FROM (
   SELECT name, department_code FROM departments
 );
+
+--43. Operação aritmética com função de agregação como operador
+SELECT employee_cpf, (wage * 1.60) AS new_wage
+FROM employees WHERE wage < AVG(wage) FROM employees;
 
 --44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
 SELECT wage FROM employees
