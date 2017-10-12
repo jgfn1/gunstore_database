@@ -485,6 +485,46 @@ BEGIN
   END LOOP;
   CLOSE weapons;
 END;
+/
+
+--61. Uso de cursor explícito com parâmetro
+DECLARE
+  israel_military artifacts.manufacturer_name%TYPE := 'Israel Military Industries';
+
+  CURSOR israel_weapons(israel_military artifacts.manufacturer_name%TYPE) IS
+  SELECT * FROM artifacts
+  WHERE name = israel_military;
+
+  iweapons israel_weapons%TYPE;
+
+  code artifacts.artifact_code%TYPE;
+  name artifacts.name%TYPE;
+  manufacturer artifacts.manufacturer_name%TYPE;
+  "date" artifacts.manufacture_date%TYPE;
+  sale artifacts.sale_date%TYPE;
+BEGIN
+  OPEN iweapons;
+  LOOP
+    FETCH iweapons INTO israel_weapons;
+  EXIT WHEN iweapons%NOTFOUND;
+  END LOOP;
+  CLOSE iweapons;
+END;
+/
+
+--62. Cursor dentro de FOR (sem DECLARE)
+DECLARE
+
+BEGIN
+  FOR implicit IN (
+    SELECT name, birthdate FROM persons
+    WHERE sex = 'M'
+  )
+  LOOP
+    DBMS_OUTPUT.put_line(implicit.name || 'birthday is' || to_char(implicit.birthdate));
+  END LOOP;
+END;
+/
 
 --67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos
 -- procedimentos criados anteriormente)

@@ -86,8 +86,8 @@ PL - básicas
 58. Output de string com variável
     --59. Uso de cursor explícito com variável
 60. Uso de cursor explícito com registro
-61. Uso de cursor explícito com parâmetro
-62. Cursor dentro de FOR (sem DECLARE)
+    --61. Uso de cursor explícito com parâmetro
+    --62. Cursor dentro de FOR (sem DECLARE)
 63. Procedimento sem parâmetro
 64. Procedimento com parâmetro IN
 65. Procedimento com parâmetro OUT
@@ -95,9 +95,9 @@ PL - básicas
 67. Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
 criados anteriormente)
 68. Função sem parâmetro
-69. Função comparâmetro IN
-70. Função comparâmetro OUT
-71. Função comparâmetro INOUT
+69. Função com parâmetro IN
+70. Função com parâmetro OUT
+71. Função com parâmetro INOUT
 72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
 73. BEFORE TRIGGER
 74. AFTER TRIGGER
