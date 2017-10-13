@@ -105,6 +105,28 @@ BEGIN
 END;
 /
 
+--65. Procedimento com parâmetro OUT
+CREATE OR REPLACE PROCEDURE returnc4c(c4_number OUT INTEGER)
+is
+BEGIN
+  SELECT artifact_code INTO c4_number FROM artifacts
+  WHERE name = 'C-4';
+END returnc4c ;
+
+EXECUTE returnc4c(c4_number);
+
+--66. Procedimento com parâmetro INOUT
+CREATE OR REPLACE PROCEDURE return_super( super IN OUT INTEGER)
+is
+BEGIN
+  SELECT supervisor_cpf INTO super FROM employees
+  WHERE super = employee_cpf;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+  super = 0;
+END return_super;
+
+EXECUTE return_super(4323);
 --69. Função com parâmetro IN
 CREATE OR REPLACE FUNCTION cpf_of_phone(phone IN)
   RETURN INTEGER IS
@@ -163,3 +185,21 @@ BEGIN
     DBMS_OUTPUT.put_line('You can''t fire the King who declared our independence, you idiot!');
   END IF;
 END delete_check;
+
+--81. Uso de TRIGGER para impedir inserção em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
+  BEGIN
+    raise_application_error(-20000, 'C''mon, how many employees do you think we can have?');
+  END;
+
+--82. Uso de TRIGGER para impedir atualização em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
+  BEGIN
+    raise_application_error(-20000, 'You''re not allowed to update our departments.');
+  END;
+
+  --91. INSTEAD OF TRIGGER
+CREATE OR REPLACE TRIGGER delete_if_update_attempt INSTEAD OF UPDATE ON occupied_vacancies
+BEGIN
+    DELETE occupied_vacancies;
+END delete_if_update_attempt;

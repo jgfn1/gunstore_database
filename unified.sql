@@ -254,9 +254,16 @@ DROP VIEW occupied_vacancies;
 
 --10. Criar CHECKs
 ALTER TABLE employees
-ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
+ADD (CONSTRAINT employees_wage_check CHECK (wage > 200));
+
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
+
+--12. Criar FK Composta
+ALTER TABLE employees ADD (phone_number INTEGER);
+
+ALTER TABLE employees ADD
+(CONSTRAINT employees_fkey3 FOREIGN KEY (employee_cpf, phone_number) REFERENCES phones(cpf, phone_number));
 
 --15. Usar ALTER TABLE para Adicionar Coluna
 ALTER TABLE addresses ADD (reference_point VARCHAR2(30));
@@ -297,7 +304,7 @@ HAVING count(*) > 1;
 
 --24. Junção entre duas tabelas
 SELECT D.name
-FROM departments D, employeey E
+FROM departments D, employees E
 WHERE E.employee_cpf = D.manager_cpf;
 
 --26. Junção usando INNER JOIN
@@ -407,10 +414,12 @@ FROM employees WHERE wage < (
 );
 
 --45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
+--25. Junção entre três tabelas + condição de seleção (M:N)
+--nome dos clientes que ja fizeram uma compra e participam do curso
 SELECT p.name
 FROM persons p
 INNER JOIN sale s ON p.cpf = s.client_cpf
-INNER JOIN instruct i ON p.cpf = i.cpf; /*Qual CPF, client_cpf ou employee cpf?*/
+INNER JOIN instruct i ON p.cpf = i.client_cpf; 
 
 --47 EXISTS com mais de uma tabela, sem fazer junção
 SELECT *
@@ -610,6 +619,8 @@ BEGIN
   WHERE name = 'C-4';
 END returnc4c ;
 
+EXECUTE returnc4c(c4_number);
+
 --66. Procedimento com parâmetro INOUT
 CREATE OR REPLACE PROCEDURE return_super( super IN OUT INTEGER)
 is
@@ -621,6 +632,7 @@ EXCEPTION
   super = 0;
 END return_super;
 
+EXECUTE return_super(4323);
 
 --67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos
 -- procedimentos criados anteriormente)
@@ -629,7 +641,7 @@ CREATE OR REPLACE PROCEDURE change_emp (sale_number NUMBER) AS
   BEGIN
     UPDATE sale
     SET employee_cpf = 003
-    WHERE sale_number = change_emp.sale_number; /*change_emp?*/
+    WHERE sale_number = change_emp(sale_number);
     tot_emps := tot_emps - 1;
   END;
 /
@@ -700,6 +712,29 @@ END;
 
  END two_functions;
 
+--75. TRIGGER de linha sem condição
+--85. Uso de TRIGGER para atualizar valores em outra tabela
+CREATE OR REPLACE TRIGGER vaca
+AFTER INSERT ON employee_vacancies
+FOR EACH ROW
+DECLARE
+BEGIN
+	UPDATE employees SET worked_years=10
+	WHERE worked_years > 11;
+END vaca;
+
+--76. TRIGGER de linha com condição
+--86. Uso de TRIGGER para apagar valores em outra tabela
+CREATE OR REPLACE TRIGGER overtrigger
+AFTER INSERT ON overtimes
+FOR EACH ROW
+WHEN(end_time = NULL)
+DECLARE
+BEGIN
+	DELETE FROM employee_vacancies
+	WHERE load_unload = 1;
+END overtrigger;
+
 --77 TRIGGER de comando
 --78 Uso de NEW em TRIGGER de inserção
 
@@ -712,17 +747,31 @@ END addedSale;
 
 --79. Uso de OLD em TRIGGER de deleção
 CREATE OR REPLACE TRIGGER delete_check BEFORE DELETE ON employees
-  REFERENCING OLD AS name
+  REFERENCING OLD AS employee_cpf
 BEGIN
-  IF (OLD = 'Dom Pedro I') THEN
-    DBMS_OUTPUT.put_line('You can''t fire the King who declared our independence, you idiot!');
+  IF (OLD = 003) THEN
+    raise_application_error(-20000, 'You can''t fire Ronald Reagan!');
   END IF;
 END delete_check;
+--Demonstration:
+DELETE FROM employees WHERE employee_cpf = 003;
+
+--81. Uso de TRIGGER para impedir inserção em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
+  BEGIN
+    raise_application_error(-20000, 'C''mon, how many employees do you think we can have?');
+  END;
+
+--82. Uso de TRIGGER para impedir atualização em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
+  BEGIN
+    raise_application_error(-20000, 'You''re not allowed to update our departments.');
+  END;
 
 --87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 --anteriormente)
 SELECT * FROM sale
-WHERE sale_number = get_cpf; /*get_cpf?*/
+WHERE sale_number = get_cpf();
 ;
 
 --88 Registro como parâmetro de função ou procedimento
@@ -740,3 +789,29 @@ BEGIN
    show_sale_number(l_sale);
 END;
 /
+
+--89. Função com registro como retorno
+CREATE OR REPLACE FUNCTION initialize_employee_record(name persons.name%TYPE,
+  cpf  employees.employee_cpf%TYPE)
+RETURN employee_record IS
+
+DECLARE
+  TYPE employee_record IS RECORD (
+  namer persons.name%TYPE,
+  cpf  employees.employee_cpf%TYPE);
+
+initialized_record employee_record;
+BEGIN
+  initialized_record.name := name;
+  initialized_record.cpf := cpf;
+  RETURN initialized_record;
+END initialize_employee_record;
+
+--91. INSTEAD OF TRIGGER
+CREATE OR REPLACE TRIGGER delete_if_update_attempt INSTEAD OF UPDATE ON occupied_vacancies
+BEGIN
+    DELETE occupied_vacancies;
+END delete_if_update_attempt;
+/
+--Demonstration
+UPDATE occupied_vacancies SET vacancy_number = 0;
