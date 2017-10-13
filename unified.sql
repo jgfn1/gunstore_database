@@ -361,10 +361,11 @@ WHERE e.wage = (
 );
 
 --34. Uso de UNION
-SELECT P.name, S.artifact_code
+--primeiro vejo quem compra arma, depois quem faz curso, e faço um UNION
+SELECT P.cpf
 FROM persons P, sale S
 WHERE P.cpf = S.client_cpf
-UNION (SELECT artifact_code FROM artifacts);
+UNION (SELECT client_cpf FROM instruct);
 
 --35. Uso de INTERSECT
 --funcionarios que tiraram ferias
@@ -372,7 +373,7 @@ UNION (SELECT artifact_code FROM artifacts);
 (SELECT employee_cpf FROM employee_vacancies);
 
 --36. Uso de MINUS
---funcionarios que nao tiraram ferias
+--pessoas que nao tiraram ferias (incluindo clientes :D) 
 (SELECT cpf FROM persons) MINUS
 (SELECT employee_cpf FROM employee_vacancies);
 
