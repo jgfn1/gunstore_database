@@ -735,6 +735,7 @@ END;
 
 --74. AFTER TRIGGER
 --75. TRIGGER de linha sem condição
+--84. Uso de TRIGGER para inserir valores em outra tabela
 --85. Uso de TRIGGER para atualizar valores em outra tabela
 CREATE OR REPLACE TRIGGER vaca
 AFTER INSERT ON employee_vacancies
@@ -743,6 +744,7 @@ DECLARE
 BEGIN
 	UPDATE employees SET worked_years = 10
 	WHERE worked_years > 11;
+  INSERT INTO employees VALUES (123, 1230, 3, 'Clown.', 100, 000, 009);
 END vaca;
 
 --76. TRIGGER de linha com condição
@@ -770,6 +772,7 @@ END addedSale;
 INSERT INTO sale VALUES (100, 002, 010, 5000, SYSTIMESTAMP);
 
 --79. Uso de OLD em TRIGGER de deleção
+--83. Uso de TRIGGER para impedir deleção em tabela
 CREATE OR REPLACE TRIGGER delete_check BEFORE DELETE ON employees
   REFERENCING OLD AS employee_cpf
 BEGIN
@@ -805,8 +808,14 @@ CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
 UPDATE departments SET department_code = 0
 WHERE department_code <> 0;
 
+--83. Uso de TRIGGER para impedir deleção em tabela
+--Feito coom a 79.
+
+--84. Uso de TRIGGER para inserir valores em outra tabela
+--Feito com a 74.
+
 --85. Uso de TRIGGER para atualizar valores em outra tabela
---Feito com a 75.
+--Feito com a 74.
 
 --86. Uso de TRIGGER para apagar valores em outra tabela
 --Feito com a 76.

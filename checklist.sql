@@ -109,8 +109,8 @@ criados anteriormente)
     --80. Uso de NEW e OLD em TRIGGER de atualização
     --81. Uso de TRIGGER para impedir inserção em tabela
     --82. Uso de TRIGGER para impedir atualização em tabela
-83. Uso de TRIGGER para impedir deleção em tabela
-84. Uso de TRIGGER para inserir valores em outra tabela
+    --83. Uso de TRIGGER para impedir deleção em tabela
+    --84. Uso de TRIGGER para inserir valores em outra tabela
     --85. Uso de TRIGGER para atualizar valores em outra tabela
     --86. Uso de TRIGGER para apagar valores em outra tabela
 
