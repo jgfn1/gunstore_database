@@ -45,7 +45,7 @@ SQL - básicas
     --22. Uso de HAVING com subconsulta
     --23. Uso de WHERE + HAVING
   	--24. Junção entre duas tabelas
-25. Junção entre três tabelas + condição de seleção (M:N)
+    --25. Junção entre três tabelas + condição de seleção (M:N)
 	  --26. Junção usando INNER JOIN
 27. Junção usando LEFT OUTER JOIN
 28. Junção usando RIGHT OUTER JOIN
@@ -101,8 +101,8 @@ criados anteriormente)
     --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
 73. BEFORE TRIGGER
 74. AFTER TRIGGER
-75. TRIGGER de linha sem condição
-76. TRIGGER de linha com condição
+    --75. TRIGGER de linha sem condição
+    --76. TRIGGER de linha com condição
 77. TRIGGER de comando
 78. Uso de NEW em TRIGGER de inserção
     --79. Uso de OLD em TRIGGER de deleção
@@ -111,8 +111,8 @@ criados anteriormente)
     --82. Uso de TRIGGER para impedir atualização em tabela
 83. Uso de TRIGGER para impedir deleção em tabela
 84. Uso de TRIGGER para inserir valores em outra tabela
-85. Uso de TRIGGER para atualizar valores em outra tabela
-86. Uso de TRIGGER para apagar valores em outra tabela
+    --85. Uso de TRIGGER para atualizar valores em outra tabela
+    --86. Uso de TRIGGER para apagar valores em outra tabela
 
 PL - avançadas
 87. Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas

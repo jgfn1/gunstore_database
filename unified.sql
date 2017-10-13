@@ -410,10 +410,12 @@ FROM employees WHERE wage < (
 );
 
 --45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
+--25. Junção entre três tabelas + condição de seleção (M:N)
+--nome dos clientes que ja fizeram uma compra e participam do curso
 SELECT p.name
 FROM persons p
 INNER JOIN sale s ON p.cpf = s.client_cpf
-INNER JOIN instruct i ON p.cpf = i.cpf; /*Qual CPF, client_cpf ou employee cpf?*/
+INNER JOIN instruct i ON p.cpf = i.client_cpf; 
 
 --47 EXISTS com mais de uma tabela, sem fazer junção
 SELECT *
@@ -652,6 +654,29 @@ END;
    END cpf_of_phone_value_incremented;
 
  END two_functions;
+
+--75. TRIGGER de linha sem condição
+--85. Uso de TRIGGER para atualizar valores em outra tabela
+CREATE OR REPLACE TRIGGER vaca
+AFTER INSERT ON employee_vacancies
+FOR EACH ROW
+DECLARE
+BEGIN
+	UPDATE employees SET worked_years=10
+	WHERE worked_years > 11;
+END vaca;
+
+--76. TRIGGER de linha com condição
+--86. Uso de TRIGGER para apagar valores em outra tabela
+CREATE OR REPLACE TRIGGER overtrigger
+AFTER INSERT ON overtimes
+FOR EACH ROW
+WHEN(end_time = NULL)
+DECLARE
+BEGIN
+	DELETE FROM employee_vacancies
+	WHERE load_unload = 1;
+END overtrigger;
 
 --77 TRIGGER de comando
 --78 Uso de NEW em TRIGGER de inserção
