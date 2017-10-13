@@ -662,7 +662,7 @@ AFTER INSERT ON employee_vacancies
 FOR EACH ROW
 DECLARE
 BEGIN
-	UPDATE employees SET worked_years=10
+	UPDATE employees SET worked_years = 10
 	WHERE worked_years > 11;
 END vaca;
 
@@ -671,7 +671,7 @@ END vaca;
 CREATE OR REPLACE TRIGGER overtrigger
 AFTER INSERT ON overtimes
 FOR EACH ROW
-WHEN(end_time = NULL)
+WHEN(end_time IS NULL)
 DECLARE
 BEGIN
 	DELETE FROM employee_vacancies
@@ -680,13 +680,14 @@ END overtrigger;
 
 --77 TRIGGER de comando
 --78 Uso de NEW em TRIGGER de inserção
-
 CREATE OR REPLACE TRIGGER addedSale
 BEFORE INSERT ON sale FOR EACH ROW
 BEGIN
 	DBMS_OUTPUT.put_line('New sale number= ' || :NEW.sale_number );
 END addedSale;
 /
+--Demonstration
+INSERT INTO sale VALUES (100, 002, 010, 5000, SYSTIMESTAMP);
 
 --79. Uso de OLD em TRIGGER de deleção
 CREATE OR REPLACE TRIGGER delete_check BEFORE DELETE ON employees
@@ -704,15 +705,20 @@ CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
   BEGIN
     raise_application_error(-20000, 'C''mon, how many employees do you think we can have?');
   END;
+--Demonstration
+INSERT INTO employees VALUES (100, 50, 0, 'President of United States', 001, 001, 001);
 
 --82. Uso de TRIGGER para impedir atualização em tabela
 CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
   BEGIN
-    raise_application_error(-20000, 'You''re not allowed to update our departments.');
+    raise_application_error(-20001, 'You''re not allowed to update our departments.');
   END;
+--Demonstration
+UPDATE departments SET department_code = 0
+WHERE department_code <> 0;
 
 --87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
---anteriormente)
+--anteriormente). Já serve como demonstração da função get_cpf.
 SELECT * FROM sale
 WHERE sale_number = get_cpf();
 ;
@@ -724,31 +730,46 @@ BEGIN
 END;
 /
 
+--Demonstration
 DECLARE
   l_sale sale%ROWTYPE;
 BEGIN
   SELECT * INTO l_sale FROM sale
-   WHERE sale_number = 1;
-   show_sale_number(l_sale);
+  WHERE sale_number = 1;
+  show_sale_number(l_sale);
 END;
 /
 
---89. Função com registro como retorno
-CREATE OR REPLACE FUNCTION initialize_employee_record(name persons.name%TYPE,
-  cpf  employees.employee_cpf%TYPE)
-RETURN employee_record IS
-
+/*
 DECLARE
   TYPE employee_record IS RECORD (
-  namer persons.name%TYPE,
+  name persons.name%TYPE,
   cpf  employees.employee_cpf%TYPE);
+*/
 
-initialized_record employee_record;
+--89. Função com registro como retorno
+CREATE TYPE employee_record IS OBJECT (
+  name persons.name%TYPE,
+  cpf  employees.employee_cpf%TYPE
+);
+
+CREATE OR REPLACE FUNCTION initialize_employee_record(name persons.name%TYPE,
+cpf  employees.employee_cpf%TYPE)
+RETURN employee_record IS
+
+  initialized_record employee_record;
+
 BEGIN
   initialized_record.name := name;
   initialized_record.cpf := cpf;
   RETURN initialized_record;
 END initialize_employee_record;
+
+--Demonstration
+DECLARE
+BEGIN
+initialize_employee_record('Dom Pedro I', 003);
+END;
 
 --91. INSTEAD OF TRIGGER
 CREATE OR REPLACE TRIGGER delete_if_update_attempt INSTEAD OF UPDATE ON occupied_vacancies
