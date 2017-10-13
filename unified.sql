@@ -358,7 +358,7 @@ SELECT * FROM employees e
 WHERE e.wage = (
   SELECT wage FROM employees emp
   WHERE e.wage = emp.wage
-);
+); 
 
 --34. Uso de UNION
 SELECT P.name, S.artifact_code
