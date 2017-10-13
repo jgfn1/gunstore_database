@@ -358,7 +358,7 @@ SELECT * FROM employees e
 WHERE e.wage = (
   SELECT wage FROM employees emp
   WHERE e.wage = emp.wage
-); 
+);
 
 --34. Uso de UNION
 SELECT P.name, S.artifact_code
@@ -617,6 +617,16 @@ BEGIN
 END;
 /
 
+--63. Procedimento sem parâmetro
+CREATE OR REPLACE PROCEDURE the_procedure IS
+  a INTEGER;
+  BEGIN
+    a = 1;
+  END;
+
+--64. Procedimento com parâmetro IN
+--Feito junto com o 67.
+
 --65. Procedimento com parâmetro OUT
 CREATE OR REPLACE PROCEDURE returnc4c(c4_number OUT INTEGER)
 is
@@ -628,8 +638,7 @@ END returnc4c ;
 EXECUTE returnc4c(c4_number);
 
 --66. Procedimento com parâmetro INOUT
-CREATE OR REPLACE PROCEDURE return_super( super IN OUT INTEGER)
-is
+CREATE OR REPLACE PROCEDURE return_super( super IN OUT INTEGER) IS
 BEGIN
   SELECT supervisor_cpf INTO super FROM employees
   WHERE super = employee_cpf;
@@ -642,7 +651,8 @@ EXECUTE return_super(4323);
 
 --67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos
 -- procedimentos criados anteriormente)
-CREATE OR REPLACE PROCEDURE change_emp (sale_number NUMBER) AS
+--64. Procedimento com parâmetro IN
+CREATE OR REPLACE PROCEDURE change_emp (sale_number IN NUMBER) AS
   tot_emps NUMBER;
   BEGIN
     UPDATE sale

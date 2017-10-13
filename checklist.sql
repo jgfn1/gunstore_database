@@ -88,8 +88,8 @@ PL - básicas
     --60. Uso de cursor explícito com registro
     --61. Uso de cursor explícito com parâmetro
     --62. Cursor dentro de FOR (sem DECLARE)
-63. Procedimento sem parâmetro
-64. Procedimento com parâmetro IN
+    --63. Procedimento sem parâmetro
+    --64. Procedimento com parâmetro IN
     --65. Procedimento com parâmetro OUT
     --66. Procedimento com parâmetro INOUT
     --67. Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
