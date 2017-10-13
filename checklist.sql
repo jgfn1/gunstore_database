@@ -53,7 +53,7 @@ SQL - básicas
     --30. Uma subconsulta com uso de ANY ou SOME
     --31. Uma subconsulta com uso de ALL
     --32. Uma subconsulta com uso de EXISTS/NOT EXISTS
-33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo
+    --33. Uma subconsulta com uso de ALIAS com consultas aninhadas (ALIAS externo sendo
 referenciado na subconsulta)
 	  --34. Uso de UNION
 	  --35. Uso de INTERSECT
