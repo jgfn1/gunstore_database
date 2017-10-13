@@ -562,6 +562,8 @@ BEGIN
   WHERE name = 'C-4';
 END returnc4c ;
 
+EXECUTE returnc4c(c4_number);
+
 --66. Procedimento com parâmetro INOUT
 CREATE OR REPLACE PROCEDURE return_super( super IN OUT INTEGER)
 is
@@ -573,6 +575,7 @@ EXCEPTION
   super = 0;
 END return_super;
 
+EXECUTE return_super(4323);
 
 --67 Uso de procedimento dentro de outro bloco PL (pode-se usar um dos
 -- procedimentos criados anteriormente)
