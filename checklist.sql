@@ -82,19 +82,19 @@ PL - básicas
     --54. WHILE LOOP
 	  --55. FOR LOOP
 	  --56. Recuperação de dados para variável
-57. Recuperação de dados para registro
-58. Output de string com variável
-59. Uso de cursor explícito com variável
+    --57. Recuperação de dados para registro
+    --58. Output de string com variável
+    --59. Uso de cursor explícito com variável
     --60. Uso de cursor explícito com registro
-61. Uso de cursor explícito com parâmetro
-62. Cursor dentro de FOR (sem DECLARE)
+    --61. Uso de cursor explícito com parâmetro
+    --62. Cursor dentro de FOR (sem DECLARE)
 63. Procedimento sem parâmetro
 64. Procedimento com parâmetro IN
     --65. Procedimento com parâmetro OUT
     --66. Procedimento com parâmetro INOUT
-67. Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
+    --67. Uso de procedimento dentro de outro bloco PL (pode-se usar um dos procedimentos
 criados anteriormente)
-68. Função sem parâmetro
+    --68. Função sem parâmetro
     --69. Função com parâmetro IN
 70. Função com parâmetro OUT
     --71. Função com parâmetro INOUT
@@ -103,8 +103,8 @@ criados anteriormente)
 74. AFTER TRIGGER
     --75. TRIGGER de linha sem condição
     --76. TRIGGER de linha com condição
-77. TRIGGER de comando
-78. Uso de NEW em TRIGGER de inserção
+    --77. TRIGGER de comando
+    --78. Uso de NEW em TRIGGER de inserção
     --79. Uso de OLD em TRIGGER de deleção
 80. Uso de NEW e OLD em TRIGGER de atualização
     --81. Uso de TRIGGER para impedir inserção em tabela
@@ -115,9 +115,9 @@ criados anteriormente)
     --86. Uso de TRIGGER para apagar valores em outra tabela
 
 PL - avançadas
-87. Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
+    --87. Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 anteriormente)
-88. Registro como parâmetro de função ou procedimento
+    --88. Registro como parâmetro de função ou procedimento
 
 89. Função com registro como retorno
 90. Pacote com funções ou procedimentos que usem outros componentes do mesmo

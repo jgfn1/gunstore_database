@@ -775,6 +775,12 @@ CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
 UPDATE departments SET department_code = 0
 WHERE department_code <> 0;
 
+--85. Uso de TRIGGER para atualizar valores em outra tabela
+--Feito com a 75.
+
+--86. Uso de TRIGGER para apagar valores em outra tabela
+--Feito com a 76.
+
 --87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 --anteriormente). Já serve como demonstração da função get_cpf.
 SELECT * FROM sale
