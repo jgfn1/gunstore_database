@@ -85,8 +85,13 @@ SELECT name FROM (
   SELECT name, department_code FROM departments
 );
 
-----44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
-SELECT wage FROM employees
-WHERE employees.wage > (
+--43. Operação aritmética com função de agregação como operador
+SELECT employee_cpf, (wage * 1.60) AS new_wage
+FROM employees WHERE wage < (
   SELECT avg(wage) FROM employees
 );
+
+--44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
+SELECT wage FROM employees
+WHERE employees.wage BETWEEN (SELECT avg(wage) FROM employees)
+  AND (SELECT avg(wage) - 1 FROM employees);

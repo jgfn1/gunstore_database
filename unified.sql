@@ -399,19 +399,14 @@ SELECT name FROM (
 
 --43. Operação aritmética com função de agregação como operador
 SELECT employee_cpf, (wage * 1.60) AS new_wage
-FROM employees WHERE wage < AVG(wage) FROM employees;
-
---44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
-SELECT wage FROM employees
-WHERE employees.wage > (
-  SELECT avg(wage) FROM employees
-);
-
---43. Operação aritmética com função de agregação como operador
-SELECT employee_cpf, (wage * 1.60) AS new_wage
 FROM employees WHERE wage < (
   SELECT avg(wage) FROM employees
 );
+
+--44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
+SELECT wage FROM employees
+WHERE employees.wage BETWEEN (SELECT avg(wage) FROM employees)
+  AND (SELECT avg(wage) - 1 FROM employees);
 
 --45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
 --25. Junção entre três tabelas + condição de seleção (M:N)
