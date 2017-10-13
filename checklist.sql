@@ -23,7 +23,7 @@ executem, para demonstração.
 SQL - básicas
   	--1. Uso de BETWEEN com valores numéricos
     --2. Uso de BETWEEN com datas
-3. Uso de LIKE/NOT LIKE com tokens (% ou _)
+'   --3. Uso de LIKE/NOT LIKE com tokens (% ou _)
     --4. Uso de IN com subconsulta
 	  --5. Uso de IS NULL/IS NOT NULL
     --6. Uso de ORDER BY
@@ -62,7 +62,7 @@ referenciado na subconsulta)
 38. UPDATE com subconsulta
 39. DELETE com subconsulta
     --40. Uso de GRANT
-41. Uso de REVOKE
+    --41. Uso de REVOKE
 
 SQL - avançadas
     --42. Subconsulta dentro da cláusula FROM (VIEW implícita)
@@ -75,17 +75,17 @@ SQL - avançadas
 PL - básicas
     --48. Bloco anônimo com declaração de variável e instrução
 49. Bloco anônimo com exceção
-50. Uso de IF-THEN-ELSE
+    --50. Uso de IF-THEN-ELSE
 51. Uso de ELSIF
 52. Uso de CASE
-53. LOOP com instrução de saída
-54. WHILE LOOP
+    --53. LOOP com instrução de saída
+    --54. WHILE LOOP
 	  --55. FOR LOOP
 	  --56. Recuperação de dados para variável
 57. Recuperação de dados para registro
 58. Output de string com variável
 59. Uso de cursor explícito com variável
-60. Uso de cursor explícito com registro
+    --60. Uso de cursor explícito com registro
 61. Uso de cursor explícito com parâmetro
 62. Cursor dentro de FOR (sem DECLARE)
 63. Procedimento sem parâmetro

@@ -390,6 +390,10 @@ SELECT name FROM (
   SELECT name, department_code FROM departments
 );
 
+--43. Operação aritmética com função de agregação como operador
+SELECT employee_cpf, (wage * 1.60) AS new_wage
+FROM employees WHERE wage < AVG(wage) FROM employees;
+
 --44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
 SELECT wage FROM employees
 WHERE employees.wage > (
@@ -436,6 +440,16 @@ EXCEPTION WHEN LOGIN_DENIED THEN
   DBMS_OUTPUT.put_line('ERROR! The aliens are attacking, try logging in later!');
 END;
 /
+--50. Uso de IF-THEN-ELSE
+DECLARE
+	salary INTEGER := 1000;
+	minimum INTEGER := 700;
+BEGIN
+	IF salary < minimum THEN salary := salary + minimum
+	ELSE 
+  	DBMS_OUTPUT.put_line('Minimum wage creates unemployment');
+END
+/
 
 --51. Uso de ELSIF
 DECLARE
@@ -459,6 +473,27 @@ BEGIN CASE a
     DBMS_OUTPUT.put_line('That''s equal, man!');
   END CASE;
 END;
+/
+
+--53. LOOP com instrução de saída
+DECLARE
+	count INTEGER := 0;
+BEGIN
+	LOOP
+		count := count + 1;
+		EXIT WHEN count > 100
+	END LOOP
+END
+/
+
+--54. WHILE LOOP
+DECLARE
+	var INTEGER := 1
+BEGIN
+	WHILE var < 100 LOOP
+		var := var + 1;
+	END LOOP
+END
 /
 
 --56. Recuperação de dados para variável
@@ -508,6 +543,25 @@ BEGIN
   CLOSE weapons;
 END;
 /
+
+--60. Uso de cursor explícito com registro
+-- Declaração do Cursor
+DECLARE
+CURSORS c_artifacts IS
+SELECT artifact_code, name FROM artifacts
+WHERE manufacturer_name = 'Israel Military Industries';
+v_artifacts c_artifacts%ROWTYPE;
+
+BEGIN
+OPEN c_artifacts
+LOOP
+FETCH c_artifacts INTO v_artifacts;
+EXIT WHEN c_artifacts%NOTFOUND;
+DBMS_OUTPUT.PUTLINE('CODE: '||v_artifacts.artifact_code||' '||'Name: '|| v_artifacts.name);
+END LOOP
+
+CLOSE c_artifacts;
+END;
 
 --61. Uso de cursor explícito com parâmetro
 DECLARE
