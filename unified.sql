@@ -449,10 +449,11 @@ DECLARE
 	salary INTEGER := 1000;
 	minimum INTEGER := 700;
 BEGIN
-	IF salary < minimum THEN salary := salary + minimum
+	IF salary < minimum THEN salary := salary + minimum;
 	ELSE 
   	DBMS_OUTPUT.put_line('Minimum wage creates unemployment');
-END
+  END IF;
+END;
 /
 
 --51. Uso de ELSIF
@@ -485,19 +486,19 @@ DECLARE
 BEGIN
 	LOOP
 		count := count + 1;
-		EXIT WHEN count > 100
-	END LOOP
-END
+		EXIT WHEN count > 100;
+	END LOOP;
+END;
 /
 
 --54. WHILE LOOP
 DECLARE
-	var INTEGER := 1
+	var INTEGER := 1;
 BEGIN
 	WHILE var < 100 LOOP
 		var := var + 1;
-	END LOOP
-END
+	END LOOP;
+END;
 /
 
 --56. Recuperação de dados para variável
@@ -551,18 +552,19 @@ END;
 --60. Uso de cursor explícito com registro
 -- Declaração do Cursor
 DECLARE
-CURSORS c_artifacts IS
+CURSOR c_artifacts IS
 SELECT artifact_code, name FROM artifacts
 WHERE manufacturer_name = 'Israel Military Industries';
+
 v_artifacts c_artifacts%ROWTYPE;
 
 BEGIN
-OPEN c_artifacts
+OPEN c_artifacts;
 LOOP
 FETCH c_artifacts INTO v_artifacts;
 EXIT WHEN c_artifacts%NOTFOUND;
 DBMS_OUTPUT.PUTLINE('CODE: '||v_artifacts.artifact_code||' '||'Name: '|| v_artifacts.name);
-END LOOP
+END LOOP;
 
 CLOSE c_artifacts;
 END;
