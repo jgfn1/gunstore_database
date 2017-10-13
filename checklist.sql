@@ -37,8 +37,8 @@ SQL - básicas
 	  --14. Usar ALTER TABLE para Modificação de Coluna
 	  --15. Usar ALTER TABLE para Adicionar Coluna
 	  --16. Usar ALTER TABLE para Remover de Coluna
-17. Operadores aritméticos no SELECT
-18. Função de agregação sem GROUP BY
+    --17. Operadores aritméticos no SELECT
+    --18. Função de agregação sem GROUP BY
     --19. Função de agregação com GROUP BY
     --20. Uso de DISTINCT
     --21. Uso de HAVING
@@ -47,8 +47,8 @@ SQL - básicas
   	--24. Junção entre duas tabelas
     --25. Junção entre três tabelas + condição de seleção (M:N)
 	  --26. Junção usando INNER JOIN
-27. Junção usando LEFT OUTER JOIN
-28. Junção usando RIGHT OUTER JOIN
+    --27. Junção usando LEFT OUTER JOIN
+    --28. Junção usando RIGHT OUTER JOIN
     --29. Junção usando FULL OUTER JOIN
     --30. Uma subconsulta com uso de ANY ou SOME
     --31. Uma subconsulta com uso de ALL
@@ -58,9 +58,9 @@ referenciado na subconsulta)
 	  --34. Uso de UNION
 	  --35. Uso de INTERSECT
 	  --36. Uso de MINUS
-37. INSERT com subconsulta
-38. UPDATE com subconsulta
-39. DELETE com subconsulta
+    --37. INSERT com subconsulta
+    --38. UPDATE com subconsulta
+    --39. DELETE com subconsulta
     --40. Uso de GRANT
     --41. Uso de REVOKE
 
@@ -70,14 +70,14 @@ SQL - avançadas
     --44. Uso de BETWEEN com valores numéricos retornados por funções de agregação
 	  --45. Junção entre três tabelas usando INNER JOIN ou OUTER JOIN
 	  --46. ORDER BY com mais de dois campos
-47. EXISTS com mais de uma tabela, sem fazer junção
+    --47. EXISTS com mais de uma tabela, sem fazer junção
 
 PL - básicas
     --48. Bloco anônimo com declaração de variável e instrução
-49. Bloco anônimo com exceção
+    --49. Bloco anônimo com exceção
     --50. Uso de IF-THEN-ELSE
-51. Uso de ELSIF
-52. Uso de CASE
+    --51. Uso de ELSIF
+    --52. Uso de CASE
     --53. LOOP com instrução de saída
     --54. WHILE LOOP
 	  --55. FOR LOOP

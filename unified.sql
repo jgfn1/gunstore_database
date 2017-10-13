@@ -198,11 +198,11 @@ INSERT INTO sale VALUES (009, 008, 010, 4, (CURRENT_TIMESTAMP));
 INSERT INTO sale VALUES (003, 007, 011, 5, (CURRENT_TIMESTAMP));
 INSERT INTO sale VALUES (009, 000, 001, 6, (CURRENT_TIMESTAMP));
 
+--11. Criar PK Composta
 CREATE TABLE instruct
 (
   client_cpf INTEGER,
   employee_cpf INTEGER,
-  --11. Criar PK Composta
   CONSTRAINT instruct_pkey PRIMARY KEY (client_cpf, employee_cpf),
   CONSTRAINT instruct_fkey FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
   CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
@@ -255,13 +255,14 @@ DROP VIEW occupied_vacancies;
 --10. Criar CHECKs
 ALTER TABLE employees
 ADD (CONSTRAINT employees_wage_check CHECK (wage > 200));
-
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 
+--11. Criar PK Composta
+--Feito no create table
+
 --12. Criar FK Composta
 ALTER TABLE employees ADD (phone_number INTEGER);
-
 ALTER TABLE employees ADD
 (CONSTRAINT employees_fkey3 FOREIGN KEY (employee_cpf, phone_number) REFERENCES phones(cpf, phone_number));
 
@@ -307,6 +308,9 @@ SELECT D.name
 FROM departments D, employees E
 WHERE E.employee_cpf = D.manager_cpf;
 
+--25. Junção entre três tabelas + condição de seleção (M:N)
+--Feito junto com o 45.
+
 --26. Junção usando INNER JOIN
 select name
 from persons
@@ -319,7 +323,6 @@ LEFT OUTER JOIN sale
 ON employees.employee_cpf = sale.employee_cpf;
 
 --28 Junção usando RIGHT OUTER JOIN
-
 SELECT sale.sale_number, employees.employee_cpf
 FROM sale
 RIGHT OUTER JOIN employees
@@ -416,6 +419,9 @@ FROM persons p
 INNER JOIN sale s ON p.cpf = s.client_cpf
 INNER JOIN instruct i ON p.cpf = i.client_cpf; 
 
+--46. ORDER BY com mais de dois campos
+--Feito junto com o 6.
+
 --47 EXISTS com mais de uma tabela, sem fazer junção
 SELECT *
 FROM sale
@@ -501,17 +507,15 @@ BEGIN
 END;
 /
 
---56. Recuperação de dados para variável
 --55. FOR LOOP
+--Feito junto com 62.
+
+--56. Recuperação de dados para variável
 DECLARE
   bomb_number INTEGER := 0;
 BEGIN
     SELECT artifact_code INTO bomb_number FROM artifacts
     WHERE name = 'C-4';
-    --LOOP
-
-    --EXIT [WHEN ];
-    --END LOOP;
 END;
 /
 
