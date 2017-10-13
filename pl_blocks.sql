@@ -105,6 +105,28 @@ BEGIN
 END;
 /
 
+--65. Procedimento com parâmetro OUT
+CREATE OR REPLACE PROCEDURE returnc4c(c4_number OUT INTEGER)
+is
+BEGIN
+  SELECT artifact_code INTO c4_number FROM artifacts
+  WHERE name = 'C-4';
+END returnc4c ;
+
+EXECUTE returnc4c(c4_number);
+
+--66. Procedimento com parâmetro INOUT
+CREATE OR REPLACE PROCEDURE return_super( super IN OUT INTEGER)
+is
+BEGIN
+  SELECT supervisor_cpf INTO super FROM employees
+  WHERE super = employee_cpf;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+  super = 0;
+END return_super;
+
+EXECUTE return_super(4323);
 --69. Função com parâmetro IN
 CREATE OR REPLACE FUNCTION cpf_of_phone(phone IN)
   RETURN INTEGER IS
