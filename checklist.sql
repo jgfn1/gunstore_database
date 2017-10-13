@@ -120,7 +120,7 @@ anteriormente)
     --88. Registro como parâmetro de função ou procedimento
 
 89. Função com registro como retorno
-90. Pacote com funções ou procedimentos que usem outros componentes do mesmo
+    --90. Pacote com funções ou procedimentos que usem outros componentes do mesmo
 pacote
     --91. INSTEAD OF TRIGGER
 */

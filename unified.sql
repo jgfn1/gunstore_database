@@ -702,6 +702,7 @@ END;
 /
 
 --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
+--90. Pacote com funções ou procedimentos que usem outros componentes do mesmo pacote
  CREATE OR REPLACE PACKAGE two_functions AS
    FUNCTION cpf_of_phone(phone IN phones.cpf%TYPE) RETURN INTEGER;
    FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TYPE, value IN OUT INTEGER)
@@ -724,7 +725,7 @@ END;
    BEGIN
      SELECT cpf INTO desired_cpf FROM phones
      WHERE phone_number = phone;
-     value := value + 1;
+     value := cpf_of_phone(value) + 1;
      RETURN desired_cpf;
    END cpf_of_phone_value_incremented;
 
@@ -873,6 +874,9 @@ DECLARE
 BEGIN
 initialize_employee_record('Dom Pedro I', 003);
 END;
+
+--90. Pacote com funções ou procedimentos que usem outros componentes do mesmo pacote
+--Feito com a 72.
 
 --91. INSTEAD OF TRIGGER
 CREATE OR REPLACE TRIGGER delete_if_update_attempt INSTEAD OF UPDATE ON occupied_vacancies
