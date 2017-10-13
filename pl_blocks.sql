@@ -175,3 +175,9 @@ CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
   BEGIN
     raise_application_error(-20000, 'You''re not allowed to update our departments.');
   END;
+
+  --91. INSTEAD OF TRIGGER
+CREATE OR REPLACE TRIGGER delete_if_update_attempt INSTEAD OF UPDATE ON occupied_vacancies
+BEGIN
+    DELETE occupied_vacancies;
+END delete_if_update_attempt;
