@@ -32,7 +32,7 @@ SQL - básicas
     --9. Deleção de VIEW
     --10. Criar CHECKs
     --11. Criar PK Composta
-12. Criar FK Composta
+    --12. Criar FK Composta
 	  --13. Usar Valor DEFAULT (Ex: Data do Sistema)
 	  --14. Usar ALTER TABLE para Modificação de Coluna
 	  --15. Usar ALTER TABLE para Adicionar Coluna
@@ -107,8 +107,8 @@ criados anteriormente)
 78. Uso de NEW em TRIGGER de inserção
     --79. Uso de OLD em TRIGGER de deleção
 80. Uso de NEW e OLD em TRIGGER de atualização
-81. Uso de TRIGGER para impedir inserção em tabela
-82. Uso de TRIGGER para impedir atualização em tabela
+    --81. Uso de TRIGGER para impedir inserção em tabela
+    --82. Uso de TRIGGER para impedir atualização em tabela
 83. Uso de TRIGGER para impedir deleção em tabela
 84. Uso de TRIGGER para inserir valores em outra tabela
     --85. Uso de TRIGGER para atualizar valores em outra tabela
@@ -118,6 +118,7 @@ PL - avançadas
 87. Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 anteriormente)
 88. Registro como parâmetro de função ou procedimento
+
 89. Função com registro como retorno
 90. Pacote com funções ou procedimentos que usem outros componentes do mesmo
 pacote
