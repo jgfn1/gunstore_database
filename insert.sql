@@ -41,8 +41,8 @@ INSERT INTO phones VALUES (007, 0008);
 INSERT INTO phones VALUES (008, 0009);
 INSERT INTO phones VALUES (010, 0010);
 
-INSERT INTO employees VALUES (002, 1000, 10, 'Gestor de Pistolas/Revólveres | Gestor de Armas Brancas', 010, 000);
-INSERT INTO employees VALUES (003, 1200, 7, 'Gestor de Metralhadoras | Vendedor | Instrutor de Tiro', 010, 000);
+INSERT INTO employees VALUES (002, 1000, 10, 'Gestor de Pistolas/Revólveres | Gestor de Armas Brancas', 012, 000);
+INSERT INTO employees VALUES (003, 1200, 7, 'Gestor de Metralhadoras | Vendedor | Instrutor de Tiro', 013, 000);
 INSERT INTO employees VALUES (009, 1100, 20, 'Gestor de Bombas | Vendedor | Instrutor de Tiro', 010, 000);
 INSERT INTO employees VALUES (010, 300, 5, 'Gestor de Rifles/Fuzis | Gestor de Espingardas', 010, 000);
 
@@ -65,6 +65,12 @@ INSERT INTO artifacts VALUES (101, 'C-4', 'Phillips Petroleum Company', to_date(
 --INSERT INTO overtimes VALUES (NULL , NULL, NULL, 003);
 INSERT INTO overtimes VALUES (to_date('21/07/2016', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 009);
 INSERT INTO overtimes VALUES (to_date('01/07/1998', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 010);
+
+INSERT INTO employee_vacancies VALUES (002, 00, 0, 00);
+INSERT INTO employee_vacancies VALUES (003, 01, 1, 01);
+INSERT INTO employee_vacancies VALUES (009, 10, 0, 00);
+INSERT INTO employee_vacancies VALUES (010, 11, 1, 01);
+
 
 INSERT INTO sale VALUES (009, 001, 101, 1, (CURRENT_TIMESTAMP));
 INSERT INTO sale VALUES (003, 004, 100, 2, (CURRENT_TIMESTAMP));
