@@ -254,13 +254,16 @@ DROP VIEW occupied_vacancies;
 
 --10. Criar CHECKs
 ALTER TABLE employees
-ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
+ADD (CONSTRAINT employees_wage_check CHECK (wage > 200));
+
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 
 --12. Criar FK Composta
-ALTER TABLE employees ADD (phone_number INTEGER),
-ADD (CONSTRAINT employees_fkey3 FOREIGN KEY (employee_cpf, phone_number) REFERENCES phones(cpf, phone_number);
+ALTER TABLE employees ADD (phone_number INTEGER);
+
+ALTER TABLE employees ADD
+(CONSTRAINT employees_fkey3 FOREIGN KEY (employee_cpf, phone_number) REFERENCES phones(cpf, phone_number));
 
 --15. Usar ALTER TABLE para Adicionar Coluna
 ALTER TABLE addresses ADD (reference_point VARCHAR2(30));
@@ -740,11 +743,21 @@ RETURN employee_record IS
 
 DECLARE
   TYPE employee_record IS RECORD (
-  name persons.name%TYPE,
+  namer persons.name%TYPE,
   cpf  employees.employee_cpf%TYPE);
+
 initialized_record employee_record;
 BEGIN
   initialized_record.name := name;
   initialized_record.cpf := cpf;
   RETURN initialized_record;
 END initialize_employee_record;
+
+--91. INSTEAD OF TRIGGER
+CREATE OR REPLACE TRIGGER delete_if_update_attempt INSTEAD OF UPDATE ON occupied_vacancies
+BEGIN
+    DELETE occupied_vacancies;
+END delete_if_update_attempt;
+/
+--Demonstration
+UPDATE occupied_vacancies SET vacancy_number = 0;
