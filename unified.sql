@@ -258,6 +258,10 @@ ADD (CONSTRAINT employees_wage_check CHECK (wage > 200))/
 ALTER TABLE persons
 ADD (CONSTRAINT persons_name_check CHECK (name <> 'Adolf Hitler'));
 
+--12. Criar FK Composta
+ALTER TABLE employees ADD (phone_number INTEGER),
+ADD (CONSTRAINT employees_fkey3 FOREIGN KEY (employee_cpf, phone_number) REFERENCES phones(cpf, phone_number);
+
 --15. Usar ALTER TABLE para Adicionar Coluna
 ALTER TABLE addresses ADD (reference_point VARCHAR2(30));
 
@@ -297,7 +301,7 @@ HAVING count(*) > 1;
 
 --24. Junção entre duas tabelas
 SELECT D.name
-FROM departments D, employeey E
+FROM departments D, employees E
 WHERE E.employee_cpf = D.manager_cpf;
 
 --26. Junção usando INNER JOIN
@@ -575,7 +579,7 @@ CREATE OR REPLACE PROCEDURE change_emp (sale_number NUMBER) AS
   BEGIN
     UPDATE sale
     SET employee_cpf = 003
-    WHERE sale_number = change_emp.sale_number; /*change_emp?*/
+    WHERE sale_number = change_emp(sale_number);
     tot_emps := tot_emps - 1;
   END;
 /
@@ -658,17 +662,31 @@ END addedSale;
 
 --79. Uso de OLD em TRIGGER de deleção
 CREATE OR REPLACE TRIGGER delete_check BEFORE DELETE ON employees
-  REFERENCING OLD AS name
+  REFERENCING OLD AS employee_cpf
 BEGIN
-  IF (OLD = 'Dom Pedro I') THEN
-    DBMS_OUTPUT.put_line('You can''t fire the King who declared our independence, you idiot!');
+  IF (OLD = 003) THEN
+    raise_application_error(-20000, 'You can''t fire Ronald Reagan!');
   END IF;
 END delete_check;
+--Demonstration:
+DELETE FROM employees WHERE employee_cpf = 003;
+
+--81. Uso de TRIGGER para impedir inserção em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
+  BEGIN
+    raise_application_error(-20000, 'C''mon, how many employees do you think we can have?');
+  END;
+
+--82. Uso de TRIGGER para impedir atualização em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
+  BEGIN
+    raise_application_error(-20000, 'You''re not allowed to update our departments.');
+  END;
 
 --87 Uso de função dentro de uma consulta SQL (pode-se usar uma das funções criadas
 --anteriormente)
 SELECT * FROM sale
-WHERE sale_number = get_cpf; /*get_cpf?*/
+WHERE sale_number = get_cpf();
 ;
 
 --88 Registro como parâmetro de função ou procedimento
@@ -686,3 +704,19 @@ BEGIN
    show_sale_number(l_sale);
 END;
 /
+
+--89. Função com registro como retorno
+CREATE OR REPLACE FUNCTION initialize_employee_record(name persons.name%TYPE,
+  cpf  employees.employee_cpf%TYPE)
+RETURN employee_record IS
+
+DECLARE
+  TYPE employee_record IS RECORD (
+  name persons.name%TYPE,
+  cpf  employees.employee_cpf%TYPE);
+initialized_record employee_record;
+BEGIN
+  initialized_record.name := name;
+  initialized_record.cpf := cpf;
+  RETURN initialized_record;
+END initialize_employee_record;

@@ -163,3 +163,15 @@ BEGIN
     DBMS_OUTPUT.put_line('You can''t fire the King who declared our independence, you idiot!');
   END IF;
 END delete_check;
+
+--81. Uso de TRIGGER para impedir inserção em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
+  BEGIN
+    raise_application_error(-20000, 'C''mon, how many employees do you think we can have?');
+  END;
+
+--82. Uso de TRIGGER para impedir atualização em tabela
+CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
+  BEGIN
+    raise_application_error(-20000, 'You''re not allowed to update our departments.');
+  END;
