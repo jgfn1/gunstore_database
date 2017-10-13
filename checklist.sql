@@ -96,17 +96,17 @@ PL - básicas
 criados anteriormente)
     --68. Função sem parâmetro
     --69. Função com parâmetro IN
-70. Função com parâmetro OUT
+    --70. Função com parâmetro OUT
     --71. Função com parâmetro INOUT
     --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
-73. BEFORE TRIGGER
-74. AFTER TRIGGER
+    --73. BEFORE TRIGGER
+    --74. AFTER TRIGGER
     --75. TRIGGER de linha sem condição
     --76. TRIGGER de linha com condição
     --77. TRIGGER de comando
     --78. Uso de NEW em TRIGGER de inserção
     --79. Uso de OLD em TRIGGER de deleção
-80. Uso de NEW e OLD em TRIGGER de atualização
+    --80. Uso de NEW e OLD em TRIGGER de atualização
     --81. Uso de TRIGGER para impedir inserção em tabela
     --82. Uso de TRIGGER para impedir atualização em tabela
 83. Uso de TRIGGER para impedir deleção em tabela

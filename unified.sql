@@ -683,11 +683,13 @@ CREATE OR REPLACE FUNCTION cpf_of_phone(phone IN phones.cpf%TYPE)
     RETURN desired_cpf;
   END cpf_of_phone;
 
+--70. Função com parâmetro OUT
 --71. Função com parâmetro INOUT
-CREATE OR REPLACE FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TYPE, value IN OUT INTEGER)
+CREATE OR REPLACE FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TYPE, value IN OUT INTEGER, value1 OUT INTEGER)
   RETURN INTEGER IS
   desired_cpf phones.cpf%TYPE;
   BEGIN
+    value1 = 100;
     SELECT cpf INTO desired_cpf FROM phones
     WHERE phone_number = phone;
     value := value + 1;
@@ -728,6 +730,10 @@ END;
 
  END two_functions;
 
+--73. BEFORE TRIGGER
+--Feito com o 77.
+
+--74. AFTER TRIGGER
 --75. TRIGGER de linha sem condição
 --85. Uso de TRIGGER para atualizar valores em outra tabela
 CREATE OR REPLACE TRIGGER vaca
@@ -752,6 +758,7 @@ BEGIN
 END overtrigger;
 
 --77 TRIGGER de comando
+--73. BEFORE TRIGGER
 --78 Uso de NEW em TRIGGER de inserção
 CREATE OR REPLACE TRIGGER addedSale
 BEFORE INSERT ON sale FOR EACH ROW
@@ -772,6 +779,14 @@ BEGIN
 END delete_check;
 --Demonstration:
 DELETE FROM employees WHERE employee_cpf = 003;
+
+--80. Uso de NEW e OLD em TRIGGER de atualização
+CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
+  BEGIN
+    IF NEW.department_code <> OLD.department_code THEN
+    raise_application_error(-20001, 'You''re not allowed to update our departments.');
+    END IF;
+  END;
 
 --81. Uso de TRIGGER para impedir inserção em tabela
 CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
