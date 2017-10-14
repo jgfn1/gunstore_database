@@ -1,0 +1,784 @@
+
+Table OVERTIMES eliminado.
+
+
+Table EMPLOYEE_VACANCIES eliminado.
+
+
+Table PHONES eliminado.
+
+
+Table SALE eliminado.
+
+
+Table INSTRUCT eliminado.
+
+
+Table CLIENTS eliminado.
+
+
+Table EMPLOYEES eliminado.
+
+
+Table PERSONS eliminado.
+
+
+Table ADDRESSES eliminado.
+
+
+Table DEPARTMENTS eliminado.
+
+
+Table ARTIFACTS eliminado.
+
+
+Table ADDRESSES criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table DEPARTMENTS criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table PERSONS criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table PHONES criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table EMPLOYEES criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table DEPARTMENTS alterado.
+
+
+Table CLIENTS criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table ARTIFACTS criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table OVERTIMES criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table EMPLOYEE_VACANCIES criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table SALE criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+Table INSTRUCT criado.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+1 linha inserido.
+
+
+CLIENT_CPF TRAINING_END_REGISTER
+---------- ---------------------
+         0                     0
+         4                     0
+         5 1,0E+000             
+         7                     0
+
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+Ronald Reagan
+Ariano Suassuna
+Coronel Brilhante Ustra
+Harry S. Truman
+
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+Katana
+Kalashnikova 1947 (AK-47)
+Winchester Model 1912 (Shotgun 12)
+C-4
+
+
+CLIENT_CPF
+----------
+         1
+         5
+         8
+
+
+EMPLOYEE_CPF
+------------
+           9
+          10
+
+
+SALE_NUMBER
+-----------
+          4
+          5
+          6
+
+
+View OCCUPIED_VACANCIES criado.
+
+
+EMPLOYEE_CPF VACANCY_NUMBER
+------------ --------------
+           2              0
+           3              1
+           9             10
+          10             11
+
+
+View OCCUPIED_VACANCIES eliminado.
+
+
+Table EMPLOYEES alterado.
+
+
+Table PERSONS alterado.
+
+
+Table EMPLOYEES alterado.
+
+
+Table EMPLOYEES alterado.
+
+
+Table ADDRESSES alterado.
+
+
+Table ADDRESSES alterado.
+
+
+SALE_NUMBER+EMPLOYEE_CPF
+------------------------
+                      10
+                       5
+                       6
+                      13
+                       8
+                      15
+
+6 linhas selecionadas. 
+
+
+  COUNT(*)
+----------
+         6
+
+
+DEPARTMENT_CODE  SUM(WAGE)
+--------------- ----------
+              0       3600
+
+
+DEPARTMENT_CODE
+---------------
+              0
+
+
+DEPARTMENT_CODE  SUM(WAGE)
+--------------- ----------
+              0       3600
+
+
+DEPARTMENT_CODE  SUM(WAGE)
+--------------- ----------
+              0       3600
+
+
+DEPARTMENT_CODE   COUNT(*)
+--------------- ----------
+              0          2
+
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+Pistolas/RevÃ³lveres
+Armas Brancas
+Fuzis/Rifles
+Metralhadoras
+Espingardas
+Bombas
+
+6 linhas selecionadas. 
+
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+BarÃ£o de MauÃ¡
+Duque de Caxias
+Duque de Caxias
+Machado de Assis
+PlÃ­nio Salgado
+Coronel Brilhante Ustra
+
+6 linhas selecionadas. 
+
+
+EMPLOYEE_CPF SALE_NUMBER
+------------ -----------
+          10            
+           2            
+           3           3
+           3           2
+           3           5
+           9           6
+           9           1
+           9           4
+
+8 linhas selecionadas. 
+
+
+SALE_NUMBER EMPLOYEE_CPF
+----------- ------------
+                      10
+                       2
+          3            3
+          2            3
+          5            3
+          6            9
+          1            9
+          4            9
+
+8 linhas selecionadas. 
+
+
+NAME                                                                                                 NAME                                                                                                
+---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------
+Winston Churchill                                                                                    Pistolas/RevÃ³lveres                                                                                
+Winston Churchill                                                                                    Armas Brancas                                                                                       
+TomÃ¡s de Aquino                                                                                     Fuzis/Rifles                                                                                        
+Ronald Reagan                                                                                        Metralhadoras                                                                                       
+TomÃ¡s de Aquino                                                                                     Espingardas                                                                                         
+Harry S. Truman                                                                                      Bombas                                                                                              
+Dom Pedro I                                                                                                                                                                                              
+Coronel Brilhante Ustra                                                                                                                                                                                  
+Duque de Caxias                                                                                                                                                                                          
+Ariano Suassuna                                                                                                                                                                                          
+PlÃ­nio Salgado                                                                                                                                                                                          
+
+NAME                                                                                                 NAME                                                                                                
+---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------
+BarÃ£o de MauÃ¡                                                                                                                                                                                          
+Machado de Assis                                                                                                                                                                                         
+
+13 linhas selecionadas. 
+
+
+EMPLOYEE_CPF       WAGE JOB_TITLE                                                                                            WORKED_YEARS
+------------ ---------- ---------------------------------------------------------------------------------------------------- ------------
+           2       1000 Gestor de Pistolas/RevÃ³lveres | Gestor de Armas Brancas                                                       10
+           3       1200 Gestor de Metralhadoras | Vendedor | Instrutor de Tiro                                                          7
+           9       1100 Gestor de Bombas | Vendedor | Instrutor de Tiro                                                                20
+
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+BarÃ£o de MauÃ¡
+Duque de Caxias
+Machado de Assis
+Dom Pedro I
+TomÃ¡s de Aquino
+
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+C-4
+Winchester Model 1912 (Shotgun 12)
+Kalashnikova 1947 (AK-47)
+Uzi Micro SMG 
+Katana
+
+
+EMPLOYEE_CPF       WAGE WORKED_YEARS JOB_TITLE                                                                                            SUPERVISOR_CPF DEPARTMENT_CODE PHONE_NUMBER
+------------ ---------- ------------ ---------------------------------------------------------------------------------------------------- -------------- --------------- ------------
+          10        300            5 Gestor de Rifles/Fuzis | Gestor de Espingardas                                                                   10               0             
+           2       1000           10 Gestor de Pistolas/RevÃ³lveres | Gestor de Armas Brancas                                                         10               0             
+           3       1200            7 Gestor de Metralhadoras | Vendedor | Instrutor de Tiro                                                           10               0             
+           9       1100           20 Gestor de Bombas | Vendedor | Instrutor de Tiro                                                                  10               0             
+
+
+       CPF
+----------
+         0
+         1
+         4
+         5
+         7
+         8
+
+6 linhas selecionadas. 
+
+
+       CPF
+----------
+         2
+         3
+         9
+        10
+
+
+       CPF
+----------
+         0
+         1
+         4
+         5
+         6
+         7
+         8
+
+7 linhas selecionadas. 
+
+
+1 linha inserido.
+
+
+1 linha atualizado.
+
+Erro a partir da linha : 393 no comando -
+DELETE FROM employees
+WHERE wage > (
+    SELECT avg(wage) FROM employees
+)
+Relatório de erros -
+ORA-02292: restrição de integridade (SYSTEM.DEPARTMENTS_FKEY) violada - registro filho localizado
+
+Erro a partir da linha : 399 no comando -
+GRANT SELECT ON employees TO human_resources_maganer
+Relatório de erros -
+ORA-01917: o usuário ou a atribuição 'HUMAN_RESOURCES_MAGANER' não existe
+01917. 00000 -  "user or role '%s' does not exist"
+*Cause:    There is not a user or role by that name.
+*Action:   Re-specify the name.
+Erro a partir da linha : 402 no comando -
+REVOKE SELECT ON employees FROM human_resources_maganer
+Relatório de erros -
+ORA-01917: o usuário ou a atribuição 'HUMAN_RESOURCES_MAGANER' não existe
+01917. 00000 -  "user or role '%s' does not exist"
+*Cause:    There is not a user or role by that name.
+*Action:   Re-specify the name.
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+Pistolas/RevÃ³lveres
+Armas Brancas
+Fuzis/Rifles
+Metralhadoras
+Espingardas
+Bombas
+
+6 linhas selecionadas. 
+
+
+EMPLOYEE_CPF   NEW_WAGE
+------------ ----------
+          10        480
+
+nenhuma linha selecionada
+
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+Duque de Caxias
+Duque de Caxias
+Duque de Caxias
+Coronel Brilhante Ustra
+
+
+EMPLOYEE_CPF CLIENT_CPF ARTIFACT_CODE SALE_NUMBER DATE_HOUR                  
+------------ ---------- ------------- ----------- ---------------------------
+           9          1           101           1 13/10/17 22:23:12,025000000
+           3          4           100           2 13/10/17 22:23:12,029000000
+           3          1            10           3 13/10/17 22:23:12,038000000
+           9          8            10           4 13/10/17 22:23:12,042000000
+           3          7            11           5 13/10/17 22:23:12,045000000
+           9          0             1           6 13/10/17 22:23:12,051000000
+           3          1           100         412                            
+
+7 linhas selecionadas. 
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+Erro a partir da linha : 529 no comando -
+SELECT * FROM sale AS OF TIMESTAMP systimestamp - INTERVAL '5' MINUTE
+Relatório de erros -
+ORA-01466: não é possível ler os dados - a definição da tabela se alterou
+
+
+Procedimento PL/SQL concluído com sucesso.
+
+Erro a partir da linha : 541 no comando -
+DECLARE
+  CURSOR all_weapons IS
+    SELECT * FROM artifacts;
+
+  weapons all_weapons%TYPE;
+
+  code artifacts.artifact_code%TYPE;
+  name artifacts.name%TYPE;
+  manufacturer artifacts.manufacturer_name%TYPE;
+  "date" artifacts.manufacture_date%TYPE;
+  sale artifacts.sale_date%TYPE;
+BEGIN
+  OPEN weapons;
+  LOOP
+    FETCH weapons INTO all_weapons;
+  EXIT WHEN weapons%NOTFOUND;
+  END LOOP;
+  CLOSE weapons;
+END;
+Relatório de erros -
+ORA-06550: linha 5, coluna 11:
+PLS-00206: %TYPE deve ser aplicado a uma variável, coluna, campo ou atributo e não a "ALL_WEAPONS"
+ORA-06550: linha 5, coluna 11:
+PL/SQL: Item ignored
+ORA-06550: linha 13, coluna 8:
+PLS-00320: a declaração do tipo desta expressão está incompleta ou incorreta
+ORA-06550: linha 13, coluna 3:
+PL/SQL: SQL Statement ignored
+ORA-06550: linha 15, coluna 11:
+PLS-00320: a declaração do tipo desta expressão está incompleta ou incorreta
+ORA-06550: linha 15, coluna 5:
+PL/SQL: SQL Statement ignored
+ORA-06550: linha 16, coluna 13:
+PLS-00320: a declaração do tipo desta expressão está incompleta ou incorreta
+ORA-06550: linha 16, coluna 3:
+PL/SQL: Statement ignored
+ORA-06550: linha 18, coluna 9:
+PLS-00320: a declaração do tipo desta expressão está incompleta ou incorreta
+ORA-06550: linha 18, coluna 3:
+PL/SQL: SQL Statement ignored
+06550. 00000 -  "line %s, column %s:\n%s"
+*Cause:    Usually a PL/SQL compilation error.
+*Action:
+Erro a partir da linha : 564 no comando -
+DECLARE
+CURSOR c_artifacts IS
+SELECT artifact_code, name FROM artifacts
+WHERE manufacturer_name = 'Israel Military Industries';
+
+v_artifacts c_artifacts%ROWTYPE;
+
+BEGIN
+OPEN c_artifacts;
+LOOP
+FETCH c_artifacts INTO v_artifacts;
+EXIT WHEN c_artifacts%NOTFOUND;
+DBMS_OUTPUT.PUTLINE('CODE: '||v_artifacts.artifact_code||' '||'Name: '|| v_artifacts.name);
+END LOOP;
+
+CLOSE c_artifacts;
+END;
+
+--61. Uso de cursor explÃ­cito com parÃ¢metro
+DECLARE
+  israel_military artifacts.manufacturer_name%TYPE := 'Israel Military Industries';
+
+  CURSOR israel_weapons(israel_military artifacts.manufacturer_name%TYPE) IS
+  SELECT * FROM artifacts
+  WHERE name = israel_military;
+
+  iweapons israel_weapons%TYPE;
+
+  code artifacts.artifact_code%TYPE;
+  name artifacts.name%TYPE;
+  manufacturer artifacts.manufacturer_name%TYPE;
+  "date" artifacts.manufacture_date%TYPE;
+  sale artifacts.sale_date%TYPE;
+BEGIN
+  OPEN iweapons;
+  LOOP
+    FETCH iweapons INTO israel_weapons;
+  EXIT WHEN iweapons%NOTFOUND;
+  END LOOP;
+  CLOSE iweapons;
+END;
+Relatório de erros -
+ORA-06550: linha 20, coluna 1:
+PLS-00103: Encontrado o símbolo "DECLARE" 
+06550. 00000 -  "line %s, column %s:\n%s"
+*Cause:    Usually a PL/SQL compilation error.
+*Action:
+
+Procedimento PL/SQL concluído com sucesso.
+
+
+Procedure THE_PROCEDURE compilado
+
+Erros: verifique o log do compilador
+
+Function GET_CPF compilado
+
+
+Function CPF_OF_PHONE compilado
+
+Erros: verifique o log do compilador
+
+Package TWO_FUNCTIONS compilado
+
+Erros: verifique o log do compilador
+Erro a partir da linha : 774 no comando -
+INSERT INTO sale VALUES (100, 002, 010, 5000, SYSTIMESTAMP)
+Relatório de erros -
+ORA-02291: restrição de integridade (SYSTEM.SALE_FKEY1) violada - chave mãe não localizada
+
+
+Trigger DELETE_CHECK compilado
+
+Erros: verifique o log do compilador
+Erro a partir da linha : 839 no comando -
+DECLARE
+  l_sale sale%ROWTYPE;
+BEGIN
+  SELECT * INTO l_sale FROM sale
+  WHERE sale_number = 1;
+  show_sale_number(l_sale);
+END;
+Relatório de erros -
+ORA-06550: linha 6, coluna 3:
+PLS-00201: o identificador 'SHOW_SALE_NUMBER' deve ser declarado
+ORA-06550: linha 6, coluna 3:
+PL/SQL: Statement ignored
+06550. 00000 -  "line %s, column %s:\n%s"
+*Cause:    Usually a PL/SQL compilation error.
+*Action:
+
+Type EMPLOYEE_RECORD compilado
+
+Erros: verifique o log do compilador
+
+Erro a partir da linha : 889 no comando -
+UPDATE occupied_vacancies SET vacancy_number = 0
+Erro na Linha de Comandos : 889 Coluna : 8
+Relatório de erros -
+Erro de SQL: ORA-00942: a tabela ou view não existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:

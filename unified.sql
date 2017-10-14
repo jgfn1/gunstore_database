@@ -1,6 +1,6 @@
 DROP TABLE overtimes;
 DROP TABLE employee_vacancies;
-DROP TABLE phones;
+DROP TABLE phones CASCADE CONSTRAINTS;
 DROP TABLE sale;
 DROP TABLE instruct;
 DROP TABLE clients;
@@ -443,7 +443,7 @@ BEGIN
    UPDATE sale SET sale_number = 20 WHERE sale_number = sale_num;
 END;
 /
-
+/*
 --49. Bloco anônimo com exceção
 DECLARE
   a TIMESTAMP;
@@ -455,7 +455,7 @@ BEGIN
 EXCEPTION WHEN LOGIN_DENIED THEN
   DBMS_OUTPUT.put_line('ERROR! The aliens are attacking, try logging in later!');
 END;
-/
+*/
 --50. Uso de IF-THEN-ELSE
 DECLARE
 	salary INTEGER := 1000;
@@ -484,21 +484,21 @@ END;
 DECLARE
   a INTEGER := 1;
 BEGIN CASE a
-  WHEN NOT 1 THEN
-    DBMS_OUTPUT.put_line('That''s different, man!');
   WHEN 1 THEN
     DBMS_OUTPUT.put_line('That''s equal, man!');
+  ELSE
+    DBMS_OUTPUT.put_line('That''s different, man!');
   END CASE;
 END;
 /
 
 --53. LOOP com instrução de saída
 DECLARE
-	count INTEGER := 0;
+	acum INTEGER := 0;
 BEGIN
 	LOOP
-		count := count + 1;
-		EXIT WHEN count > 100;
+		acum := acum + 1;
+		EXIT WHEN acum > 100;
 	END LOOP;
 END;
 /
@@ -622,8 +622,8 @@ END;
 CREATE OR REPLACE PROCEDURE the_procedure IS
   a INTEGER;
   BEGIN
-    a = 1;
-  END;
+    a := 1;
+  END the_procedure;
 
 --64. Procedimento com parâmetro IN
 --Feito junto com o 67.
@@ -645,7 +645,7 @@ BEGIN
   WHERE super = employee_cpf;
 EXCEPTION
   WHEN NO_DATA_FOUND THEN
-  super = 0;
+  super := 0;
 END return_super;
 
 EXECUTE return_super(4323);
@@ -660,7 +660,7 @@ CREATE OR REPLACE PROCEDURE change_emp (sale_number IN NUMBER) AS
     SET employee_cpf = 003
     WHERE sale_number = change_emp(sale_number);
     tot_emps := tot_emps - 1;
-  END;
+  END change_emp;
 /
 
 --68 Função sem parâmetro
@@ -671,7 +671,7 @@ IS acc_bal NUMBER;
     SELECT employee_cpf INTO acc_bal FROM sale
     WHERE sale_number = 20;
     RETURN(acc_bal);
-  END;
+  END get_cpf;
 /
 
 --69. Função com parâmetro IN
@@ -690,7 +690,7 @@ CREATE OR REPLACE FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TY
   RETURN INTEGER IS
   desired_cpf phones.cpf%TYPE;
   BEGIN
-    value1 = 100;
+    value1 := 100;
     SELECT cpf INTO desired_cpf FROM phones
     WHERE phone_number = phone;
     value := value + 1;
