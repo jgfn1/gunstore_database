@@ -779,6 +779,8 @@ BEGIN
   INSERT INTO employees VALUES (123, 1230, 3, 'Clown.', 100, 000, 009);
 END vaca;
 
+INSERT INTO employees VALUES (150, 60, 0, 'Chief of BrazilBall', 002, 003, 004);
+
 --76. TRIGGER de linha com condição
 --86. Uso de TRIGGER para apagar valores em outra tabela
 CREATE OR REPLACE TRIGGER overtrigger
@@ -790,6 +792,8 @@ BEGIN
 	DELETE FROM employee_vacancies
 	WHERE load_unload = 1;
 END overtrigger;
+
+INSERT INTO overtimes VALUES (to_date('09/11/2001', 'dd/mm/yyyy'), (CURRENT_TIMESTAMP), NULL, 008);
 
 --77 TRIGGER de comando
 --73. BEFORE TRIGGER
