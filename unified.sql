@@ -361,7 +361,7 @@ WHERE e.wage = (
 );
 
 --34. Uso de UNION
---primeiro vejo quem compra arma, depois quem faz curso, e fa�o um UNION
+--primeiro vejo quem compra arma, depois quem faz curso, e fa? um UNION
 SELECT P.cpf
 FROM persons P, sale S
 WHERE P.cpf = S.client_cpf
@@ -625,6 +625,8 @@ CREATE OR REPLACE PROCEDURE the_procedure IS
     a := 1;
   END the_procedure;
 
+EXECUTE the_procedure
+
 --64. Procedimento com parâmetro IN
 --Feito junto com o 67.
 
@@ -663,6 +665,8 @@ CREATE OR REPLACE PROCEDURE change_emp (sale_number IN NUMBER) AS
   END change_emp;
 /
 
+EXECUTE change_emp(1);
+
 --68 Função sem parâmetro
 CREATE OR REPLACE FUNCTION get_cpf
   RETURN NUMBER
@@ -674,6 +678,8 @@ IS acc_bal NUMBER;
   END get_cpf;
 /
 
+EXECUTE get_cpf
+
 --69. Função com parâmetro IN
 CREATE OR REPLACE FUNCTION cpf_of_phone(phone IN phones.cpf%TYPE)
   RETURN INTEGER IS
@@ -683,6 +689,8 @@ CREATE OR REPLACE FUNCTION cpf_of_phone(phone IN phones.cpf%TYPE)
     WHERE phone_number = phone;
     RETURN desired_cpf;
   END cpf_of_phone;
+
+EXECUTE cpf_of_phone(0002)
 
 --70. Função com parâmetro OUT
 --71. Função com parâmetro INOUT
@@ -699,8 +707,17 @@ CREATE OR REPLACE FUNCTION cpf_of_phone_value_incremented(phone IN phones.cpf%TY
 
 BEGIN
    change_emp(20);
-END;
+END; 
 /
+DECLARE 
+	value INTEGER;
+	ret INTEGER;
+BEGIN 
+   ret := totalCustomers(011,value,0); 
+   dbms_output.put_line('CPF of phone: ' || ret); 
+END; 
+/
+
 
 --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
 --90. Pacote com funções ou procedimentos que usem outros componentes do mesmo pacote
@@ -887,3 +904,29 @@ END delete_if_update_attempt;
 /
 --Demonstration
 UPDATE occupied_vacancies SET vacancy_number = 0;
+
+--Running functions/procedures and triggers
+--63. Procedimento sem parâmetro
+EXECUTE the_procedure
+
+--64. Procedimento com parâmetro IN
+--Feito junto com o 67.
+
+--65. Procedimento com parâmetro OUT
+DECLARE 
+   c INTEGER; 
+BEGIN 
+   returnc4c(c)
+   dbms_output.put_line(' Return: ' || c); 
+END; 
+/
+
+--66. Procedimento com parâmetro INOUT
+DECLARE 
+   a INTEGER; 
+BEGIN 
+   a:= 23; 
+   squareNum(a); 
+   dbms_output.put_line(' Square of (23): ' || a); 
+END; 
+/
