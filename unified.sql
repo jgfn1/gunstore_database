@@ -718,7 +718,6 @@ BEGIN
 END; 
 /
 
-
 --72. Criação de pacote (declaração e corpo) com pelo menos dois componentes
 --90. Pacote com funções ou procedimentos que usem outros componentes do mesmo pacote
  CREATE OR REPLACE PACKAGE two_functions AS
@@ -748,7 +747,21 @@ END;
    END cpf_of_phone_value_incremented;
 
  END two_functions;
-
+/
+DECLARE 
+	ret INTEGER; 
+	code phones.cpf%type := &c_phone; 
+BEGIN 
+   ret = two_functions.cpf_of_phone(code,ret); 
+END; 
+/
+DECLARE 
+	ret INTEGER; 
+	code phones.cpf%type := &c_phone; 
+BEGIN 
+   ret = two_functions.cpf_of_phone_value_incremented(code,ret); 
+END; 
+/
 --73. BEFORE TRIGGER
 --Feito com o 77.
 
