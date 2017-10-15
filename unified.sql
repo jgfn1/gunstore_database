@@ -827,6 +827,8 @@ CREATE OR REPLACE TRIGGER stop_insert BEFORE UPDATE ON departments
     END IF;
   END;
 
+ UPDATE departments SET department_code = 000 WHERE manager_cpf = 003;
+
 --81. Uso de TRIGGER para impedir inserção em tabela
 CREATE OR REPLACE TRIGGER stop_insert BEFORE INSERT ON employees
   BEGIN
@@ -868,7 +870,6 @@ BEGIN
    DBMS_OUTPUT.put_line (sale_in.sale_number);
 END;
 /
-
 --Demonstration
 DECLARE
   l_sale sale%ROWTYPE;
