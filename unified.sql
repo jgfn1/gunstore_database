@@ -187,8 +187,8 @@ CREATE TABLE sale
   date_hour TIMESTAMP,
   CONSTRAINT sale_pkey PRIMARY KEY (employee_cpf, client_cpf, artifact_code, sale_number),
   CONSTRAINT sale_fkey FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf),
-  CONSTRAINT sale_fkey1 FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
-  CONSTRAINT sale_fkey2 FOREIGN KEY (artifact_code) REFERENCES artifacts (artifact_code)
+  CONSTRAINT sale_fkey1 FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf)
+  --CONSTRAINT sale_fkey2 FOREIGN KEY (artifact_code) REFERENCES artifacts (artifact_code)
 );
 
 INSERT INTO sale VALUES (009, 001, 101, 1, (CURRENT_TIMESTAMP));
@@ -548,7 +548,7 @@ DECLARE
   name artifacts.name%TYPE;
   manufacturer artifacts.manufacturer_name%TYPE;
   "date" artifacts.manufacture_date%TYPE;
-  sale artifacts.sale_date%TYPE;
+  salee artifacts.sale_date%TYPE;
 BEGIN
   OPEN weapons;
   LOOP
@@ -593,7 +593,7 @@ DECLARE
   name artifacts.name%TYPE;
   manufacturer artifacts.manufacturer_name%TYPE;
   "date" artifacts.manufacture_date%TYPE;
-  sale artifacts.sale_date%TYPE;
+  salee artifacts.sale_date%TYPE;
 BEGIN
   OPEN iweapons;
   LOOP
