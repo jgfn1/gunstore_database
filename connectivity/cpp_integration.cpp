@@ -30,6 +30,10 @@ Press any key to continue."
 
 Obs:​ ​A​ ​tabela​ ​escolhida​ ​pela​ ​equipe​ ​deve​ ​possuir,​ ​ao​ ​menos,​ ​quatro​ ​colunas.*/
 #include "cstdio"
+// #include <windows.h>
+// #include <sql.h>
+// #include <sqlext.h>
+// #include <sqltypes.h>
 using namespace std;
 
 void insert();
