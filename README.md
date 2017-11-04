@@ -6,8 +6,6 @@ the Federal University of Pernambuco, in Brazil.
 
 @pdssf
 
-@wcc
-
 @mgm6
 
 @vgs2
