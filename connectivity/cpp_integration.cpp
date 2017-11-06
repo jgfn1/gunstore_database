@@ -80,6 +80,11 @@ void update()
 }
 void remove()
 {
+	SQLHENV env;
+	SQLHDBC dbc;
+	char  *input_remove = NULL;
+	printf("Digite o comando SQL para remoção de uma tabela:\n");
+	scanf("%s", input_remove);
 
 }
 
@@ -91,7 +96,7 @@ void select()
 	SQLLEN indicator[ 2 ]; // indica qual campo será acessado
 	SQLLEN cep; // variável que armazena o campo CEP
 	SQLCHAR desc[20]=""; // variável que armazena o campo desc
-	printf("Digite a tabela para procurar\n");
+	printf("Digite a tabela para exibir os dados\n");
 	scanf("%s", input);//adress, por exemplo
 	char *command = "SELECT * FROM ";
 	strcat(command,input);//concatena as strings
