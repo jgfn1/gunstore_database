@@ -85,5 +85,24 @@ void remove()
 
 void select()
 {
-
+	SQLHSTMT stmt;
+	SQLRETURN ret; // variável de status do retorno
+	SQLLEN indicator[ 2 ]; // indica qual campo será acessado
+	SQLLEN cep; // variável que armazena o campo CEP
+	SQLCHAR desc[20]=""; // variável que armazena o campo desc
+	printf("Digite a tabela para procurar\n");
+	scanf("%s", input);//employee, por exemplo
+	char *command = "SELECT * FROM ";
+	strcat(command,input);//concatena as strings
+	//exemplo: "SELECT * FROM employe"
+	SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
+	/* armazena em cep o campo de índice 0 */
+	ret = SQLBindCol(stmt,1,SQL_C_LONG,&cep,0,&indicator[0]);
+	/* armazena em desc o campo de índice 1 */
+	ret = SQLBindCol(stmt,2,SQL_C_CHAR,desc,sizeof(desc),&indicator[1]);
+	/* execução do comando */
+	ret = SQLExecDirect(stmt,(SQLCHAR *)command,SQL_NTS);
+	/* imprime os dados obtidos – sequência de fetch */
+	while((ret = SQLFetch(stmt)) != SQL_NO_DATA)
+	printf("CEP: %d \tDescricao:%s\n",cep, desc);
 }
