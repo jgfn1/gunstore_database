@@ -40,6 +40,7 @@ void insert();
 void update();
 void remove();
 void select();
+void sqlIUD(SQLHDBC *dbc, char *command);
 
 int main ()
 {
@@ -85,20 +86,38 @@ void remove()
 	char  *input_remove = NULL;
 	printf("Digite o comando SQL para remoção de uma tabela:\n");
 	scanf("%s", input_remove);
+	/* Cria um manipulador de ambiente */
+	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
+	/* Seta o ambiente para oferecer suporte a ODBC 3 */
+	SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void *)SQL_OV_ODBC3, 0);
+	/* Cria um manipulador de conexão com a base de dados*/
+	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
+	/* Conecta ao DSN chamado "nome aqui"*/
+	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+	sqlIUD(&dbc, input_remove);
 
+}
+
+void sqlIUD(SQLHDBC *dbc, char *command)
+{
+    SQLHSTMT stmt;
+    SQLRETURN ret;
+    SQLAllocHandle(SQL_HANDLE_STMT, (*dbc), &stmt);
+    ret = SQLExecDirect(stmt,(SQLCHAR *)command,SQL_NTS); //executa o comando de remoção
 }
 
 void select()
 {
 	int count = 0;
+	char input[50] = "";
 	SQLHSTMT stmt;
 	SQLRETURN ret; // variável de status do retorno
 	SQLLEN indicator[ 2 ]; // indica qual campo será acessado
 	SQLLEN cep; // variável que armazena o campo CEP
 	SQLCHAR desc[20]=""; // variável que armazena o campo desc
-	printf("Digite a tabela para exibir os dados\n");
+	printf("SELECT * FROM adress WHERE ");
 	scanf("%s", input);//adress, por exemplo
-	char *command = "SELECT * FROM ";
+	char *command = "SELECT * FROM adress WHERE ";
 	strcat(command,input);//concatena as strings
 	//exemplo: "SELECT * FROM adress"
 	SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
