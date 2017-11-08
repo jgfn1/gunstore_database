@@ -40,7 +40,7 @@ void insert();
 void update();
 void remove();
 void select();
-void sqlIUD(SQLHDBC *dbc, char *command);
+void execute_sql(SQLHDBC *dbc, char *command);
 
 int main ()
 {
@@ -72,18 +72,51 @@ int main ()
 
 void insert()
 {
-
+	SQLHENV env;
+	SQLHDBC dbc;
+	SQLHSTMT stmt;
+	SQLRETURN ret;
+	char  input_create[200];
+	printf("Digite o comando SQL para remoção de uma tabela:\n");
+	scanf("%s", input_create);
+	/* Cria um manipulador de ambiente */
+	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
+	/* Seta o ambiente para oferecer suporte a ODBC 3 */
+	SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void *)SQL_OV_ODBC3, 0);
+	/* Cria um manipulador de conexão com a base de dados*/
+	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
+	/* Conecta ao DSN chamado "nome aqui"*/
+	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+	execute_sql(&dbc, input_create);
 }
 
 void update()
 {
-	
+	SQLHENV env;
+	SQLHDBC dbc;
+	SQLHSTMT stmt;
+	SQLRETURN ret;
+	char  input_update[200];
+	printf("Digite o comando SQL para remoção de uma tabela:\n");
+	scanf("%s", input_update);
+	/* Cria um manipulador de ambiente */
+	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
+	/* Seta o ambiente para oferecer suporte a ODBC 3 */
+	SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void *)SQL_OV_ODBC3, 0);
+	/* Cria um manipulador de conexão com a base de dados*/
+	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
+	/* Conecta ao DSN chamado "nome aqui"*/
+	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+	execute_sql(&dbc, input_update);
 }
+
 void remove()
 {
 	SQLHENV env;
 	SQLHDBC dbc;
-	char  *input_remove = NULL;
+	SQLHSTMT stmt;
+	SQLRETURN ret;
+	char  input_remove[200];
 	printf("Digite o comando SQL para remoção de uma tabela:\n");
 	scanf("%s", input_remove);
 	/* Cria um manipulador de ambiente */
@@ -94,11 +127,11 @@ void remove()
 	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 	/* Conecta ao DSN chamado "nome aqui"*/
 	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
-	sqlIUD(&dbc, input_remove);
+	execute_sql(&dbc, input_remove);
 
 }
 
-void sqlIUD(SQLHDBC *dbc, char *command)
+void execute_sql(SQLHDBC *dbc, char *command)
 {
     SQLHSTMT stmt;
     SQLRETURN ret;
@@ -109,7 +142,7 @@ void sqlIUD(SQLHDBC *dbc, char *command)
 void select()
 {
 	int count = 0;
-	char input[50] = "";
+	char input[200];
 	SQLHSTMT stmt;
 	SQLRETURN ret; // variável de status do retorno
 	SQLLEN indicator[ 2 ]; // indica qual campo será acessado
@@ -118,6 +151,8 @@ void select()
 	printf("SELECT * FROM adress WHERE ");
 	scanf("%s", input);//adress, por exemplo
 	char *command = "SELECT * FROM adress WHERE ";
+	//realoc para permitir que guarde uma instrução SQL maior
+	command = (char*) realoc(command,400*sizeof(char));
 	strcat(command,input);//concatena as strings
 	//exemplo: "SELECT * FROM adress"
 	SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
