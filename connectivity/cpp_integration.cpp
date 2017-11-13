@@ -1,4 +1,4 @@
-/*Implemente um programa em C++ que, a partir de um menu simples, o usuário
+﻿/*Implemente um programa em C++ que, a partir de um menu simples, o usuário
 escolha uma das ações abaixo:
 ● Encerrar: o programa deve permanecer em execução até que esta opção
 seja selecionada.
@@ -29,11 +29,14 @@ Process return 0 (0x0)
 Press any key to continue."
 
 Obs:​ ​A​ ​tabela​ ​escolhida​ ​pela​ ​equipe​ ​deve​ ​possuir,​ ​ao​ ​menos,​ ​quatro​ ​colunas.*/
-#include "cstdio"
-// #include <windows.h>
-// #include <sql.h>
-// #include <sqlext.h>
-// #include <sqltypes.h>
+// #include "cstdio"
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <sql.h>
+#include <sqlext.h>
+#include <sqltypes.h>
+
 using namespace std;
 
 void insert();
@@ -45,7 +48,7 @@ void execute_sql(SQLHDBC *dbc, char *command);
 int main ()
 {
 	int command;
-	do 
+	do
 	{
 		printf("Choose an option:\n 0 - Exit\n 1 - Insert\n 2 - Update\n 3 - Remove\n 4 - Select\n");
 		scanf("%d", &command);
@@ -86,7 +89,7 @@ void insert()
 	/* Cria um manipulador de conexão com a base de dados*/
 	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 	/* Conecta ao DSN chamado "nome aqui"*/
-	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Gunstore", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
 	execute_sql(&dbc, input_create);
 }
 
@@ -143,6 +146,8 @@ void select()
 {
 	int count = 0;
 	char input[200];
+	SQLHENV env;
+    SQLHDBC dbc;
 	SQLHSTMT stmt;
 	SQLRETURN ret; // variável de status do retorno
 	SQLLEN indicator[ 2 ]; // indica qual campo será acessado
@@ -152,7 +157,7 @@ void select()
 	scanf("%s", input);//adress, por exemplo
 	char *command = "SELECT * FROM adress WHERE ";
 	//realoc para permitir que guarde uma instrução SQL maior
-	command = (char*) realoc(command,400*sizeof(char));
+	command = (char*) realloc(command,400*sizeof(char));
 	strcat(command,input);//concatena as strings
 	//exemplo: "SELECT * FROM adress"
 	SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
