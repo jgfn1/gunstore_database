@@ -109,7 +109,7 @@ void update()
 	/* Cria um manipulador de conexão com a base de dados*/
 	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 	/* Conecta ao DSN chamado "nome aqui"*/
-	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Gunstore", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
 	execute_sql(&dbc, input_update);
 }
 
@@ -129,7 +129,7 @@ void remove()
 	/* Cria um manipulador de conexão com a base de dados*/
 	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 	/* Conecta ao DSN chamado "nome aqui"*/
-	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Nome aqui;", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+	SQLDriverConnect(dbc, NULL, (SQLCHAR*)"DSN=Gunstore", SQL_NTS,NULL, 0, NULL, SQL_DRIVER_COMPLETE);
 	execute_sql(&dbc, input_remove);
 
 }
