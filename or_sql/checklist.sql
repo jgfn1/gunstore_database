@@ -52,14 +52,3 @@ tabela B, a partir da tabela B
 29. Criação de TRIGGER de linha para impedir INSERT, DELETEou UPDATE
 30. Criação de TRIGGER de comando para impedir INSERT, DELETEou UPDATE
 */
-
-0--
-1--
-2
-3--
-4--
-5
-6--
-7--
-8
-9--
