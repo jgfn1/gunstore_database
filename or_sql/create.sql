@@ -8,7 +8,8 @@ CREATE OR REPLACE TYPE tp_adress AS OBJECT(
 CREATE OR REPLACE TYPE tp_phones AS TABLE OF VARCHAR2 (9);
 /
 
-*/
+--2. Criação de um tipo que contenha um atributo que seja de um outro tipo
+--4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
 CREATE OR REPLACE TYPE tp_persons AS OBJECT(
 	cpf INTEGER,
 	name VARCHAR2(100),
@@ -51,7 +52,7 @@ CREATE TABLE employees
   CONSTRAINT persons_fkey2 FOREIGN KEY (department_code) REFERENCES departments (department_code)
 );
 */
-
+    --1. Criação de tipo e subtipo
 CREATE OR REPLACE TYPE tp_employees UNDER tp_persons AS OBJECT(
 	wage INTEGER,
   	worked_years INTEGER,
@@ -151,7 +152,7 @@ CREATE OR REPLACE TYPE tp_vacancies AS OBJECT(
 -->>monitoria apenas<< estarei limitando uma venda a 4 objetos aqui para exemplificar o uso de varray
 CREATE OR REPLACE TYPE tp_artifacts_sale AS varray (4) of tp_artifacts;
 /
-
+--3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
 CREATE OR REPLACE TYPE tp_sale AS OBJECT(
 	sale_number INTEGER,
 	date_hour TIMESTAMP,
