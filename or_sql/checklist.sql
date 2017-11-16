@@ -21,9 +21,9 @@ que o execute/teste.
 
 Atividades
 1. Criação de tipo e subtipo
-2. Criação de um tipo que contenha um atributo que seja de um outro tipo
+  --2. Criação de um tipo que contenha um atributo que seja de um outro tipo
 3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
-4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
+  --4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
 5. Criação e chamada de um método construtor (diferente do padrão)
 6. Criação e chamada de um função membro em um comando SELECT e em um bloco PL
 7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
