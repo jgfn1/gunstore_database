@@ -1,6 +1,6 @@
 
 CREATE OR REPLACE TYPE tp_adress AS OBJECT(
-	zipcode integer
+	zipcode integer,
 	street varchar2(100)
 )FINAL;
 /
@@ -54,10 +54,10 @@ CREATE TABLE employees
 
 CREATE OR REPLACE TYPE tp_employees UNDER tp_persons AS OBJECT(
 	wage INTEGER,
-  worked_years INTEGER,
-  job_title VARCHAR2(100),	
-  ref_supervisor REF tp_empregado,
-  ref_department_code REF tp_department
+  	worked_years INTEGER,
+  	job_title VARCHAR2(100),	
+  	ref_supervisor REF tp_empregado,
+  	ref_department_code REF tp_department
 )FINAL ;
 /
 /*
@@ -75,7 +75,7 @@ CREATE TABLE clients
 CREATE OR REPLACE TYPE tp_clients UNDER tp_persons AS OBJECT(
 	purchases_number INTEGER,
 	heavy_guns_license BINARY_DOUBLE, -- 1 - Have the License | 0 - Don't.
-  	training_end_register BINARY_DOUBLE, -- 1 - Finished the training | 0 - Don't.
+  	training_end_register BINARY_DOUBLE -- 1 - Finished the training | 0 - Don't.
 )FINAL;
 /
 /*
@@ -113,7 +113,7 @@ CREATE OR REPLACE TYPE tp_overtimes AS OBJECT(
 	overtime_date DATE,
 	start_time TIMESTAMP,
 	end_time TIMESTAMP,
-	employee_cpf INTEGER NOT NULL,
+	employee_cpf INTEGER NOT NULL
 )FINAL;
 /
 /*
@@ -155,8 +155,8 @@ CREATE OR REPLACE TYPE tp_artifacts_sale AS varray (4) of tp_artifacts;
 CREATE OR REPLACE TYPE tp_sale AS OBJECT(
 	sale_number INTEGER,
 	date_hour TIMESTAMP,
-	ref_client REF tp_client
-	ref_employee REF tp_employee
+	ref_client REF tp_client,
+	ref_employee REF tp_employee,
 	ref_artifact REF tp_artifact_sale
 )FINAL;
 /
@@ -170,7 +170,7 @@ CREATE OR REPLACE TYPE tp_sale AS OBJECT(
   CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
 );*/
 CREATE OR REPLACE TYPE tp_instruct AS OBJECT(
-	ref_client REF tp_client
+	ref_client REF tp_client,
 	ref_employee REF tp_employee
 )FINAL;
 /
