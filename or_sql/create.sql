@@ -32,7 +32,6 @@ CREATE OR REPLACE TYPE tp_department AS OBJECT(
 	department_code INTEGER,
  	name VARCHAR2 (100),
  	phone_extension INTEGER, --In Portuguese it is called "Ramal".
- 	manager_cpf REF tp_persons
 )FINAL;
 /
 /*
@@ -59,6 +58,9 @@ CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
   	ref_department_code REF tp_department
 )FINAL ;
 /
+
+
+ALTER TYPE tp_department ADD ATRIBUTE (manager_cpf REF tp_persons);
 
 CREATE OR REPLACE TYPE tp_clients UNDER tp_persons(
 	purchases_number INTEGER,
@@ -110,3 +112,5 @@ CREATE OR REPLACE TYPE tp_instruct AS OBJECT(
 	ref_employee REF tp_employees
 )FINAL;
 /
+
+--comecando a fazer criacao de tabelas em outro arquivo
