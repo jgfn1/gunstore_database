@@ -16,23 +16,23 @@ CREATE OR REPLACE TYPE tp_adress AS OBJECT(
 CREATE OR REPLACE TYPE tp_phones AS TABLE OF VARCHAR2 (9);
 /
 
---2. CriaÃ§Ã£o de um tipo que contenha um atributo que seja de um outro tipo
---4. CriaÃ§Ã£o de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
+--2. Criação de um tipo que contenha um atributo que seja de um outro tipo
+--4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
 CREATE OR REPLACE TYPE tp_persons AS OBJECT(
 	cpf INTEGER,
 	name VARCHAR2(100),
 	birthdate DATE,
-	sex VARCHAR2(1),
 	adress tp_adress,
 	phones tp_phones
 )NOT FINAL  NOT INSTANTIABLE; -- THERE WILL BE SUBCLASSES OF tp_persons BUT THERE WILL NOT EXISTS A INSTANCE tp_persons, someone is either a employeer or a client
 /
+--14. Alteração de supertipo com propagação de mudança
+ALTER TYPE tp_persons ADD ATRIBUTE(sex VARCHAR2(1)) CASCADE;
 
 CREATE OR REPLACE TYPE tp_department AS OBJECT(
 	department_code INTEGER,
  	name VARCHAR2 (100),
- 	phone_extension INTEGER, --In Portuguese it is called "Ramal".
- 	manager_cpf REF tp_persons
+ 	phone_extension INTEGER --In Portuguese it is called "Ramal".
 )FINAL;
 /
 /*
@@ -50,7 +50,7 @@ CREATE TABLE employees
   CONSTRAINT persons_fkey2 FOREIGN KEY (department_code) REFERENCES departments (department_code)
 );
 */
-    --1. CriaÃ§Ã£o de tipo e subtipo
+    --1. Criação de tipo e subtipo
 CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
 	wage INTEGER,
   	worked_years INTEGER,
@@ -59,6 +59,8 @@ CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
   	ref_department_code REF tp_department
 )FINAL ;
 /
+--11. Alteração de tipo: adição de atributo
+ALTER TYPE tp_department ADD(manager_cpf REF tp_persons);
 
 CREATE OR REPLACE TYPE tp_clients UNDER tp_persons(
 	purchases_number INTEGER,
@@ -95,7 +97,7 @@ CREATE OR REPLACE TYPE tp_vacancies AS OBJECT(
 -->>monitoria apenas<< estarei limitando uma venda a 2 objetos aqui para exemplificar o uso de varray
 CREATE OR REPLACE TYPE tp_artifacts_sale AS varray (2) of tp_artifact;
 /
---3. CriaÃ§Ã£o de um tipo que contenha um atributo que seja de um tipo VARRAY
+--3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
 CREATE OR REPLACE TYPE tp_sale AS OBJECT(
 	sale_number INTEGER,
 	date_hour TIMESTAMP,

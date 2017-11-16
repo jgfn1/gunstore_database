@@ -30,10 +30,10 @@ Atividades
 8. Criação e chamada de um método ORDER em um comando SELECT e em um bloco PL
 9. Criação e chamada de método abstrato
 10. Redefinição de método do supertipo dentro do subtipo
-11. Alteração de tipo: adição de atributo
+		--11. Alteração de tipo: adição de atributo
 12. Alteração de tipo: modificação de atributo
 13. Alteração de tipo: remoção de atributo
-14. Alteração de supertipo com propagação de mudança
+		--14. Alteração de supertipo com propagação de mudança
 15. Alteração de supertipo com invalidação de subtipos afetados
 16. Uso de referência e controle de integridade referencial
 17. Restrição de escopo de referência
