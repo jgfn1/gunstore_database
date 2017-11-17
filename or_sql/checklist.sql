@@ -22,7 +22,7 @@ que o execute/teste.
 Atividades
     --1. Criação de tipo e subtipo
     --2. Criação de um tipo que contenha um atributo que seja de um outro tipo
-    --3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
+3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
     --4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
 5. Criação e chamada de um método construtor (diferente do padrão)
 6. Criação e chamada de um função membro em um comando SELECT e em um bloco PL
@@ -36,7 +36,7 @@ Atividades
 		--14. Alteração de supertipo com propagação de mudança
 15. Alteração de supertipo com invalidação de subtipos afetados
 16. Uso de referência e controle de integridade referencial
-17. Restrição de escopo de referência
+		--17. Restrição de escopo de referência
 18. Criação de todas as tabela a partir de um tipo
 19. Criação de uma consulta com expressão de caminho parapercorrer três tabelas
 20. Criação de uma consulta com DEREF
@@ -46,8 +46,7 @@ Atividades
 24. Criação de subconsultas com IN , ALL, ANY,
 25. Criação de uma consulta que exiba os dados de um VARRAY
 26. Criação de uma consulta que exiba os dados de um NESTED TABLE
-27. SELECT com EXISTS para acessar os dados de uma tabela A com referência para outra
-tabela B, a partir da tabela B
+27. SELECT com EXISTS para acessar os dados de uma tabela A com referência para outra tabela B, a partir da tabela B
 28. Criação de TRIGGER de linha ao ocorrer um INSERT, DELETEou UPDATE
 29. Criação de TRIGGER de linha para impedir INSERT, DELETEou UPDATE
 30. Criação de TRIGGER de comando para impedir INSERT, DELETEou UPDATE

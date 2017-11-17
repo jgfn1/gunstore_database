@@ -7,6 +7,8 @@ DROP TYPE tp_department force;
 DROP TYPE tp_artifact force;
 DROP TYPE tp_overtimes force;
 DROP TYPE tp_vacancies force;
+DROP TYPE tp_sale force;
+DROP TYPE tp_instruct force;
 
 CREATE OR REPLACE TYPE tp_adress AS OBJECT(
 	zipcode integer,
@@ -16,8 +18,8 @@ CREATE OR REPLACE TYPE tp_adress AS OBJECT(
 CREATE OR REPLACE TYPE tp_phones AS TABLE OF VARCHAR2(9);
 /
 
---2. CriaÃ§Ã£o de um tipo que contenha um atributo que seja de um outro tipo
---4. CriaÃ§Ã£o de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
+--2. Criação de um tipo que contenha um atributo que seja de um outro tipo
+--4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
 CREATE OR REPLACE TYPE tp_persons AS OBJECT(
 	cpf INTEGER,
     p_name VARCHAR2(100),
@@ -26,25 +28,23 @@ CREATE OR REPLACE TYPE tp_persons AS OBJECT(
 	phones tp_phones
 )NOT FINAL NOT INSTANTIABLE; -- THERE WILL BE SUBCLASSES OF tp_persons BUT THERE WILL NOT EXISTS A INSTANCE tp_persons, someone is either a employeer or a client
 /
---14. AlteraÃ§Ã£o de supertipo com propagaÃ§Ã£o de mudanÃ§a
+--14. Alteração de supertipo com propagação de mudança
 ALTER TYPE tp_persons ADD ATTRIBUTE(sex VARCHAR2(1)) CASCADE;
 
 CREATE OR REPLACE TYPE tp_department AS OBJECT(
 	department_code INTEGER,
  	d_name VARCHAR2 (100),
- 	phone_extension INTEGER --In Portuguese it is called "Ramal".
+ 	phone_extension INTEGER, --In Portuguese it is called "Ramal".
+    manager_cpf INTEGER
 )FINAL;
 /
---11. AlteraÃ§Ã£o de tipo: adiÃ§Ã£o de atributo
-ALTER TYPE tp_department ADD ATTRIBUTE (manager_cpf REF tp_persons) CASCADE;
-
- --1. CriaÃ§Ã£o de tipo e subtipo
+ --1. Criação de tipo e subtipo
 CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
     wage INTEGER,
   	worked_years INTEGER,
   	job_title VARCHAR2(100),
   	ref_supervisor REF tp_employees,
-  	ref_department_code REF tp_department
+  	department tp_department
 )FINAL ;
 /
 
@@ -59,10 +59,11 @@ CREATE OR REPLACE TYPE tp_artifact AS OBJECT(
 	artifact_code INTEGER,
 	artifact_name VARCHAR2 (100),
 	manufacturer_name VARCHAR2(100),
-	manufacture_date DATE,
-	sale_date DATE
+	manufacture_date DATE
 )FINAL;
 /
+--11. Alteração de tipo: adição de atributo
+ALTER TYPE tp_artifact ADD ATTRIBUTE (sale_date DATE) CASCADE;
 
 CREATE OR REPLACE TYPE tp_overtimes AS OBJECT(
 	overtime_date DATE,
@@ -80,14 +81,10 @@ CREATE OR REPLACE TYPE tp_vacancies AS OBJECT(
 )FINAL;
 /
 
--->>monitoria apenas<< estarei limitando uma venda a 2 objetos aqui para exemplificar o uso de varray
-CREATE OR REPLACE TYPE tp_artifacts_sale AS varray (2) of tp_artifact;
-/
---3. CriaÃ§Ã£o de um tipo que contenha um atributo que seja de um tipo VARRAY
 CREATE OR REPLACE TYPE tp_sale AS OBJECT(
 	sale_number INTEGER,
 	date_hour TIMESTAMP,
-    ref_artifact tp_artifacts_sale,
+    ref_artifact REF tp_artifact,
 	ref_client REF tp_clients,
 	ref_employee REF tp_employees
 )FINAL;
@@ -98,7 +95,6 @@ CREATE OR REPLACE TYPE tp_instruct AS OBJECT(
 	ref_employee REF tp_employees
 )FINAL;
 /
-DROP TABLE tb_department CASCADE CONSTRAINTS;
 DROP TABLE tb_employees CASCADE CONSTRAINTS;
 DROP TABLE tb_clients CASCADE CONSTRAINTS;
 DROP TABLE tb_artifact CASCADE CONSTRAINTS;
@@ -107,22 +103,14 @@ DROP TABLE tb_vacancies;
 DROP TABLE tb_sale;
 DROP TABLE tb_instruct;
 
-CREATE TABLE tb_department of tp_department(
-	PRIMARY KEY (department_code),
-	d_name NOT NULL,
-	phone_extension NOT NULL
-);
-
 CREATE TABLE tb_employees of tp_employees(
 	PRIMARY KEY (cpf),
 	p_name NOT NULL,
 	birthdate NOT NULL,
-	FOREIGN KEY (ref_department_code) REFERENCES tb_department,
-    FOREIGN KEY (ref_supervisor) REFERENCES tb_employees
+    FOREIGN KEY (ref_supervisor) REFERENCES tb_employees,
+    department NOT NULL
 )
 NESTED TABLE phones STORE AS tb_phone;
-
---ALTER TYPE tp_department MODIFY ATTRIBUTE (manager_cpf REF tp_persons) CASCADE;
 
 CREATE TABLE tb_clients of tp_clients(
 	PRIMARY KEY (cpf),
@@ -155,9 +143,15 @@ CREATE TABLE tb_vacancies of tp_vacancies(
 --0k
 CREATE TABLE tb_sale of tp_sale(
 	PRIMARY KEY(sale_number),
+    FOREIGN KEY (ref_artifact) REFERENCES tb_artifact,
     FOREIGN KEY(ref_employee) REFERENCES tb_employees,
 	FOREIGN KEY(ref_client) REFERENCES tb_clients,
 	date_hour NOT NULL
 );
 --ok
-CREATE TABLE tb_instruct of tp_instruct;
+--17. Restri��o de escopo de refer�ncia
+--garantinhdo que apenas clientes possam receber  treinamento 
+CREATE TABLE tb_instruct of tp_instruct(
+    ref_client SCOPE IS tb_clients,
+    ref_employee SCOPE IS tb_employees
+    );
