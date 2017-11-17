@@ -88,7 +88,7 @@ CREATE OR REPLACE TYPE tp_artifacts_sale AS varray (2) of tp_artifact;
 CREATE OR REPLACE TYPE tp_sale AS OBJECT(
 	sale_number INTEGER,
 	date_hour TIMESTAMP,
-    ref_artifact tp_artifact_sale,
+    	ref_artifact tp_artifacts_sale,
 	ref_client REF tp_clients,
 	ref_employee REF tp_employees
 )FINAL;
