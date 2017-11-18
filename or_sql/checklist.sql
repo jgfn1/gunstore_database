@@ -28,7 +28,7 @@ Atividades
 6. Criação e chamada de um função membro em um comando SELECT e em um bloco PL
 7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
 8. Criação e chamada de um método ORDER em um comando SELECT e em um bloco PL
-9. Criação e chamada de método abstrato
+    --9. Criação e chamada de método abstrato
 10. Redefinição de método do supertipo dentro do subtipo
 		--11. Alteração de tipo: adição de atributo
 12. Alteração de tipo: modificação de atributo
