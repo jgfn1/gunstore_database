@@ -1,4 +1,4 @@
-DROP TYPE tp_adress force;
+DROP TYPE tp_address force;
 DROP TYPE tp_phones force;
 DROP TYPE tp_persons force;
 DROP TYPE tp_employees force;
@@ -10,7 +10,7 @@ DROP TYPE tp_vacancies force;
 DROP TYPE tp_sale force;
 DROP TYPE tp_instruct force;
 
-CREATE OR REPLACE TYPE tp_adress AS OBJECT(
+CREATE OR REPLACE TYPE tp_address AS OBJECT(
 	zipcode integer,
 	street varchar2(100)
 )FINAL;
@@ -24,7 +24,7 @@ CREATE OR REPLACE TYPE tp_persons AS OBJECT(
 	cpf INTEGER,
     p_name VARCHAR2(100),
 	birthdate DATE,
-	adress tp_adress,
+	adress tp_address,
 	phones tp_phones
 )NOT FINAL NOT INSTANTIABLE; -- THERE WILL BE SUBCLASSES OF tp_persons BUT THERE WILL NOT EXISTS A INSTANCE tp_persons, someone is either a employeer or a client
 /
@@ -268,10 +268,9 @@ DECLARE
      RETURN desired_cpf;
    END cpf_of_phone;
 BEGIN
-  SELECT na
-  )
+  SELECT E.name FROM tb_employees E
+    WHERE cpf_of_phone(1111111) = E.cpf;
 END;
-
 
 --9. Criação e chamada de método abstrato
 
