@@ -110,14 +110,14 @@ CREATE TABLE tb_employees of tp_employees(
     FOREIGN KEY (ref_supervisor) REFERENCES tb_employees,
     department NOT NULL
 )
-NESTED TABLE phones STORE AS tb_phone;
+NESTED TABLE phones STORE AS tb_phones;
 
 CREATE TABLE tb_clients of tp_clients(
 	PRIMARY KEY (cpf),
 	birthdate NOT NULL,
 	sex NOT NULL
 ) 
-NESTED TABLE phones STORE AS tb_phone_cli;
+NESTED TABLE phones STORE AS tb_phones_clients;
 
 CREATE TABLE tb_artifact of tp_artifact(
 	PRIMARY KEY (artifact_code),
@@ -256,7 +256,22 @@ CREATE OR REPLACE TYPE tp_license_plate AS OBJECT(
 CREATE OR REPLACE TYPE tp_car_license_plate AS VARRAY(10) OF tp_license_plate;
 /
 
---6. Criação e chamada de um função membro em um comando SELECT e em um bloco PL
+--6. Criação e chamada de um função membro em um comando
+--  SELECT em um bloco PL
+DECLARE
+  FUNCTION cpf_of_phone(phone IN tb_phones.cpf)
+   RETURN INTEGER IS
+   desired_cpf tb_clients.cpf%TYPE;
+   BEGIN
+     SELECT cpf INTO desired_cpf FROM tb_phones
+     WHERE phone_number = phone;
+     RETURN desired_cpf;
+   END cpf_of_phone;
+BEGIN
+  SELECT na
+  )
+END;
+
 
 --9. Criação e chamada de método abstrato
 
