@@ -149,7 +149,7 @@ CREATE TABLE tb_sale of tp_sale(
 	date_hour NOT NULL
 );
 --ok
---17. Restri��o de escopo de refer�ncia
+--17. Restri��o de escopo de refer�ncia
 --garantinhdo que apenas clientes possam receber  treinamento 
 CREATE TABLE tb_instruct of tp_instruct(
     ref_client SCOPE IS tb_clients,
@@ -162,14 +162,14 @@ INSERT INTO tb_artifact VALUES (011, 'Uzi Micro SMG ', 'Israel Military Industri
 INSERT INTO tb_artifact VALUES (100, 'Winchester Model 1912 (Shotgun 12)', 'Winchester Repeating Arms Company', to_date('12/12/1912', 'dd/mm/yyyy'), to_date('30/10/2006', 'dd/mm/yyyy'));
 INSERT INTO tb_artifact VALUES (101, 'C-4', 'Phillips Petroleum Company', to_date('31/03/1958', 'dd/mm/yyyy'), to_date('01/07/1987', 'dd/mm/yyyy'));
 
-INSERT INTO tb_clients VALUES (000, 'Bar�o de Mau�', to_date('28/12/1813', 'dd/mm/yyyy'), tp_adress(010, 'Rua da Vida'), 
+INSERT INTO tb_clients VALUES (000, 'Bar�o de Mau�', to_date('28/12/1813', 'dd/mm/yyyy'), tp_adress(010, 'Rua da Vida'), 
                                 tp_phones(40028922,34219595,800777700), 'M', 000, 1, 1);
 INSERT INTO tb_clients VALUES (001, 'Duque de Caxias', to_date('25/08/1803', 'dd/mm/yyyy'), tp_adress(009, 'Rua do Armamento Civil'),
                                tp_phones(40038922,34219595,190), 'M', 001,1,1);
 
 --inserindo gerente do setor de espingardas 
 INSERT INTO tb_employees VALUES (010,
-    'Tom�s de Aquino',
+    'Tom�s de Aquino',
     to_date('07/03/1274', 'dd/mm/yyyy'),
     tp_adress(019, 'Rua que sobe e desce'),
     tp_phones(814001,81342295, 0211240),
@@ -188,7 +188,7 @@ INSERT INTO tb_employees VALUES (
     'M', 
     1000,
     10,
-    'Gestor de Pistolas/Rev�lveres | Gestor de Armas Brancas | Instrutor de Tiro',
+    'Gestor de Pistolas/Rev�lveres | Gestor de Armas Brancas | Instrutor de Tiro',
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010), 
     tp_department(100, 'Espingardas', 100, 010));
     
@@ -203,7 +203,7 @@ INSERT INTO tb_employees VALUES (
     2, 
     ' Vendedor | Instrutor de Tiro',
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010),
-    tp_department(000, 'Pistolas/Rev�lveres', 000, 009));
+    tp_department(000, 'Pistolas/Rev�lveres', 000, 009));
     
 INSERT INTO tb_instruct VALUES((SELECT REF(H) FROM tb_clients H WHERE H.CPF = 000),
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010) );
@@ -246,3 +246,40 @@ INSERT INTO tb_vacancies VALUES(
     10,
    (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 009)
 );
+
+--3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
+CREATE OR REPLACE TYPE tp_license_plate AS OBJECT(
+  license INTEGER
+);
+/
+
+CREATE OR REPLACE TYPE tp_car_license_plate AS VARRAY(10) OF tp_license_plate;
+/
+
+--6. Criação e chamada de um função membro em um comando SELECT e em um bloco PL
+
+--9. Criação e chamada de método abstrato
+
+--10. Redefinição de método do supertipo dentro do subtipo
+
+--13. Alteração de tipo: remoção de atributo
+
+--16. Uso de referência e controle de integridade referencial
+
+--19. Criação de uma consulta com expressão de caminho para
+-- percorrer três tabelas
+
+--20. Criação de uma consulta com DEREF
+
+--23. Criação de consultas com LIKE, BETWEEN, ORDER BY,
+--  GROUP BY, HAVING
+
+--26. Criação de uma consulta que exiba os dados
+-- de um NESTED TABLE
+
+--29. Criação de TRIGGER de linha para impedir INSERT,
+-- DELETE ou UPDATE
+
+--30. Criação de TRIGGER de comando para
+-- impedir INSERT, DELETEou UPDATE
+

@@ -95,6 +95,7 @@ CREATE OR REPLACE TYPE tp_instruct AS OBJECT(
 	ref_employee REF tp_employees
 )FINAL;
 /
+
 DROP TABLE tb_employees CASCADE CONSTRAINTS;
 DROP TABLE tb_clients CASCADE CONSTRAINTS;
 DROP TABLE tb_artifact CASCADE CONSTRAINTS;
@@ -103,13 +104,15 @@ DROP TABLE tb_vacancies;
 DROP TABLE tb_sale;
 DROP TABLE tb_instruct;
 
-CREATE TABLE tb_employees of tp_employees(
-	PRIMARY KEY (cpf),
+CREATE TABLE tb_employees OF tp_employees(
+	cpf PRIMARY KEY,
 	p_name NOT NULL,
 	birthdate NOT NULL,
-    FOREIGN KEY (ref_supervisor) REFERENCES tb_employees,
-    department NOT NULL
-)
+  FOREIGN KEY (ref_supervisor) REFERENCES tb_employees,
+  department NOT NULL
+) NOT FINAL;
+/
+
 NESTED TABLE phones STORE AS tb_phone;
 
 CREATE TABLE tb_clients of tp_clients(
@@ -149,7 +152,7 @@ CREATE TABLE tb_sale of tp_sale(
 	date_hour NOT NULL
 );
 --ok
---17. Restrição de escopo de referência
+--17. Restriï¿½ï¿½o de escopo de referï¿½ncia
 --garantinhdo que apenas clientes possam receber  treinamento 
 CREATE TABLE tb_instruct of tp_instruct(
     ref_client SCOPE IS tb_clients,
