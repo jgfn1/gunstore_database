@@ -274,9 +274,11 @@ END;
 
 --9. Criação e chamada de método abstrato
 
+
 --10. Redefinição de método do supertipo dentro do subtipo
 
 --13. Alteração de tipo: remoção de atributo
+ALTER TYPE tp_persons DROP ATTRIBUTE(sex) CASCADE;
 
 --16. Uso de referência e controle de integridade referencial
 
@@ -284,6 +286,8 @@ END;
 -- percorrer três tabelas
 
 --20. Criação de uma consulta com DEREF
+/*SELECT DEREF(D.chefe) as CHEFE, D.descricao as Departamento
+FROM tb_departamento D;*/
 
 --23. Criação de consultas com LIKE, BETWEEN, ORDER BY,
 --  GROUP BY, HAVING
@@ -295,5 +299,5 @@ END;
 -- DELETE ou UPDATE
 
 --30. Criação de TRIGGER de comando para
--- impedir INSERT, DELETEou UPDATE
+-- impedir INSERT, DELETE ou UPDATE
 
