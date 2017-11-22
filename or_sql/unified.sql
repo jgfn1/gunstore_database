@@ -340,7 +340,17 @@ SELECT * FROM tb_employees;
 
 --29. Criação de TRIGGER de linha para impedir INSERT,
 -- DELETE ou UPDATE
+CREATE OR REPLACE TRIGGER forbid_all BEFORE INSERT OR DELETE OR UPDATE ON
+  tb_employees
+  BEGIN
+    RAISE_APPLICATION_ERROR(-20000, 'Sorry, you are not allowed to do this.');
+END forbid_all;
 
 --30. Criação de TRIGGER de comando para
 -- impedir INSERT, DELETE ou UPDATE
-
+CREATE OR REPLACE TRIGGER forbid_all BEFORE INSERT OR DELETE OR UPDATE ON
+  tb_employees FOR EACH ROW
+  BEGIN
+    dbms_ouput.put_line('You cannot delete this person:' || tb_employees.p_name);
+    RAISE_APPLICATION_ERROR(-20000, 'Sorry, you are not allowed to do this.');
+END forbid_all;

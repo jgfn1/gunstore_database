@@ -48,6 +48,6 @@ Atividades
     --26. Criação de uma consulta que exiba os dados de um NESTED TABLE
 27. SELECT com EXISTS para acessar os dados de uma tabela A com referência para outra tabela B, a partir da tabela B
 28. Criação de TRIGGER de linha ao ocorrer um INSERT, DELETEou UPDATE
-29. Criação de TRIGGER de linha para impedir INSERT, DELETEou UPDATE
-30. Criação de TRIGGER de comando para impedir INSERT, DELETEou UPDATE
+    --29. Criação de TRIGGER de linha para impedir INSERT, DELETEou UPDATE
+    --30. Criação de TRIGGER de comando para impedir INSERT, DELETEou UPDATE
 */
