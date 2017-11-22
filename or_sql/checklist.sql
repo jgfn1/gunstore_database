@@ -26,7 +26,7 @@ Atividades
     --4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
 5. Criação e chamada de um método construtor (diferente do padrão)
 6. Criação e chamada de um função membro em um comando SELECT e em um bloco PL
-7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
+    --7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
 8. Criação e chamada de um método ORDER em um comando SELECT e em um bloco PL
     --9. Criação e chamada de método abstrato
 10. Redefinição de método do supertipo dentro do subtipo
@@ -40,9 +40,9 @@ Atividades
 18. Criação de todas as tabela a partir de um tipo
 19. Criação de uma consulta com expressão de caminho parapercorrer três tabelas
 20. Criação de uma consulta com DEREF
-21. Criação de uma consulta com VALUE
+    --21. Criação de uma consulta com VALUE
 22. Criação de uma consulta com TABLE
-23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
+  23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
 24. Criação de subconsultas com IN , ALL, ANY,
 25. Criação de uma consulta que exiba os dados de um VARRAY
 26. Criação de uma consulta que exiba os dados de um NESTED TABLE

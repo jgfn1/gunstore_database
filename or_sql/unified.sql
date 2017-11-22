@@ -65,12 +65,22 @@ CREATE OR REPLACE TYPE tp_artifact AS OBJECT(
 --11. Alteração de tipo: adição de atributo
 ALTER TYPE tp_artifact ADD ATTRIBUTE (sale_date DATE) CASCADE;
 
+--7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
 CREATE OR REPLACE TYPE tp_overtimes AS OBJECT(
 	overtime_date DATE,
 	start_time TIMESTAMP,
 	end_time TIMESTAMP,
-    ref_employee REF tp_employees
+    ref_employee REF tp_employees,
+    MAP MEMBER FUNCTION calendario RETURN DATE
 )FINAL;
+/
+
+CREATE OR REPLACE TYPE BODY tp_overtimes AS
+  MAP MEMBER FUNCTION calendario RETURN DATE IS
+    BEGIN
+      RETURN SELF.overtime_date;
+    END; 
+END;
 /
 
 CREATE OR REPLACE TYPE tp_vacancies AS OBJECT(
@@ -136,8 +146,6 @@ CREATE TABLE tb_overtimes of tp_overtimes(
 
 CREATE TABLE tb_vacancies of tp_vacancies(
 	PRIMARY KEY(vacancy_number),
-	load_unload NOT NULL,
-	floor NOT NULL,
 	FOREIGN KEY (ref_employee) REFERENCES tb_employees
 );
 --0k
@@ -162,16 +170,16 @@ INSERT INTO tb_artifact VALUES (011, 'Uzi Micro SMG ', 'Israel Military Industri
 INSERT INTO tb_artifact VALUES (100, 'Winchester Model 1912 (Shotgun 12)', 'Winchester Repeating Arms Company', to_date('12/12/1912', 'dd/mm/yyyy'), to_date('30/10/2006', 'dd/mm/yyyy'));
 INSERT INTO tb_artifact VALUES (101, 'C-4', 'Phillips Petroleum Company', to_date('31/03/1958', 'dd/mm/yyyy'), to_date('01/07/1987', 'dd/mm/yyyy'));
 
-INSERT INTO tb_clients VALUES (000, 'Bar�o de Mau�', to_date('28/12/1813', 'dd/mm/yyyy'), tp_adress(010, 'Rua da Vida'), 
+INSERT INTO tb_clients VALUES (000, 'Bar�o de Mau�', to_date('28/12/1813', 'dd/mm/yyyy'), tp_address(010, 'Rua da Vida'), 
                                 tp_phones(40028922,34219595,800777700), 'M', 000, 1, 1);
-INSERT INTO tb_clients VALUES (001, 'Duque de Caxias', to_date('25/08/1803', 'dd/mm/yyyy'), tp_adress(009, 'Rua do Armamento Civil'),
+INSERT INTO tb_clients VALUES (001, 'Duque de Caxias', to_date('25/08/1803', 'dd/mm/yyyy'), tp_address(009, 'Rua do Armamento Civil'),
                                tp_phones(40038922,34219595,190), 'M', 001,1,1);
 
 --inserindo gerente do setor de espingardas 
 INSERT INTO tb_employees VALUES (010,
     'Tom�s de Aquino',
     to_date('07/03/1274', 'dd/mm/yyyy'),
-    tp_adress(019, 'Rua que sobe e desce'),
+    tp_address(019, 'Rua que sobe e desce'),
     tp_phones(814001,81342295, 0211240),
     'M',
     1300,
@@ -183,7 +191,7 @@ INSERT INTO tb_employees VALUES (
     002,
     'Winston Churchill',
     to_date('30/11/1874', 'dd/mm/yyyy'), 
-    tp_adress(009, 'Rua do Armamento Civil'), 
+    tp_address(009, 'Rua do Armamento Civil'), 
     tp_phones(4001,342295,1240), 
     'M', 
     1000,
@@ -196,7 +204,7 @@ INSERT INTO tb_employees VALUES (
     009,
     'Harry S. Truman',
     to_date('26/12/1972', 'dd/mm/yyyy'),
-    tp_adress(099, 'AVENIDA BRASIL'), 
+    tp_address(099, 'AVENIDA BRASIL'), 
     tp_phones(40021,3422951,12401), 
     'M',
     1100,
@@ -246,6 +254,19 @@ INSERT INTO tb_vacancies VALUES(
     10,
    (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 009)
 );
+
+SET SERVEROUTPUT ON;
+--23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING (não completo)
+--7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
+SELECT (O.ref_employee.p_name) FROM tb_overtimes O ORDER BY O.calendario();
+
+DECLARE
+  demo tp_overtimes;
+BEGIN
+  SELECT VALUE(O) INTO demo FROM tb_overtimes O WHERE O.overtime_date = to_date('01/02/2018', 'dd/mm/yyyy');
+  dbms_output.put_line(TO_CHAR(demo.end_time));
+END;
+/
 
 --3. Criação de um tipo que contenha um atributo que seja de um tipo VARRAY
 CREATE OR REPLACE TYPE tp_license_plate AS OBJECT(
