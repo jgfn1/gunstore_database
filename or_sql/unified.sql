@@ -332,7 +332,7 @@ FROM tb_departments D;
 
 --20. Criação de uma consulta com DEREF
 SELECT DEREF(D.manager_cpf) AS MANAGER, D. AS Departamento
-FROM tb_departments D;
+FROM tb_departments D; 
 
 --26. Criação de uma consulta que exiba os dados
 -- de um NESTED TABLE
