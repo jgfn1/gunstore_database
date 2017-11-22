@@ -49,12 +49,13 @@ CREATE OR REPLACE TYPE tp_department AS OBJECT(
     manager_cpf INTEGER
 )FINAL;
 /
- --1. Criação de tipo e subtipo
+--1. Criação de tipo e subtipo
+--16. Uso de referência e controle de integridade referencial
 CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
     wage INTEGER,
   	worked_years INTEGER,
   	job_title VARCHAR2(100),
-  	ref_supervisor REF tp_employees,
+  	ref_supervisor WITH ROWID REFERENCES tp_employees,
   	department tp_department
 )FINAL ;
 /
@@ -313,8 +314,6 @@ END;
 
 --13. Alteração de tipo: remoção de atributo
 ALTER TYPE tp_persons DROP ATTRIBUTE(sex) CASCADE;
-
---16. Uso de referência e controle de integridade referencial
 
 --19. Criação de uma consulta com expressão de caminho para
 -- percorrer três tabelas
