@@ -336,6 +336,7 @@ FROM tb_departments D;
 
 --26. Criação de uma consulta que exiba os dados
 -- de um NESTED TABLE
+SELECT * FROM tb_employees;
 
 --29. Criação de TRIGGER de linha para impedir INSERT,
 -- DELETE ou UPDATE

@@ -45,7 +45,7 @@ Atividades
     --23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
 24. Criação de subconsultas com IN , ALL, ANY,
 25. Criação de uma consulta que exiba os dados de um VARRAY
-26. Criação de uma consulta que exiba os dados de um NESTED TABLE
+    --26. Criação de uma consulta que exiba os dados de um NESTED TABLE
 27. SELECT com EXISTS para acessar os dados de uma tabela A com referência para outra tabela B, a partir da tabela B
 28. Criação de TRIGGER de linha ao ocorrer um INSERT, DELETEou UPDATE
 29. Criação de TRIGGER de linha para impedir INSERT, DELETEou UPDATE
