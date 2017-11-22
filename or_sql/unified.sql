@@ -20,14 +20,26 @@ CREATE OR REPLACE TYPE tp_phones AS TABLE OF VARCHAR2(9);
 
 --2. Criação de um tipo que contenha um atributo que seja de um outro tipo
 --4. Criação de um tipo que contenha um atributo que seja de um tipo NESTED TABLE
+--9. Criação e chamada de método abstrato
 CREATE OR REPLACE TYPE tp_persons AS OBJECT(
 	cpf INTEGER,
     p_name VARCHAR2(100),
 	birthdate DATE,
-	adress tp_address,
-	phones tp_phones
+	address tp_address,
+	phones tp_phones,
+  MEMBER PROCEDURE name_address() IS
+  BEGIN
+      dbms_output.put_line(p_name || address);
+  END name_address;
 )NOT FINAL NOT INSTANTIABLE; -- THERE WILL BE SUBCLASSES OF tp_persons BUT THERE WILL NOT EXISTS A INSTANCE tp_persons, someone is either a employeer or a client
 /
+
+DECLARE
+BEGIN
+  name_address();
+END;
+/
+
 --14. Alteração de supertipo com propagação de mudança
 ALTER TYPE tp_persons ADD ATTRIBUTE(sex VARCHAR2(1)) CASCADE;
 
@@ -294,8 +306,6 @@ BEGIN
   SELECT E.name FROM tb_employees E
     WHERE cpf_of_phone(1111111) = E.cpf;
 END;
-
---9. Criação e chamada de método abstrato
 
 
 --10. Redefinição de método do supertipo dentro do subtipo
