@@ -134,7 +134,7 @@ CREATE TABLE tb_employees of tp_employees(
 	PRIMARY KEY (cpf),
 	p_name NOT NULL,
 	birthdate NOT NULL,
-    FOREIGN KEY (ref_supervisor) REFERENCES tb_employees,
+    FOREIGN KEY (ref_manager_cpf) REFERENCES tb_employees,
     department NOT NULL
 )
 NESTED TABLE phones STORE AS tb_phones;
@@ -317,6 +317,8 @@ ALTER TYPE tp_persons DROP ATTRIBUTE(sex) CASCADE;
 
 --19. Criação de uma consulta com expressão de caminho para
 -- percorrer três tabelas
+SELECT D.p_name.manager_cpf
+FROM tb_department D;
 
 --20. Criação de uma consulta com DEREF
 /*SELECT DEREF(D.chefe) as CHEFE, D.descricao as Departamento
