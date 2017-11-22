@@ -3,7 +3,7 @@ DROP TYPE tp_phones force;
 DROP TYPE tp_persons force;
 DROP TYPE tp_employees force;
 DROP TYPE tp_clients force;
-DROP TYPE tp_department force;
+DROP TYPE tp_departments force;
 DROP TYPE tp_artifact force;
 DROP TYPE tp_overtimes force;
 DROP TYPE tp_vacancies force;
@@ -42,13 +42,14 @@ END;
 --14. Alteração de supertipo com propagação de mudança
 ALTER TYPE tp_persons ADD ATTRIBUTE(sex VARCHAR2(1)) CASCADE;
 
-CREATE OR REPLACE TYPE tp_department AS OBJECT(
+CREATE OR REPLACE TYPE tp_departments AS OBJECT(
 	department_code INTEGER,
  	d_name VARCHAR2 (100),
  	phone_extension INTEGER, --In Portuguese it is called "Ramal".
     manager_cpf INTEGER
 )FINAL;
 /
+
 --1. Criação de tipo e subtipo
 --16. Uso de referência e controle de integridade referencial
 CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
@@ -56,7 +57,7 @@ CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
   	worked_years INTEGER,
   	job_title VARCHAR2(100),
   	ref_supervisor WITH ROWID REFERENCES tp_employees,
-  	department tp_department
+  	department tp_departments
 )FINAL ;
 /
 
@@ -135,9 +136,15 @@ CREATE TABLE tb_employees of tp_employees(
 	p_name NOT NULL,
 	birthdate NOT NULL,
     FOREIGN KEY (ref_manager_cpf) REFERENCES tb_employees,
-    department NOT NULL
+    departments NOT NULL
 )
 NESTED TABLE phones STORE AS tb_phones;
+
+CREATE TABLE tb_departments OF tp_departments (
+PRIMARY KEY (department_code),
+  manager_cpf NOT NULL
+) FINAL;
+/
 
 CREATE TABLE tb_clients of tp_clients(
 	PRIMARY KEY (cpf),
@@ -203,7 +210,7 @@ INSERT INTO tb_employees VALUES (010,
     15,
     'Gestor de Rifles/Fuzis | Gestor de Espingardas | Instrutor de Tiro',
     NULL,
-    tp_department(100, 'Espingardas', 100, 010));
+    tp_departments(100, 'Espingardas', 100, 010));
 INSERT INTO tb_employees VALUES (
     002,
     'Winston Churchill',
@@ -215,7 +222,7 @@ INSERT INTO tb_employees VALUES (
     10,
     'Gestor de Pistolas/Rev�lveres | Gestor de Armas Brancas | Instrutor de Tiro',
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010), 
-    tp_department(100, 'Espingardas', 100, 010));
+    tp_departments(100, 'Espingardas', 100, 010));
     
 INSERT INTO tb_employees VALUES (
     009,
@@ -228,7 +235,7 @@ INSERT INTO tb_employees VALUES (
     2, 
     ' Vendedor | Instrutor de Tiro',
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010),
-    tp_department(000, 'Pistolas/Rev�lveres', 000, 009));
+    tp_departments(000, 'Pistolas/Rev�lveres', 000, 009));
     
 INSERT INTO tb_instruct VALUES((SELECT REF(H) FROM tb_clients H WHERE H.CPF = 000),
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010) );
@@ -318,11 +325,11 @@ ALTER TYPE tp_persons DROP ATTRIBUTE(sex) CASCADE;
 --19. Criação de uma consulta com expressão de caminho para
 -- percorrer três tabelas
 SELECT D.p_name.manager_cpf
-FROM tb_department D;
+FROM tb_departments D;
 
 --20. Criação de uma consulta com DEREF
-/*SELECT DEREF(D.chefe) as CHEFE, D.descricao as Departamento
-FROM tb_departamento D;*/
+SELECT DEREF(D.manager_cpf) AS MANAGER, D. AS Departamento
+FROM tb_departments D;
 
 --23. Criação de consultas com LIKE, BETWEEN, ORDER BY,
 --  GROUP BY, HAVING
