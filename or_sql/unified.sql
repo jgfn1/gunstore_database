@@ -33,7 +33,6 @@ CREATE OR REPLACE TYPE tp_persons AS OBJECT(
   END name_address;
 )NOT FINAL NOT INSTANTIABLE; -- THERE WILL BE SUBCLASSES OF tp_persons BUT THERE WILL NOT EXISTS A INSTANCE tp_persons, someone is either a employeer or a client
 /
-
 DECLARE
 BEGIN
   name_address();
@@ -60,10 +59,15 @@ CREATE OR REPLACE TYPE tp_employees UNDER tp_persons(
 )FINAL ;
 /
 
+--10. Redefinição de método do supertipo dentro do subtipo
 CREATE OR REPLACE TYPE tp_clients UNDER tp_persons(
-    purchases_number INTEGER,
-	heavy_guns_license BINARY_DOUBLE, -- 1 - Have the License | 0 - Don't.
-  	training_end_register BINARY_DOUBLE -- 1 - Finished the training | 0 - Don't.
+  purchases_number INTEGER,
+  heavy_guns_license BINARY_DOUBLE, -- 1 - Have the License | 0 - Don't.
+  training_end_register BINARY_DOUBLE -- 1 - Finished the training | 0 - Don't.
+  OVERRIDING MEMBER PROCEDURE name_address() IS
+  BEGIN
+      dbms_output.put_line(p_name || address || purchases_number);
+  END name_address;
 )FINAL;
 /
 
@@ -306,9 +310,6 @@ BEGIN
   SELECT E.name FROM tb_employees E
     WHERE cpf_of_phone(1111111) = E.cpf;
 END;
-
-
---10. Redefinição de método do supertipo dentro do subtipo
 
 --13. Alteração de tipo: remoção de atributo
 ALTER TYPE tp_persons DROP ATTRIBUTE(sex) CASCADE;
