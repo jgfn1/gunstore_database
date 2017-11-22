@@ -200,8 +200,9 @@ INSERT INTO tb_clients VALUES (001, 'Duque de Caxias', to_date('25/08/1803', 'dd
                                tp_phones(40038922,34219595,190), 'M', 001,1,1);
 
 --inserindo gerente do setor de espingardas 
-INSERT INTO tb_employees VALUES (010,
-    'Tom�s de Aquino',
+INSERT INTO tb_employees VALUES (
+	010,
+    'Tomas de Aquino',
     to_date('07/03/1274', 'dd/mm/yyyy'),
     tp_address(019, 'Rua que sobe e desce'),
     tp_phones(814001,81342295, 0211240),
@@ -211,6 +212,7 @@ INSERT INTO tb_employees VALUES (010,
     'Gestor de Rifles/Fuzis | Gestor de Espingardas | Instrutor de Tiro',
     NULL,
     tp_departments(100, 'Espingardas', 100, 010));
+    
 INSERT INTO tb_employees VALUES (
     002,
     'Winston Churchill',
@@ -249,6 +251,7 @@ INSERT INTO tb_overtimes VALUES(
     to_date('01/02/2018', 'dd/mm/yyyy'),
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010)
     );
+    
 --23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING (não completo)
 INSERT INTO tb_overtimes VALUES(
     to_date('02/02/2018', 'dd/mm/yyyy'),
@@ -281,15 +284,25 @@ INSERT INTO tb_vacancies VALUES(
 );
 
 SET SERVEROUTPUT ON;
+--27. SELECT com EXISTS para acessar os dados de uma tabela A com referência para outra tabela B, a partir da tabela B
 --23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING (não completo)
 --7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
-SELECT (O.ref_employee.p_name) FROM tb_overtimes O ORDER BY O.calendario();
+SELECT (O.ref_employee.p_name) 
+FROM tb_overtimes O 
+WHERE EXIST (
+SELECT VALUE(s.ref_employee)
+FROM tb_sale s
+)
+ORDER BY O.calendario();
 
 --23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
+--21. Criação de uma consulta com VALUE
 DECLARE
   demo tp_overtimes;
 BEGIN
-  SELECT VALUE(O) INTO demo FROM tb_overtimes O WHERE O.overtime_date BETWEEN to_date('01/02/2018', 'dd/mm/yyyy') AND to_date('03/02/2018', 'dd/mm/yyyy');
+  SELECT VALUE(O) INTO demo 
+  FROM tb_overtimes O 
+  WHERE O.overtime_date BETWEEN to_date('01/02/2018', 'dd/mm/yyyy') AND to_date('03/02/2018', 'dd/mm/yyyy');
   dbms_output.put_line(TO_CHAR(demo.end_time));
 END;
 /
