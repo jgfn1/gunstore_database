@@ -136,7 +136,7 @@ CREATE TABLE tb_employees of tp_employees(
 	p_name NOT NULL,
 	birthdate NOT NULL,
     FOREIGN KEY (ref_manager_cpf) REFERENCES tb_employees,
-    departments NOT NULL
+    department NOT NULL
 )
 NESTED TABLE phones STORE AS tb_phones;
 
@@ -285,7 +285,7 @@ SET SERVEROUTPUT ON;
 --7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
 SELECT (O.ref_employee.p_name) FROM tb_overtimes O ORDER BY O.calendario();
 
---23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING (não completo)
+--23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
 DECLARE
   demo tp_overtimes;
 BEGIN
@@ -305,6 +305,7 @@ CREATE OR REPLACE TYPE tp_car_license_plate AS VARRAY(10) OF tp_license_plate;
 
 --6. Criação e chamada de um função membro em um comando
 --  SELECT em um bloco PL
+--23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
 DECLARE
   FUNCTION cpf_of_phone(phone IN tb_phones.cpf)
    RETURN INTEGER IS
@@ -316,7 +317,9 @@ DECLARE
    END cpf_of_phone;
 BEGIN
   SELECT E.name FROM tb_employees E
-    WHERE cpf_of_phone(1111111) = E.cpf;
+    WHERE cpf_of_phone(1111111) = E.cpf
+    GROUP BY E.sex
+    HAVING E.department.department_code = 1;
 END;
 
 --13. Alteração de tipo: remoção de atributo
@@ -330,9 +333,6 @@ FROM tb_departments D;
 --20. Criação de uma consulta com DEREF
 SELECT DEREF(D.manager_cpf) AS MANAGER, D. AS Departamento
 FROM tb_departments D;
-
---23. Criação de consultas com LIKE, BETWEEN, ORDER BY,
---  GROUP BY, HAVING
 
 --26. Criação de uma consulta que exiba os dados
 -- de um NESTED TABLE
