@@ -225,11 +225,12 @@ INSERT INTO tb_overtimes VALUES(
     to_date('01/02/2018', 'dd/mm/yyyy'),
     (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 010)
     );
+--23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING (não completo)
 INSERT INTO tb_overtimes VALUES(
-    to_date('01/02/2018', 'dd/mm/yyyy'),
+    to_date('02/02/2018', 'dd/mm/yyyy'),
     (CURRENT_TIMESTAMP),
     to_date('01/03/2018', 'dd/mm/yyyy'),
-    (SELECT REF(E) FROM tb_employees E WHERE E.cpf = 009)
+    (SELECT REF(E) FROM tb_employees E WHERE E.p_name LIKE 'Winston%')
     );
 
 
@@ -260,10 +261,11 @@ SET SERVEROUTPUT ON;
 --7. Criação e chamada de um método MAP em um comando SELECT e em um bloco PL
 SELECT (O.ref_employee.p_name) FROM tb_overtimes O ORDER BY O.calendario();
 
+--23. Criação de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING (não completo)
 DECLARE
   demo tp_overtimes;
 BEGIN
-  SELECT VALUE(O) INTO demo FROM tb_overtimes O WHERE O.overtime_date = to_date('01/02/2018', 'dd/mm/yyyy');
+  SELECT VALUE(O) INTO demo FROM tb_overtimes O WHERE O.overtime_date BETWEEN to_date('01/02/2018', 'dd/mm/yyyy') AND to_date('03/02/2018', 'dd/mm/yyyy');
   dbms_output.put_line(TO_CHAR(demo.end_time));
 END;
 /
