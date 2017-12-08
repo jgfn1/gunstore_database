@@ -1,0 +1,39 @@
+<?xml version = '1.0' ?>
+
+<!-- CREATE TABLE instruct
+(
+  client_cpf INTEGER,
+  employee_cpf INTEGER,
+  
+  CONSTRAINT instruct_pkey PRIMARY KEY (client_cpf, employee_cpf),
+  
+  CONSTRAINT instruct_fkey FOREIGN KEY (client_cpf) REFERENCES clients (client_cpf),
+  
+  CONSTRAINT instruct_fkey1 FOREIGN KEY (employee_cpf) REFERENCES employees (employee_cpf)
+);
+
+
+INSERT INTO instruct VALUES (001, 009);
+INSERT INTO instruct VALUES (005, 009);
+INSERT INTO instruct VALUES (008, 003); -->
+
+<!DOCTYPE instruct [
+	<!ELEMENT instruct (instruction+)>
+	<!ELEMENT instruction (id2)>
+	<!ELEMENT id2 (#PCDATA)>
+	<!ATTLIST instruction id1 ID #REQUIRED>
+]>
+
+<instruct>
+	<instruction id1 = "cpf_client_001">
+		<id2>009</id2>
+	</instruction>
+
+	<instruction id1 = "cpf_client_005">
+		<id2>009</id2>
+	</instruction>
+
+	<instruction id1 = "cpf_client_008">
+		<id2>003</id2>
+	</instruction>
+</instruct>
